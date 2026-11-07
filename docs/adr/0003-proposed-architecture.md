@@ -1,6 +1,6 @@
 # ADR-0003: TypeScript PWA + API + PostgreSQL with provider adapters
 
-- **Status:** Proposed
+- **Status:** Proposed. Partially superseded by ADR-0005 (pending acceptance)
 - **Date:** 2026-11-07
 - **Decider:** pending owner
 - **Class:** Architectural

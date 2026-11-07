@@ -15,6 +15,10 @@ Every external source (API, dataset, library, asset) needs a row before use.
 | Blizzard Developer API Terms | API terms | **UNREVIEWED** (see `SPONSORSHIP.md` for §2(b), §2(h) notes) | https://www.blizzard.com/en-us/legal/a2989b50-5f16-43b1-abec-2ae17cc09dd6/blizzard-developer-api-terms-of-use | — | — | — | — |
 | Blizzard trademark / brand policy | Policy | **UNREVIEWED** | — | — | — | — | — |
 | Blizzard addon / UI policy | Policy | **UNREVIEWED** | — | — | — | — | — |
+| Google Play Developer Program Policies | Store policy | **UNREVIEWED** | https://play.google.com/about/developer-content-policy/ (to verify) | — | — | — | — |
+| Apple App Store Review Guidelines | Store policy | **UNREVIEWED** | https://developer.apple.com/app-store/review/guidelines/ (to verify) | — | — | — | — |
+| Expo (SDK and tooling) | Library license | **UNREVIEWED** (believed MIT; to verify) | https://github.com/expo/expo (to verify) | — | — | — | — |
+| React Native | Library license | **UNREVIEWED** (believed MIT; to verify) | https://github.com/facebook/react-native (to verify) | — | — | — | — |
 
 ## Dependency policy
 
@@ -33,3 +37,6 @@ Copied from HANDOFF.md; all must be evidenced:
 - [ ] Provenance manifest for every third-party source
 - [ ] Negative canary suite, CI, and dependency audit passing
 - [ ] No unauthorized assets, scraping, automation, or monetization
+- [ ] Store policy compliance (Google Play; Apple App Store for iOS) reviewed and documented
+- [ ] Privacy labels / Google Play Data safety form completed and consistent with actual data handling
+- [ ] Content rating questionnaire(s) completed

@@ -1,11 +1,11 @@
 # Architecture (proposed — not implemented)
 
-**Status:** Proposed; see [ADR-0003](adr/0003-proposed-architecture.md). Nothing here is built.
+**Status:** Proposed; see [ADR-0003](adr/0003-proposed-architecture.md) (PWA element partially superseded by [ADR-0005](adr/0005-native-mobile-app.md), pending acceptance). Nothing here is built.
 
 ## Components
 
 ```text
-PWA (TypeScript) <--> Companion API (TypeScript) <--> PostgreSQL
+Android / iOS app (TypeScript) <--> Companion API (TypeScript) <--> PostgreSQL
                            |
                      provider adapters
                       /            \
@@ -16,7 +16,8 @@ PWA (TypeScript) <--> Companion API (TypeScript) <--> PostgreSQL
                               user-controlled sync agent
 ```
 
-- **PWA:** mobile-first, accessible (WCAG 2.2 AA target), works offline for manual checklists.
+- **Mobile app:** native Android first, iOS later; proposed React Native + Expo in `apps/mobile` reusing `packages/core` ([ADR-0005](adr/0005-native-mobile-app.md), Proposed). Accessible (WCAG 2.2 AA target as a guide), local-first, works offline for manual checklists, local notifications for reset reminders.
+- **Website:** About page only (`apps/web`), redirecting to the Google Play / App Store listings. Not the product.
 - **Companion API:** auth, per-user data, provider orchestration. Server-side only access to Blizzard APIs.
 - **Provider adapters:** one interface, multiple sources. Each adapter declares provenance, retention limits, and rights status. A no-Blizzard "manual/synthetic" provider ships first (M1/M2 prototype).
 - **PostgreSQL:** separate tables/schemas for (a) provider-collected read-only data, (b) derived recommendations, (c) user-entered checklist state.

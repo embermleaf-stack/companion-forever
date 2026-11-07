@@ -2,7 +2,7 @@
 
 > **Codename:** companion-forever · **Status:** planning / pre-MVP · **License:** GNU GPL-3.0-only
 
-An independent, free and open-source companion for tracking World of Warcraft characters, quests, and recurring activities. Initial research targets the game experience referred to as **Forever**; support and API coverage are **unverified** and must be established before implementation claims.
+An independent, free and open-source **native mobile app (Android first, iOS later)** for tracking World of Warcraft characters, quests, and recurring activities. Initial research targets the game experience referred to as **Forever**; support and API coverage are **unverified** and must be established before implementation claims.
 
 **Not affiliated with, endorsed by, or sponsored by Blizzard Entertainment.** World of Warcraft, Battle.net, and associated names and artwork are the property of their respective owners. This repository does not grant rights to Blizzard content or API data.
 
@@ -26,7 +26,8 @@ A mobile-first activity planner and character dashboard that recaptures the usef
 ## Proposed architecture (not implemented)
 
 ```text
-PWA (TypeScript) <--> Companion API (TypeScript) <--> PostgreSQL
+Android / iOS app (TypeScript, React Native + Expo; proposed in ADR-0005)
+   <--> Companion API (TypeScript) <--> PostgreSQL
                            |
                      provider adapters
                       /            \
@@ -36,6 +37,8 @@ PWA (TypeScript) <--> Companion API (TypeScript) <--> PostgreSQL
                                       |
                               user-controlled sync agent
 ```
+
+The product is a native app distributed via Google Play (and later the App Store), not a website or PWA. Any website is only an About page redirecting to the store listings. Shared logic lives in `packages/core`; `apps/web` (the earlier PWA prototype) will become the About page. See [ADR-0005](docs/adr/0005-native-mobile-app.md) (Proposed).
 
 The addon cannot perform arbitrary network requests from within the WoW sandbox. SavedVariables snapshots require a separately installed, user-controlled sync process and must respect save timing. No gameplay automation, protected-function bypass, credential collection, client modification, or scraping.
 

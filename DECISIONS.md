@@ -8,5 +8,6 @@ Durable index of decisions. Full rationale lives in [docs/adr/](docs/adr/). Acce
 | [0002](docs/adr/0002-funding-on-hold.md) | Funding links disabled pending compliance clearance | Accepted | 2026-11-07 |
 | [0003](docs/adr/0003-proposed-architecture.md) | TypeScript PWA + API + PostgreSQL with provider adapters | Proposed | 2026-11-07 |
 | [0004](docs/adr/0004-network-service-license-agpl.md) | Evaluate AGPL for network-hosted server code | Proposed | 2026-11-07 |
+| [0005](docs/adr/0005-native-mobile-app.md) | Native mobile app (React Native/Expo, Android first); partially supersedes ADR-0003's PWA element | Proposed | 2026-11-07 |
 
 Open (no ADR yet): "Forever" product naming/API support verification; public branding/trademark review; primary-source Blizzard terms audit.

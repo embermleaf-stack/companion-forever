@@ -12,7 +12,7 @@ Read, in order: `HANDOFF.md`, `README.md`, `AGENTS.md`, `docs/GOVERNANCE.md`, `D
 
 ## Mission
 
-Create an independent, accessible, free, open-source, mobile-first character and activity companion for World of Warcraft. Reproduce useful *planning and tracking* functionality of the discontinued official Companion App, not restricted remote gameplay actions. The working codename is `companion-forever`; public product branding requires separate trademark review.
+Create an independent, accessible, free, open-source, native mobile (Android first, iOS later) character and activity companion for World of Warcraft. Reproduce useful *planning and tracking* functionality of the discontinued official Companion App, not restricted remote gameplay actions. The working codename is `companion-forever`; public product branding requires separate trademark review.
 
 ## Verified repository state at handoff
 
@@ -25,7 +25,7 @@ Create an independent, accessible, free, open-source, mobile-first character and
 
 ## Architecture proposal (subject to ADR approval)
 
-- TypeScript mobile-first PWA, accessible desktop experience.
+- Native mobile app (Android first, iOS later), proposed as React Native + Expo in `apps/mobile` reusing `packages/core` (ADR-0005, Proposed; partially supersedes the PWA element of ADR-0003). Not a website or PWA; any website is only an About page redirecting to the store listings. The existing `apps/web` PWA prototype was a misread and will become that About page.
 - TypeScript backend with provider adapters, PostgreSQL persistence.
 - Blizzard OAuth / developer APIs only for authorized server-side reads; verify namespaces and endpoint behavior.
 - Optional Lua addon writes supported SavedVariables; user-controlled local sync agent reads snapshots after game save and uploads with explicit consent.

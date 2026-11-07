@@ -19,6 +19,13 @@
 5. Reminders (local notifications for resets), activity templates (original content only).
 6. Dependency license check (C-10).
 
+Product-form correction (ADR-0005, Proposed; owner decision pending):
+
+7. Scaffold `apps/mobile` (Expo, React Native, TypeScript) reusing `packages/core`.
+8. Port UI from `apps/web` to `apps/mobile`.
+9. Convert `apps/web` to an About page redirecting to store listings.
+10. Store-policy audit (Google Play policies, Data safety form, content rating; App Store for iOS); verify Expo/React Native licenses.
+
 ## Blocked
 
 - Funding: awaiting Sponsors enrollment and written compliance clearance (ADR-0002).

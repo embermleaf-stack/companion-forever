@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import * as SystemUI from "expo-system-ui";
 import { StatusBar } from "expo-status-bar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
@@ -41,6 +43,18 @@ function useNow(intervalMs = 30_000): Date {
 }
 
 export default function App() {
+  useEffect(() => {
+    // Fill the window behind system bars (incl. the Android nav bar area) with the app background.
+    SystemUI.setBackgroundColorAsync(colors.bg).catch(() => undefined);
+  }, []);
+  return (
+    <SafeAreaProvider style={{ backgroundColor: colors.bg }}>
+      <AppContent />
+    </SafeAreaProvider>
+  );
+}
+
+function AppContent() {
   const [state, setState] = useState<AppState>(emptyState);
   const [prefs, setPrefsState] = useState<Prefs>(DEFAULT_PREFS);
   const [loaded, setLoaded] = useState(false);
@@ -107,7 +121,7 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }}>
+    <SafeAreaView edges={["top", "bottom", "left", "right"]} style={{ flex: 1, backgroundColor: colors.bg }}>
       <StatusBar style="light" />
       <View style={{ padding: 16, paddingBottom: 8 }}>
         <Text accessibilityRole="header" style={{ color: colors.highlight, fontSize: 24, fontWeight: "700" }}>

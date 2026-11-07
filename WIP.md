@@ -37,3 +37,8 @@ Product-form correction (ADR-0005, Proposed; owner decision pending):
 - `apps/mobile` (Expo/React Native, Android first) created: checklist, characters, activities, settings, About, opt-in reset reminders. Verified: root typecheck, 53 tests, web build, `expo export --platform android` all pass. **Not yet run on a device or emulator.**
 - Placeholders: `android.package` (`org.example.companionforever`), no app icon. `apps/web` bumped to React 19 for Expo dependency hoisting.
 - Next: emulator run, app icon (use `icons-and-imagery/`), C-10 license check, convert `apps/web` to About page.
+
+## Update: emulator verified (2026-11-07)
+
+- Android emulator (AVD Pixel_7_API34, Android 14) installed; app runs in Expo Go. Safe-area layout bugs fixed and confirmed by screenshot. 53 tests and typecheck pass.
+- Next: app icon, real Android package id, tab bar polish, C-10 license check, About-page conversion of `apps/web`, Firefly authorization (owner) for art queue.

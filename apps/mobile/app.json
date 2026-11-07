@@ -6,8 +6,10 @@
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
     "platforms": ["android"],
+    "backgroundColor": "#14171F",
     "android": {
-      "package": "org.example.companionforever"
+      "package": "org.example.companionforever",
+      "backgroundColor": "#14171F"
     },
     "plugins": ["expo-sharing", "expo-notifications"]
   }

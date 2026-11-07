@@ -31,3 +31,9 @@ Product-form correction (ADR-0005, Proposed; owner decision pending):
 - Funding: awaiting Sponsors enrollment and written compliance clearance (ADR-0002).
 - Real API integration: awaiting M0 compliance results.
 - Hero/illustration art: needs an image model (owner to authorize Adobe connector or supply a key).
+
+## Update: mobile scaffold (2026-11-07)
+
+- `apps/mobile` (Expo/React Native, Android first) created: checklist, characters, activities, settings, About, opt-in reset reminders. Verified: root typecheck, 53 tests, web build, `expo export --platform android` all pass. **Not yet run on a device or emulator.**
+- Placeholders: `android.package` (`org.example.companionforever`), no app icon. `apps/web` bumped to React 19 for Expo dependency hoisting.
+- Next: emulator run, app icon (use `icons-and-imagery/`), C-10 license check, convert `apps/web` to About page.

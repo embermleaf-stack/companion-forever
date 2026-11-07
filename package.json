@@ -7,7 +7,7 @@
   "workspaces": ["packages/*", "apps/*"],
   "scripts": {
     "test": "vitest run",
-    "typecheck": "tsc -b",
+    "typecheck": "tsc -b && npm run typecheck -w @companion/mobile",
     "build": "npm run build -w @companion/web",
     "dev": "npm run dev -w @companion/web"
   },

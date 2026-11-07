@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Economy</title>
+  <!-- Original artwork, GPL-3.0-only -->
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="#1F2430"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#B58A4A" stroke-width="2"/>
+  <rect x="6.5" y="6.5" width="51" height="51" rx="8" fill="none" stroke="#B58A4A" stroke-width="1"/>
+  <circle cx="28" cy="20" r="4.5" fill="#F6D98A" stroke="#B58A4A" stroke-width="1.5"/>
+  <circle cx="37" cy="19" r="4.5" fill="#F6D98A" stroke="#B58A4A" stroke-width="1.5"/>
+  <path d="M18 31Q32 22 46 31V46Q46 52 40 52H24Q18 52 18 46Z" fill="#E0702B"/>
+  <rect x="28.5" y="24" width="7" height="5" rx="1" fill="#B58A4A"/>
+  <circle cx="32" cy="42" r="4" fill="none" stroke="#F6D98A" stroke-width="1.5"/>
+</svg>

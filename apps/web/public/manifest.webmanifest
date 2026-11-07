@@ -1,0 +1,14 @@
+{
+  "name": "Companion Forever",
+  "short_name": "Companion",
+  "description": "Independent activity and character planner. Not affiliated with Blizzard Entertainment.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#14171F",
+  "theme_color": "#14171F",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

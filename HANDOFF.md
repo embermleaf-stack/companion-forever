@@ -18,7 +18,7 @@ Create an independent, accessible, free, open-source, mobile-first character and
 
 - Public GitHub repository exists, default branch `main`.
 - README initially contained only the project heading; a project README is being established.
-- No production code, API integration, rights-cleared quest catalog, or tested addon sync is known to exist.
+- Offline-first prototype exists (core library, PWA, canary tests); no API integration, rights-cleared quest catalog, or addon sync exists. See WIP.md for evidence.
 - Original code license chosen: GNU GPL v3.0 **only**, not 'or later'.
 - Funding provider/account not yet selected; no payment link approved.
 - The exact status, existence, and API availability of any game edition named 'Forever' must be independently verified. Do not treat earlier conversational claims as validated research.

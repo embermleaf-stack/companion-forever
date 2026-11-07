@@ -37,6 +37,22 @@ jobs:
             exit 1
           fi
 
+  tests:
+    name: Tests and canaries (C-02..C-09)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Unit tests and negative canaries C-02..C-09
+        run: npx vitest run
+      - name: Build
+        run: npm run build
+
   secret-scan:
     name: Secret scan (C-01)
     runs-on: ubuntu-latest

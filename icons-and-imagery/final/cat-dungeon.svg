@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Group content</title>
+  <!-- Original artwork, GPL-3.0-only -->
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="#1F2430"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#B58A4A" stroke-width="2"/>
+  <rect x="6.5" y="6.5" width="51" height="51" rx="8" fill="none" stroke="#B58A4A" stroke-width="1"/>
+  <path d="M19 50V28Q19 14 32 14Q45 14 45 28V50Z" fill="#14171F" stroke="#E8DCC0" stroke-width="3" stroke-linejoin="round"/>
+  <rect x="30" y="18" width="4" height="2.5" rx="1" fill="#B58A4A"/>
+  <path d="M32 22.5V26" stroke="#B58A4A" stroke-width="1.5"/>
+  <circle cx="32" cy="32" r="3.5" fill="#F6D98A"/>
+</svg>

@@ -27,6 +27,13 @@ Update `HANDOFF.md` and `WIP.md` with: date, branch/commit, files changed, tests
 - **May not:** silently change a legal/compliance boundary, rewrite or delete an Accepted decision, change the license, enable funding, add a dependency with an incompatible license, or weaken/skip a canary test. Propose instead, via a new ADR with status `Proposed`, and flag it in `WIP.md`.
 - When uncertain whether something touches a boundary, stop and ask the owner.
 
+## Orchestration rules (owner-set, 2026-11-07)
+
+1. **The orchestrator stays available.** The top-level agent plans, delegates, reviews, integrates, commits, and answers the owner. It does not tie itself up in long implementation tasks; those go to subagents running in the background.
+2. **Tiered models.** Use the cheapest model that can do the job well: Haiku for mechanical or well-specified tasks (SVG/asset authoring, boilerplate, doc formatting, simple edits); Sonnet for standard engineering (features, tests, CI, refactors); Opus only for hard design, security or compliance review, or when a lower tier has failed. Record the tier chosen in the task brief.
+3. **All work is agentic.** Implementation, testing, and review are delegated to subagents with a written brief (goal, files in scope, what is already ruled out, acceptance test). The orchestrator verifies results by running the tests itself before committing.
+4. Subagents must follow every hard boundary above; delegation does not transfer decision authority.
+
 ## Working conventions
 
 - Small, reviewable commits; Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `test:`, `ci:`).

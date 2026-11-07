@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Gathering</title>
+  <!-- Original artwork, GPL-3.0-only -->
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="#1F2430"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#B58A4A" stroke-width="2"/>
+  <rect x="6.5" y="6.5" width="51" height="51" rx="8" fill="none" stroke="#B58A4A" stroke-width="1"/>
+  <ellipse cx="27" cy="22" rx="3" ry="5" fill="#5E9E5A" transform="rotate(-25 27 22)"/>
+  <ellipse cx="37" cy="21" rx="3" ry="5" fill="#5E9E5A" transform="rotate(25 37 21)"/>
+  <path d="M22 28Q32 14 42 28" fill="none" stroke="#E8DCC0" stroke-width="2"/>
+  <path d="M20 28H44V46Q44 50 40 50H24Q20 50 20 46Z" fill="#B58A4A"/>
+  <path d="M20 28H44V34H20Z" fill="#2E5E6B"/>
+  <circle cx="32" cy="41" r="2" fill="#F6D98A"/>
+</svg>

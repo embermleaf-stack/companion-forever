@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Social and guild</title>
+  <!-- Original artwork, GPL-3.0-only -->
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="#1F2430"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#B58A4A" stroke-width="2"/>
+  <rect x="6.5" y="6.5" width="51" height="51" rx="8" fill="none" stroke="#B58A4A" stroke-width="1"/>
+  <g>
+    <rect x="22.5" y="15" width="3" height="3" fill="#B58A4A"/>
+    <path d="M20 18H30L28 21H22Z" fill="#B58A4A"/>
+    <rect x="22" y="21" width="12" height="18" rx="4" fill="#F6D98A" stroke="#B58A4A" stroke-width="1.5"/>
+    <path d="M20 39H30L28 42H22Z" fill="#B58A4A"/>
+  </g>
+  <g>
+    <rect x="34.5" y="15" width="3" height="3" fill="#B58A4A"/>
+    <path d="M32 18H42L40 21H34Z" fill="#B58A4A"/>
+    <rect x="34" y="21" width="12" height="18" rx="4" fill="#E0702B" stroke="#B58A4A" stroke-width="1.5"/>
+    <path d="M32 39H42L40 42H34Z" fill="#B58A4A"/>
+  </g>
+</svg>

@@ -2,24 +2,25 @@
 
 **Updated:** 2026-11-07
 
-## In progress
+## Done this session (evidence)
 
-- Governance and project infrastructure scaffold (this change set): AGENTS, GOVERNANCE, DECISIONS, ADRs, ARCHITECTURE, LICENSING, CANARIES, CONTRIBUTING, SECURITY, templates, CI skeleton. **Uncommitted until owner reviews.**
+- Core library `packages/core`: reset math, checklist store, strict validation, provider contract with provenance, synthetic/manual providers. Tests: 17 passing.
+- Web app `apps/web` (React + Vite PWA, local-only storage, manual checklist, import/export, user-set reset times). `npm run typecheck`, `npm run build` passed; storage tests: 4 passing.
+- Negative canaries C-02..C-09 as Vitest tests (22 tests), shown to fail on in-memory violations. C-01 (gitleaks) and C-10 (license check) still pending. Total run: 43 passing, `npx vitest run`, 2026-11-07.
+- 17 hand-authored original SVG icons in `icons-and-imagery/final/` (valid XML). Image-model briefs in `icons-and-imagery/` for hero art and illustrations.
+- CI workflow written but **not yet run on GitHub**.
 
 ## Next (ordered)
 
-1. Owner reviews and commits the scaffold; enable branch protection and GitHub secret scanning/Dependabot in repo settings (cannot be done from files).
-2. Primary-source audit (HANDOFF item 2): Blizzard API terms, trademark policy, addon policy; record URL, date, clause, test in `docs/LICENSING.md`.
-3. Resolve "Forever" naming ambiguity and verify what Blizzard exposes.
-4. Owner decision on ADR-0003 and ADR-0004.
-5. Choose toolchain (package manager, test runner), then replace the placeholder canary and CI steps with real ones.
-6. Synthetic fixtures and schema.
+1. Confirm first CI run on GitHub; fix failures.
+2. Owner: enable branch protection, secret scanning, private vulnerability reporting; decide ADR-0003 (provisionally implemented) and ADR-0004.
+3. Primary-source audit of Blizzard terms (M0), "Forever" naming check.
+4. Component tests (needs jsdom/testing-library), accessibility audit, icon wiring into the UI.
+5. Reminders (local notifications for resets), activity templates (original content only).
+6. Dependency license check (C-10).
 
 ## Blocked
 
 - Funding: awaiting Sponsors enrollment and written compliance clearance (ADR-0002).
 - Real API integration: awaiting M0 compliance results.
-
-## Evidence log
-
-- 2026-11-07: Files created only; no tests or CI have been run. CI workflow is untested until first push.
+- Hero/illustration art: needs an image model (owner to authorize Adobe connector or supply a key).

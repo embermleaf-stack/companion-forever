@@ -1,0 +1,36 @@
+# Secrets and local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+.claude/settings.local.json
+
+# Player/account data and game material (never commit)
+SavedVariables/
+*.lua.bak
+exports/
+character-exports/
+*.mpq
+*.casc
+*.blp
+*.m2
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+coverage/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# Logs and OS/editor files
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/

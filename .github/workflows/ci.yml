@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  governance-canaries:
+    name: Governance canaries
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # C-05: funding must stay inactive until clearance is documented.
+      - name: C-05 funding link inactive
+        run: |
+          active=$(grep -vE '^\s*(#|$)' .github/FUNDING.yml || true)
+          if [ -n "$active" ]; then
+            echo "::error::FUNDING.yml has active entries. Requires cleared gates in docs/SPONSORSHIP.md and a superseding ADR."
+            echo "$active"
+            exit 1
+          fi
+
+      # C-02: block obvious game-asset file types.
+      - name: C-02 no protected game assets
+        run: |
+          bad=$(git ls-files | grep -iE '\.(blp|m2|mpq|casc|adt|wdt|wmo)$' || true)
+          if [ -n "$bad" ]; then
+            echo "::error::Protected game asset file types found:"
+            echo "$bad"
+            exit 1
+          fi
+
+  secret-scan:
+    name: Secret scan (C-01)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # TODO (after toolchain ADR): lint, typecheck, unit tests, dependency license
+  # check (C-10), static checks for C-03/C-04/C-06/C-07/C-08/C-09.

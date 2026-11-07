@@ -15,7 +15,7 @@ An independent, free and open-source companion for tracking World of Warcraft ch
 5. [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — proposed system architecture.
 6. [docs/LICENSING.md](docs/LICENSING.md) — source restrictions and release gates.
 
-Some linked governance documents are planned but not yet created. Do not assume an uncommitted design is implemented.
+Governance documents now exist, but the architecture is a proposal. Do not assume a documented design is implemented. See also [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [docs/CANARIES.md](docs/CANARIES.md).
 
 ## Vision
 

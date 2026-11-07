@@ -1,0 +1,7 @@
+# Protected files route to the owner (see docs/GOVERNANCE.md)
+*                          @embermleaf-stack
+/LICENSE                   @embermleaf-stack
+/AGENTS.md                 @embermleaf-stack
+/DECISIONS.md              @embermleaf-stack
+/docs/                     @embermleaf-stack
+/.github/                  @embermleaf-stack

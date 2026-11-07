@@ -38,3 +38,7 @@ dist-types/
 
 # Expo
 .expo/
+
+# AI image generation staging (unapproved output; only the placeholder is tracked)
+icons-and-imagery/staging/*
+!icons-and-imagery/staging/README.md

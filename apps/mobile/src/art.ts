@@ -133,6 +133,69 @@ const ART_ENTRIES = [
     provisional: true,
     enabled: true,
   },
+  {
+    key: "btnPrimary",
+    job: "UI-BTN",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; original SVG in icons-and-imagery/final/btn-primary.svg
+    source: require("../assets/art/ui/btn-primary.png"),
+    alt: "Button frame",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "btnPrimaryPressed",
+    job: "UI-BTN",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; original SVG in icons-and-imagery/final/btn-primary-pressed.svg
+    source: require("../assets/art/ui/btn-primary-pressed.png"),
+    alt: "Button frame",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "btnSecondary",
+    job: "UI-BTN",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; original SVG in icons-and-imagery/final/btn-secondary.svg
+    source: require("../assets/art/ui/btn-secondary.png"),
+    alt: "Button frame",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "btnSecondaryPressed",
+    job: "UI-BTN",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; original SVG in icons-and-imagery/final/btn-secondary-pressed.svg
+    source: require("../assets/art/ui/btn-secondary-pressed.png"),
+    alt: "Button frame",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "btnDanger",
+    job: "UI-BTN",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; original SVG in icons-and-imagery/final/btn-danger.svg
+    source: require("../assets/art/ui/btn-danger.png"),
+    alt: "Button frame",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "btnDangerPressed",
+    job: "UI-BTN",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; original SVG in icons-and-imagery/final/btn-danger-pressed.svg
+    source: require("../assets/art/ui/btn-danger-pressed.png"),
+    alt: "Button frame",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "btnDisabled",
+    job: "UI-BTN",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; original SVG in icons-and-imagery/final/btn-disabled.svg
+    source: require("../assets/art/ui/btn-disabled.png"),
+    alt: "Button frame",
+    provisional: true,
+    enabled: true,
+  },
 ] as const satisfies readonly ArtEntry[];
 
 export type ArtKey = (typeof ART_ENTRIES)[number]["key"];

@@ -18,7 +18,7 @@ import {
 import { createPersistence, DEFAULT_PREFS, type Prefs } from "./persistence";
 import { cancelReminders, rescheduleReminders } from "./reminderScheduler";
 import { colors } from "./theme";
-import { Button } from "./ui";
+import { Background, Button } from "./ui";
 import { Onboarding } from "./Onboarding";
 import { ChecklistScreen } from "./screens/Checklist";
 import { CharactersScreen } from "./screens/Characters";
@@ -129,9 +129,10 @@ function AppContent() {
   }
 
   return (
-    <SafeAreaView edges={["top", "bottom", "left", "right"]} style={{ flex: 1, backgroundColor: colors.bg }}>
+    <Background>
+    <SafeAreaView edges={["top", "bottom", "left", "right"]} style={{ flex: 1 }}>
       <StatusBar style="light" />
-      <View style={{ padding: 16, paddingBottom: 8 }}>
+      <View style={{ padding: 16, paddingBottom: 12, borderBottomWidth: 1, borderBottomColor: colors.border, backgroundColor: "rgba(31,36,48,0.6)" }}>
         <Text accessibilityRole="header" style={{ color: colors.highlight, fontSize: 24, fontWeight: "700" }}>
           Companion Forever
         </Text>
@@ -143,8 +144,8 @@ function AppContent() {
         horizontal
         accessibilityRole="tablist"
         showsHorizontalScrollIndicator={false}
-        style={{ flexGrow: 0, flexShrink: 0 }}
-        contentContainerStyle={{ paddingHorizontal: 8, paddingBottom: 4 }}
+        style={{ flexGrow: 0, flexShrink: 0, borderBottomWidth: 1, borderBottomColor: colors.border, backgroundColor: "rgba(31,36,48,0.6)" }}
+        contentContainerStyle={{ paddingHorizontal: 8, paddingVertical: 4 }}
       >
         {TABS.map((t) => (
           <Button
@@ -206,5 +207,6 @@ function AppContent() {
         {DISCLAIMER}
       </Text>
     </SafeAreaView>
+    </Background>
   );
 }

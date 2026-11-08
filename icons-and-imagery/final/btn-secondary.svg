@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <title>btn-secondary</title>
+  <!-- Original hand-authored artwork, GPL-3.0-only. 9-slice: 14px caps. -->
+  <defs>
+    <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2A3040"/><stop offset="1" stop-color="#1B202B"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F6D98A" stop-opacity="0.1"/><stop offset="0.5" stop-color="#F6D98A" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="46" height="46" rx="10" fill="#B58A4A"/>
+  <rect x="2.5" y="2.5" width="43" height="43" rx="8.5" fill="url(#fill)"/>
+  <rect x="2.5" y="2.5" width="43" height="43" rx="8.5" fill="url(#glow)"/>
+  <path d="M12 3.4H36" stroke="#D2AE72" stroke-opacity="0.8" stroke-width="1" stroke-linecap="round"/>
+  <rect x="4.5" y="4.5" width="39" height="39" rx="6.5" fill="none" stroke="#D2AE72" stroke-opacity="0.35" stroke-width="0.8"/>
+  <path d="M12 44.6H36" stroke="#000000" stroke-opacity="0.35" stroke-width="1" stroke-linecap="round"/>
+  <circle cx="7" cy="7" r="1.6" fill="#D2AE72"/><circle cx="6.6" cy="6.6" r="0.6" fill="#FFFFFF" fill-opacity="0.5"/><circle cx="41" cy="7" r="1.6" fill="#D2AE72"/><circle cx="40.6" cy="6.6" r="0.6" fill="#FFFFFF" fill-opacity="0.5"/><circle cx="7" cy="41" r="1.6" fill="#D2AE72"/><circle cx="6.6" cy="40.6" r="0.6" fill="#FFFFFF" fill-opacity="0.5"/><circle cx="41" cy="41" r="1.6" fill="#D2AE72"/><circle cx="40.6" cy="40.6" r="0.6" fill="#FFFFFF" fill-opacity="0.5"/>
+</svg>

@@ -7,7 +7,7 @@ import { exportState, importState, setResetConfig, type AppState } from "@compan
 import type { Run } from "../App";
 import { MAX_LEAD_MINUTES, MIN_LEAD_MINUTES, type Prefs } from "../persistence";
 import { ensurePermission } from "../reminderScheduler";
-import { Button, Choice, H2, P, Stepper } from "../ui";
+import { Button, Choice, H2, P, Panel, Stepper } from "../ui";
 import { DAYS } from "../format";
 import { TOUCH, colors } from "../theme";
 
@@ -77,6 +77,7 @@ export function SettingsScreen(props: {
 
   return (
     <View>
+      <Panel>
       <H2>Reset schedule</H2>
       <P dim>Set these to match your game. The defaults are placeholders, not official times. All times are UTC.</P>
       <Stepper label="Daily reset hour (UTC)" value={r.dailyHourUtc} min={0} max={23}
@@ -90,6 +91,9 @@ export function SettingsScreen(props: {
         options={DAYS.map((d, i) => ({ value: i, label: d }))}
       />
 
+      </Panel>
+
+      <Panel>
       <H2>Reminders</H2>
       <P dim>Optional. Schedules a local notification shortly before the next daily and weekly reset you set above. Off by default.</P>
       <View style={{ flexDirection: "row", alignItems: "center", minHeight: TOUCH, marginBottom: 8 }}>
@@ -107,6 +111,9 @@ export function SettingsScreen(props: {
       <Stepper label="Minutes before reset" value={prefs.reminderLeadMinutes} min={MIN_LEAD_MINUTES} max={MAX_LEAD_MINUTES} step={5}
         onChange={(v) => setPrefs({ ...prefs, reminderLeadMinutes: v })} />
 
+      </Panel>
+
+      <Panel>
       <H2>Your data</H2>
       <P dim>Everything is stored only on this device. Export a backup to move it between devices.</P>
       <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
@@ -115,6 +122,7 @@ export function SettingsScreen(props: {
         <Button label="Load sample data" onPress={() => void props.loadSample()} variant="plain" />
         <Button label="Delete all data" onPress={deleteAll} variant="danger" />
       </View>
+      </Panel>
     </View>
   );
 }

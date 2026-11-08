@@ -2,7 +2,7 @@
 import { Pressable, Text, View } from "react-native";
 import type { buildChecklist } from "@companion/core";
 import { TOUCH, colors } from "../theme";
-import { H2, P } from "../ui";
+import { H2, P, Panel } from "../ui";
 import { formatRemaining } from "../format";
 import { ArtImage, EmptyState } from "../ArtImage";
 import { getArt } from "../art";
@@ -51,8 +51,8 @@ export function ChecklistScreen(props: {
         const status = r.done ? "Done" : "Not done";
         const meta = `${r.subjectName} · ${r.activity.cadence} · ${r.done ? formatRemaining(r.resetsAt, now) : status}`;
         return (
+          <Panel key={`${r.activity.id}-${r.subjectId}`} padding={0} borderColor={r.done ? colors.ok : colors.border} borderWidth={r.done ? 2 : 1.5}>
           <Pressable
-            key={`${r.activity.id}-${r.subjectId}`}
             accessibilityRole="checkbox"
             accessibilityLabel={`${r.activity.title}, ${r.subjectName}, ${r.activity.cadence}`}
             accessibilityState={{ checked: r.done }}
@@ -62,12 +62,7 @@ export function ChecklistScreen(props: {
               minHeight: TOUCH,
               flexDirection: "row",
               alignItems: "center",
-              backgroundColor: colors.surface,
-              borderColor: r.done ? colors.ok : colors.border,
-              borderWidth: r.done ? 2 : 1,
-              borderRadius: 8,
               padding: 12,
-              marginBottom: 8,
             }}
           >
             <Text style={{ color: r.done ? colors.ok : colors.text, fontSize: 24, width: 36 }} importantForAccessibility="no">
@@ -85,6 +80,7 @@ export function ChecklistScreen(props: {
               </View>
             </View>
           </Pressable>
+          </Panel>
         );
       })}
     </View>

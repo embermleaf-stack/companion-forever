@@ -43,3 +43,21 @@ Product-form correction (ADR-0005, Proposed; owner decision pending):
 
 - Android emulator (AVD Pixel_7_API34, Android 14) installed; app runs in Expo Go. Safe-area layout bugs fixed and confirmed by screenshot. 53 tests and typecheck pass.
 - Next: app icon, real Android package id, tab bar polish, C-10 license check, About-page conversion of `apps/web`, Firefly authorization (owner) for art queue.
+
+## Update: ADR-0006 Battle.net login (2026-11-07) — Proposed, awaiting owner decision
+
+- Wrote `docs/adr/0006-blizzard-account-login.md` (Status: Proposed; docs only, no code, not committed). Options A (Custom Tabs + minimal token-exchange backend), B (PKCE public client), C (client-credentials lookup), D (manual only).
+- Primary sources read 2026-11-07: Blizzard Developer API Terms (last updated 2019-10-01: 30-day TTL, 36,000 calls/hour, privacy policy, attribution, no password collection, API key confidentiality), oauth.battle.net OIDC discovery (no PKCE advertised), Play Data safety help, Expo SecureStore, Cloudflare Workers pricing.
+- **UNVERIFIED:** developer-portal guides are JavaScript-rendered and could not be read, so PKCE support, scopes (`wow.profile`), the `/profile/user/wow` endpoint, token lifetime/refresh and redirect-URI rules are unconfirmed. Owner action 1 in the ADR.
+- Recommendation: keep manual entry as the default. Use B if Blizzard confirms PKCE public clients, otherwise A1 (backend-terminated redirect with a one-time handoff) on Cloudflare Workers Free behind a feature flag. Reject C.
+- Proposed (not added): canaries C-11 (no client secret in app) and C-12 (no WebView/password field in auth), plus a C-03 host allowlist change. All need owner sign-off.
+- Next: owner reads portal guides, confirms ToU clause letters, decides the option; agents then add a `DECISIONS.md` row only after owner decision.
+
+## Update: UI frames, backgrounds, button sprites; real-device install (2026-11-07)
+
+- Branch main. Added `Background`, `Panel` (bronze frame, corner ornaments) and `GameButton` (9-slice sprites: primary/secondary/danger, normal/pressed/disabled) in `apps/mobile/src/ui.tsx`; used across all tabs. Original hand-authored SVG in `icons-and-imagery/final/btn-*.svg`, PNGs in `apps/mobile/assets/art/ui/`; provenance logged.
+- Verified: `npm run typecheck` clean; `npx vitest run` 94/94; x86_64 release build run on emulator with screenshots of every tab; arm64 release APK installed (not launched) on the owner's Pixel and opened fine. Canary C-03 failure seen mid-session was a generated, git-ignored `apps/mobile/android/` folder; folder deleted, canary unchanged.
+- Fixed: background banding, 1px seams inside 9-slice buttons.
+- Known: full-width GameButtons end ~6dp short (marginRight 6); native Switch and row checkboxes not sprite-styled; Windows 260-char path limit breaks in-repo native builds (build from a short-path copy such as C:\cfb with `buildStagingDirectory`); tab row scrolls, About partly clipped.
+- Added `icons-and-imagery/UI-KIT-BRIEF.md` (UI-001..006 AI-art prompts for the owner to generate; tool terms UNVERIFIED).
+- Next: owner decision on ADR-0006 (Battle.net login) after reading portal guides; fix button width; sprite-style Switch/checkboxes; script for short-path builds.

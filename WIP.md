@@ -137,3 +137,9 @@ Product-form correction (ADR-0005, Proposed; owner decision pending):
 - Day art: interim `bg-day.jpg` for all screens in light mode; 11 original light sprites (`build-light-sprites.mjs`). Contrast tables in `icons-and-imagery/provenance.md`.
 - Tests run: `npm run typecheck` clean; `npx vitest run` 181 passed (10 files); `npx expo export --platform android` OK; x86_64 build installed on emulator and checked in light, dark, Auto-follows-system, forced Light/Dark; arm64-v8a installed on the owner's phone (not launched).
 - Open: owner to replace bg-day.jpg with a properly upscaled file; splash screen is still dark in light mode; day Characters shares the day painting.
+
+## Update: art batch filed; day background upscaled (2026-11-08)
+
+- Day background (THEME-D-BG, tower and clouds) replaced by the upscaled version (1080x2400 JPEG q65, 184 KB); splash backdrop (UI-010) staged (splash-backdrop.jpg, 310 KB). Also staged but not yet wired: bg-night-tower.jpg (THEME-N-BG), bg-activities.jpg (SKIN-003), bg-settings.jpg (SKIN-004), frame-hawthorn.png (SKIN-006 cutout, 9-slice corner 270 px). Candidates in originals (git-ignored): SKIN-007 panel, SKIN-008 plain divider, UI-007/a/b banners, UI-008 buttons (6 not 9; prompt rewritten with 'exactly nine'), UI-009 lantern flicker (10 frames), all with white or black backgrounds needing cutouts.
+- Naming: owner chose 'Hawthorn Journal' as working public name; ADR-0007 is Proposed; main risk is a possible 'HAWTHORN' Class 9 mark (Near Studios) UNVERIFIED; owner to search registries. App display name unchanged until confirmed.
+- Next rounds: (1) wire night-tower/activities/settings backgrounds, frame, divider; (2) title banner + splash animation (needs name); (3) panels and wide buttons; app icon (hawthorn sprig) pending owner art.

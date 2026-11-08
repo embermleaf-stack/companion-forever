@@ -5,8 +5,8 @@ import type { AuthConfig } from "./config";
 import { BattleNetError } from "./errors";
 
 export type AuthSessionResult = { type: "success"; url: string } | { type: "cancel" | "dismiss" };
-/** Opens the URL in the system browser and resolves when it redirects to `redirectUri`. */
-export type OpenAuthSession = (url: string, redirectUri: string) => Promise<AuthSessionResult>;
+/** Opens the URL in the system browser and resolves when the session returns to `returnUrl` (app scheme). */
+export type OpenAuthSession = (url: string, returnUrl: string) => Promise<AuthSessionResult>;
 
 export interface HandoffBackend {
   /** Runs the backend-terminated flow and returns a user access token. */

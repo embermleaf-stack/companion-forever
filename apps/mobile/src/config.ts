@@ -5,10 +5,11 @@ import { authConfigFromEnv, type AuthConfig } from "./battlenet/config";
 declare const process: { env: Record<string, string | undefined> };
 
 /**
- * Battle.net import (ADR-0006, status Proposed). OFF by default. Do not turn on in a release build
+ * Battle.net import (ADR-0006, status Proposed). OFF by default; a local build turns it on with
+ * EXPO_PUBLIC_FEATURE_BATTLENET=1. Do not turn on in a release build
  * before the owner accepts the ADR and the legal review is recorded.
  */
-export const FEATURE_BATTLENET = false;
+export const FEATURE_BATTLENET = process.env.EXPO_PUBLIC_FEATURE_BATTLENET === "1";
 
 /**
  * Auth config comes only from EXPO_PUBLIC_BNET_* environment variables at build time. Absent by

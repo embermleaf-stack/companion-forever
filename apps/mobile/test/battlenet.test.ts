@@ -25,7 +25,8 @@ const config: AuthConfig = {
   authorizeUrl: "https://localhost/authorize",
   tokenUrl: "https://localhost/token",
   profileUrl: "https://localhost/profile",
-  redirectUri: "companionforever://bnet-callback",
+  redirectUri: "https://localhost/bnet-callback",
+  returnUrl: "companionforever://bnet-callback",
   scopes: ["wow.profile"],
 };
 
@@ -109,7 +110,7 @@ describe("authorize URL and redirect parsing", () => {
     const u = buildAuthorizeUrl(config, "CH", "ST");
     expect(u.startsWith("https://localhost/authorize?")).toBe(true);
     expect(q(u)).toEqual({
-      response_type: "code", client_id: "synthetic-client-id", redirect_uri: "companionforever://bnet-callback",
+      response_type: "code", client_id: "synthetic-client-id", redirect_uri: "https://localhost/bnet-callback",
       scope: "wow.profile", state: "ST", code_challenge: "CH", code_challenge_method: "S256",
     });
   });
@@ -128,6 +129,46 @@ describe("authorize URL and redirect parsing", () => {
   });
 });
 
+describe("redirectUri vs returnUrl end to end", () => {
+  it("authorize carries https redirect_uri, client_id, S256; exchange repeats redirect_uri with verifier and no secret", async () => {
+    let authUrl = "";
+    let tokenBody = "";
+    const f: FetchLike = async (_u, init) => { tokenBody = init?.body ?? ""; return res(200, { access_token: "T", expires_in: 60 }); };
+    const store = createTokenStore(memSecrets());
+    let watched = "";
+    await signIn({
+      config, random: seqRandom, fetch: f, tokenStore: store,
+      openAuthSession: async (url, returnUrl) => {
+        authUrl = url; watched = returnUrl;
+        const a = q(url);
+        return { type: "success", url: `${returnUrl}?code=CODE1&state=${encodeURIComponent(a.state)}` };
+      },
+    });
+    const a = q(authUrl);
+    expect(a.redirect_uri).toBe("https://localhost/bnet-callback");
+    expect(a.client_id).toBe("synthetic-client-id");
+    expect(a.code_challenge_method).toBe("S256");
+    expect(a.code_challenge).toMatch(/^[A-Za-z0-9_-]{43}$/);
+    expect(watched).toBe("companionforever://bnet-callback");
+    const b = q("?" + tokenBody);
+    expect(b.redirect_uri).toBe(a.redirect_uri);
+    expect(b.code).toBe("CODE1");
+    expect(b.code_verifier).toBeTruthy();
+    expect(codeChallengeS256(b.code_verifier)).toBe(a.code_challenge);
+    expect(tokenBody).not.toContain("client_secret");
+  });
+  it("error and mismatched-state returns fail; a return from another address is rejected", async () => {
+    const run = (mk: (rt: string, st: string) => string) => signIn({
+      config, random: seqRandom, fetch: async () => { throw new Error("no exchange expected"); },
+      tokenStore: createTokenStore({ get: async () => null, set: async () => {}, remove: async () => {} }),
+      openAuthSession: async (url, rt) => ({ type: "success", url: mk(rt, q(url).state) }),
+    }).catch((e) => (e as BattleNetError).kind);
+    expect(await run((rt, st) => `${rt}?error=access_denied&state=${st}`)).toBe("denied");
+    expect(await run((rt) => `${rt}?code=C&state=forged`)).toBe("state-mismatch");
+    expect(await run((_rt, st) => `other://bnet-callback?code=C&state=${st}`)).toBe("invalid-redirect");
+  });
+});
+
 describe("exchangeCode", () => {
   it("posts a form body with the PKCE fields and no client secret", async () => {
     let seen: { url: string; init?: { method?: string; headers?: Record<string, string>; body?: string } } | undefined;
@@ -137,7 +178,7 @@ describe("exchangeCode", () => {
     expect(seen?.init?.method).toBe("POST");
     expect(seen?.init?.headers?.["Content-Type"]).toBe("application/x-www-form-urlencoded");
     expect(q("?" + seen?.init?.body)).toEqual({
-      grant_type: "authorization_code", code: "CODE", redirect_uri: "companionforever://bnet-callback",
+      grant_type: "authorization_code", code: "CODE", redirect_uri: "https://localhost/bnet-callback",
       client_id: "synthetic-client-id", code_verifier: "VER",
     });
     expect(seen?.init?.body).not.toContain("secret");
@@ -194,10 +235,12 @@ describe("config", () => {
   it("is absent by default and requires every field", () => {
     expect(authConfigFromEnv({})).toBeNull();
     expect(authConfigFromEnv({ clientId: "a", authorizeUrl: "b", tokenUrl: "c" })).toBeNull();
-    const c = authConfigFromEnv({ clientId: "a", authorizeUrl: "b", tokenUrl: "c", profileUrl: "d" });
+    expect(authConfigFromEnv({ clientId: "a", authorizeUrl: "b", tokenUrl: "c", profileUrl: "d" })).toBeNull();
+    const c = authConfigFromEnv({ clientId: "a", authorizeUrl: "b", tokenUrl: "c", profileUrl: "d", redirectUri: "e" });
     expect(c?.mode).toBe("pkce");
-    expect(c?.redirectUri).toBe("companionforever://bnet-callback");
-    expect(authConfigFromEnv({ clientId: "a", authorizeUrl: "b", tokenUrl: "c", profileUrl: "d", mode: "handoff" })).toBeNull();
+    expect(c?.redirectUri).toBe("e");
+    expect(c?.returnUrl).toBe("companionforever://bnet-callback");
+    expect(authConfigFromEnv({ clientId: "a", authorizeUrl: "b", tokenUrl: "c", profileUrl: "d", redirectUri: "e", mode: "handoff" })).toBeNull();
   });
 });
 
@@ -287,10 +330,13 @@ function fakeServer(opts: { rejectExchange?: number } = {}) {
     }
     return res(404, "");
   };
-  const browser = (mode: "ok" | "wrong-state" | "denied" | "cancel") => async (url: string, redirect: string) => {
+  const browser = (mode: "ok" | "wrong-state" | "denied" | "cancel") => async (url: string, returnUrl: string) => {
     if (mode === "cancel") return { type: "cancel" as const };
     const a = q(url);
-    expect(a.redirect_uri).toBe(redirect);
+    // Blizzard is sent the https page; the callback page hands off to the app-scheme returnUrl.
+    expect(a.redirect_uri).toBe(config.redirectUri);
+    expect(returnUrl).toBe(config.returnUrl);
+    const redirect = returnUrl;
     const code = "code-" + a.state.slice(0, 6);
     Object.assign(issued, { code, challenge: a.code_challenge });
     if (mode === "denied") return { type: "success" as const, url: `${redirect}?error=access_denied&state=${encodeURIComponent(a.state)}` };

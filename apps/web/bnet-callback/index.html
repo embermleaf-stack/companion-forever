@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#14171F" />
+    <title>Hawthorn Ledger sign-in</title>
+  </head>
+  <body>
+    <main class="page">
+      <h1>Hawthorn Ledger</h1>
+      <p id="status" role="status">Finishing sign-in...</p>
+      <p id="detail" class="detail" hidden></p>
+      <div id="actions" class="actions" hidden>
+        <a id="open" class="store" href="#">Open Hawthorn Ledger</a>
+        <a id="plain" href="#">Open with a plain link</a>
+      </div>
+      <noscript><p>This page needs JavaScript to hand your sign-in result back to the app. Please enable JavaScript and try again from the app.</p></noscript>
+      <p class="note">Independent project. Not affiliated with or endorsed by Blizzard Entertainment.</p>
+    </main>
+    <script type="module" src="../src/callbackPage.ts"></script>
+  </body>
+</html>

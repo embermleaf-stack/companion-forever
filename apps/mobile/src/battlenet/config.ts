@@ -13,15 +13,20 @@ export interface AuthConfig {
   tokenUrl: string;
   /** Full URL of the account character list endpoint. */
   profileUrl: string;
-  /** Custom-scheme redirect (scheme declared in app.json). The redirect forms the provider accepts are UNVERIFIED. */
+  /**
+   * HTTPS callback page registered with the provider. Sent in /authorize AND in the token exchange
+   * (must be identical). The provider form accepts only http(s) redirect URLs. Env-supplied only.
+   */
   redirectUri: string;
+  /** App-scheme URL the callback page hands the result to; the in-app browser session watches for it. */
+  returnUrl: string;
   scopes: string[];
   /** Only for mode "handoff": the backend base URL. */
   backendBaseUrl?: string;
 }
 
 export const APP_SCHEME = "companionforever";
-export const DEFAULT_REDIRECT_URI = `${APP_SCHEME}://bnet-callback`;
+export const DEFAULT_RETURN_URL = `${APP_SCHEME}://bnet-callback`;
 export const DEFAULT_SCOPES = ["wow.profile"];
 
 /** Build a config from a plain key/value source; returns null unless everything required is present. */
@@ -30,7 +35,8 @@ export function authConfigFromEnv(env: Record<string, string | undefined>): Auth
   const authorizeUrl = env.authorizeUrl?.trim();
   const tokenUrl = env.tokenUrl?.trim();
   const profileUrl = env.profileUrl?.trim();
-  if (!clientId || !authorizeUrl || !tokenUrl || !profileUrl) return null;
+  const redirectUri = env.redirectUri?.trim();
+  if (!clientId || !authorizeUrl || !tokenUrl || !profileUrl || !redirectUri) return null;
   const mode: AuthMode = env.mode === "handoff" ? "handoff" : "pkce";
   const backendBaseUrl = env.backendBaseUrl?.trim() || undefined;
   if (mode === "handoff" && !backendBaseUrl) return null;
@@ -40,7 +46,8 @@ export function authConfigFromEnv(env: Record<string, string | undefined>): Auth
     authorizeUrl,
     tokenUrl,
     profileUrl,
-    redirectUri: env.redirectUri?.trim() || DEFAULT_REDIRECT_URI,
+    redirectUri,
+    returnUrl: DEFAULT_RETURN_URL,
     scopes: DEFAULT_SCOPES,
     ...(backendBaseUrl ? { backendBaseUrl } : {}),
   };

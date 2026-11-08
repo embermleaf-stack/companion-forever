@@ -31,9 +31,9 @@ export async function signIn(deps: SignInDeps): Promise<void> {
   }
 
   const url = buildAuthorizeUrl(config, codeChallengeS256(verifier), state);
-  const result = await deps.openAuthSession(url, config.redirectUri);
+  const result = await deps.openAuthSession(url, config.returnUrl);
   if (result.type !== "success") throw new BattleNetError("cancelled", "Sign-in cancelled.");
-  const code = parseRedirect(result.url, state);
+  const code = parseRedirect(result.url, state, config.returnUrl);
   const token = await exchangeCode(config, code, verifier, deps.fetch);
   await deps.tokenStore.setToken(token.accessToken, token.expiresInSec);
 }

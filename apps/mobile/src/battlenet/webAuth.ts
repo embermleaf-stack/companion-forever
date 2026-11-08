@@ -3,7 +3,7 @@
 import * as WebBrowser from "expo-web-browser";
 import type { OpenAuthSession } from "./handoff";
 
-export const openAuthSession: OpenAuthSession = async (url, redirectUri) => {
-  const r = await WebBrowser.openAuthSessionAsync(url, redirectUri);
+export const openAuthSession: OpenAuthSession = async (url, returnUrl) => {
+  const r = await WebBrowser.openAuthSessionAsync(url, returnUrl);
   return r.type === "success" ? { type: "success", url: r.url } : { type: r.type === "cancel" ? "cancel" : "dismiss" };
 };

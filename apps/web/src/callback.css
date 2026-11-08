@@ -1,0 +1,14 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+:root { --ink: #14171f; --slate: #1f2430; --vellum: #e8dcc0; --ember: #e0702b; --bronze: #b58a4a; --candle: #f6d98a; --muted: #b9ae93; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ink); color: var(--vellum); font: 16px/1.6 Georgia, "Times New Roman", serif; }
+.page { max-width: 640px; margin: 0 auto; padding: 48px 16px; text-align: center; }
+h1 { font-size: 1.8rem; margin: 0 0 12px; color: var(--candle); }
+.detail, .note { color: var(--muted); font-size: 0.9rem; }
+[hidden] { display: none !important; }
+.actions { display: grid; gap: 12px; justify-items: center; margin-top: 24px; }
+.store { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding: 10px 18px; border-radius: 8px; background: var(--slate); color: var(--vellum); border: 1px solid var(--bronze); font: inherit; text-decoration: none; }
+.store:hover { border-color: var(--candle); }
+a { color: var(--ember); }
+a:hover { color: var(--candle); }
+:focus-visible { outline: 3px solid var(--candle); outline-offset: 2px; }

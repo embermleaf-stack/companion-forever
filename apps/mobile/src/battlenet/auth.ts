@@ -49,8 +49,10 @@ function parseQuery(url: string): Record<string, string> {
   return out;
 }
 
-/** Validate the redirect and return the authorization code. Never echoes the code or state in errors. */
-export function parseRedirect(url: string, expectedState: string): string {
+/** Validate the app-scheme return URL (when given) and state, and return the authorization code. Never echoes the code or state in errors. */
+export function parseRedirect(url: string, expectedState: string, returnUrl?: string): string {
+  if (returnUrl !== undefined && !(url === returnUrl || url.startsWith(returnUrl + "?") || url.startsWith(returnUrl + "#")))
+    throw new BattleNetError("invalid-redirect", "Sign-in response came from an unexpected address.");
   const q = parseQuery(url);
   if (!expectedState || q.state === undefined || q.state !== expectedState)
     throw new BattleNetError("state-mismatch", "Sign-in response did not match this request.");

@@ -1,10 +1,16 @@
-# ADR-0007: Public app name "Hawthorn Journal"
+# ADR-0007: Public app name (proposed "Hawthorn Ledger")
 
 - **Status:** Proposed
 - **Date:** 2026-11-08
 - **Decider:** owner
 - **Class:** Protected (branding/trademark)
 
+> **Owner direction (2026-11-08):** the public app name is **"Hawthorn Ledger"**, not "Hawthorn Journal" (the name this ADR was first drafted with the same day) and not "Forever Companion" or "Companion Forever". The codename `companion-forever` and the package id `io.github.embermleaf.companionforever` stay. Status stays **Proposed** until the owner records acceptance and the manual registry checks below are done. The owner has said they do not expect problems with the other "Hawthorn" developer; that is the owner's **risk acceptance** of the residual HAWTHORN risk described below. It is **not** a finding that the risk is gone.
+>
+> **New open check (Hawthorn Ledger):** "Ledger" collides with the live USPTO word mark **LEDGER** (software, Class 42; owner Ledger Teams, Inc., serial 98116224, as seen in third-party mirrors, **UNVERIFIED**), with the well-known Ledger crypto-wallet brand, and with many accounting apps. One web search on 2026-11-08 found no "Hawthorn Ledger" app, game or mark; that search is **inconclusive**. Add `HAWTHORN LEDGER` and `LEDGER` (Classes 9, 41, 42) to the owner checklist below.
+>
+> The fallback names stay: Thornbook, Waymark Journal, Hedgerow Journal (option D).
+>
 > Not legal advice. Nothing here is a trademark clearance, a compliance finding or an approval. Evidence and sources: [NAMING-REVIEW-forever-companion.md](../NAMING-REVIEW-forever-companion.md) and [NAMING-REVIEW-hawthorn-journal.md](../NAMING-REVIEW-hawthorn-journal.md) (both Preliminary, checked 2026-11-08). Items not read on a primary source are marked **UNVERIFIED** there.
 
 ## Context
@@ -25,14 +31,15 @@
 
 | Option | Summary | Assessment |
 |---|---|---|
-| A. **Hawthorn Journal** (owner's choice) | Public display name; codename and package id unchanged | Fits the hawthorn/lantern/journal art. No Blizzard mark. Main open risk: Near Studios HAWTHORN Class 9 mark and *Hawthorn* game. |
+| A. **Hawthorn Ledger** (owner's choice, 2026-11-08; replaces the earlier "Hawthorn Journal" draft) | Public display name; codename and package id unchanged | Keeps the hawthorn motif; "Ledger" suits a checklist/tracker better than "Journal". No Blizzard mark. Main open risks: Near Studios HAWTHORN Class 9 mark and *Hawthorn* game (owner risk acceptance); LEDGER word mark, Ledger wallet brand and accounting apps (open check). |
+| A0. Hawthorn Journal (first draft, same day) | Superseded by A | Same Near Studios risk; "Journal" weak for a checklist app; the owner has moved to "Hawthorn Ledger". |
 | B. Forever Companion | Earlier working name, reversed | **Rejected.** "Forever" is Blizzard's current product subtitle ("World of Warcraft®: Forever", "WoW: Forever"); "Companion" echoes Blizzard's retired "WoW Companion App"; same name used by a CurseForge WoW: Forever addon and several GitHub tools; former adult AI-chatbot brand. Rated HIGH. |
 | C. Companion Forever | Current codename as public name | **Rejected** as public name for the same reasons (rated MEDIUM-HIGH; `daddler/Companion-Forever` uses it for the same concept). Kept as internal codename. |
 | D. Fallbacks: Thornbook, Waymark Journal, Hedgerow Journal | Used if the owner's checks rate A as HIGH | No GitHub hits, no app found by web search (2026-11-08); store, domain and trademark status UNVERIFIED. They avoid "Hawthorn", so the Near Studios mark does not reach them. |
 
 ## Decision (proposed)
 
-1. Adopt **"Hawthorn Journal"** as the public display name of the app, store listings and the About website.
+1. Adopt **"Hawthorn Ledger"** as the public display name of the app, store listings and the About website (proposed; owner direction 2026-11-08).
 2. The internal codename `companion-forever`, the repository name, the package/bundle id `io.github.embermleaf.companionforever`, the URL scheme `companionforever`, and storage keys stay unchanged.
 3. **No display-name change is made in code, store text or art until the owner has completed the checklist below and changed this ADR to Accepted.** If the checks show the Near Studios HAWTHORN mark live or pending for Class 9 mobile game software in a launch market (US, EU, UK), the owner picks a fallback (option D) instead, unless a professional advises otherwise.
 4. Store and About copy describe compatibility in plain words only, and do not use "Encounter Journal", "Adventure Guide", "companion journal", "WoW", "Warcraft", "Forever" or any Blizzard mark in the title or URL.
@@ -40,19 +47,19 @@
 ## Consequences
 
 - Positive: removes the Blizzard-product echo ("Forever", "Companion") and the crowded-niche conflict; name matches the existing visual identity; no package-id change needed.
-- Negative / risks: possible conflict with Near Studios' HAWTHORN mark and game (same class, overlapping audience, similar cozy art); "Journal" is weak and may set diary expectations for a checklist app; `hawthorn.app` domain is taken. A forced rename after launch would cost store ranking and reviews.
+- Negative / risks: possible conflict with Near Studios' HAWTHORN mark and game (same class, overlapping audience, similar cozy art), accepted as a residual risk by the owner (2026-11-08); **new:** "Ledger" collides with the LEDGER word mark (Class 42, UNVERIFIED), the Ledger crypto-wallet brand and accounting apps, so a clash there is possible and is an open check; `hawthorn.app` domain is taken. A forced rename after launch would cost store ranking and reviews.
 - Mitigations: owner registry checks before acceptance; professional knock-out search before public launch; icon and art kept clearly distinct from *Hawthorn*'s key art; descriptive store subtitle; existing "Independent fan-made tool. Not affiliated with, endorsed by, or sponsored by Blizzard Entertainment." disclaimer (wording still needs owner approval).
 - Compliance impact: none on API data handling. No new canary is required; a future optional canary could assert that the display name and store title contain no Blizzard mark (propose separately).
 
 ## Owner-only checklist (before Accepted)
 
 - [ ] WIPO Brand DB (https://branddb.wipo.int/): open IR **1879894** (HAWTHORN, Near Studios Inc.); record designations, Class 9/41/42 goods, status.
-- [ ] USPTO (https://tmsearch.uspto.gov/, TSDR https://tsdr.uspto.gov/): `HAWTHORN`, `HAWTHORN JOURNAL`, owner `Near Studios`, Classes 9/41/42/28.
-- [ ] UK IPO (https://trademarks.ipo.gov.uk/ipo-tmtext) and the journal page https://www.ipo.gov.uk/t-tmj/tm-journals/2025-043/WO0000001879894.html.
-- [ ] EUIPO eSearch plus (https://euipo.europa.eu/eSearch/) and TMview (https://www.tmdn.org/tmview/): `HAWTHORN`, `HAWTHORN JOURNAL`.
-- [ ] Google Play and App Store browser search: `Hawthorn Journal`, `Hawthorn`; Steam, itch.io, CurseForge, Wago: `Hawthorn`.
-- [ ] Domain: decide whether to register `hawthornjournal.app` (or `.com`/`.dev`); confirm availability at a registrar.
-- [ ] Handles: GitHub org `hawthornjournal` (free at check), store developer name, any social handles.
+- [ ] USPTO (https://tmsearch.uspto.gov/, TSDR https://tsdr.uspto.gov/): `HAWTHORN`, `HAWTHORN LEDGER`, `LEDGER` (Classes 9/41/42), owner `Near Studios`; confirm serial 98116224 (LEDGER) on TSDR.
+- [ ] UK IPO (https://trademarks.ipo.gov.uk/ipo-tmtext) and the journal page https://www.ipo.gov.uk/t-tmj/tm-journals/2025-043/WO0000001879894.html (corroborates that entry WO0000001879894 exists; its contents were not read).
+- [ ] EUIPO eSearch plus (https://euipo.europa.eu/eSearch/) and TMview (https://www.tmdn.org/tmview/): `HAWTHORN`, `HAWTHORN LEDGER`, `LEDGER`.
+- [ ] Google Play and App Store browser search: `Hawthorn Ledger`, `Hawthorn`, `Ledger` with checklist/tracker terms; Steam, itch.io, CurseForge, Wago: `Hawthorn`.
+- [ ] Domain: decide whether to register `hawthornledger.app` (or `.com`/`.dev`); confirm availability at a registrar (not checked).
+- [ ] Handles: GitHub org `hawthornledger` (not checked), store developer name, any social handles.
 - [ ] Professional trademark knock-out search or opinion for launch markets (before public launch; owner decides budget).
 - [ ] Record results (date, database, query, hits) in this ADR; set Status to Accepted or choose a fallback; add a DECISIONS.md row superseding the 2026-11-07 naming row.
 - [ ] Approve final disclaimer and attribution wording.
@@ -63,21 +70,21 @@ Display name only; identifiers stay.
 
 | File | Current string | Change |
 |---|---|---|
-| `apps/mobile/app.json` | `"name": "Companion Forever"` | `"name": "Hawthorn Journal"`. **Keep** `"slug": "companion-forever"` (EAS project link), `"scheme": "companionforever"`, `ios.bundleIdentifier` and `android.package`. |
-| `apps/mobile/src/App.tsx` line ~167 | header title text `Companion Forever` | `Hawthorn Journal` |
-| `apps/mobile/src/format.ts` | `BLIZZARD_ATTRIBUTION`: "... Companion Forever is an independent project ..." | "... Hawthorn Journal is an independent project ..." (wording still owner-approved) |
+| `apps/mobile/app.json` | `"name": "Companion Forever"` | `"name": "Hawthorn Ledger"`. **Keep** `"slug": "companion-forever"` (EAS project link), `"scheme": "companionforever"`, `ios.bundleIdentifier` and `android.package`. |
+| `apps/mobile/src/App.tsx` line ~167 | header title text `Companion Forever` | `Hawthorn Ledger` |
+| `apps/mobile/src/format.ts` | `BLIZZARD_ATTRIBUTION`: "... Companion Forever is an independent project ..." | "... Hawthorn Ledger is an independent project ..." (wording still owner-approved) |
 | `apps/mobile/src/screens/About.tsx` | no app name found in the file today | Add/confirm the display name if the About screen shows one |
-| `apps/web/index.html` | `<title>Companion Forever</title>`; meta description "Companion Forever is a free, open-source ..." | `Hawthorn Journal` in both |
-| `apps/web/src/App.tsx` lines ~43, ~50, ~57 | `<h1>Companion Forever</h1>` (twice); "Companion Forever is a free, open-source ..." | `Hawthorn Journal`. **Keep** `GITHUB_URL`/`LICENSE_URL` (repository name unchanged). |
-| `README.md` line 1 | `# Companion Forever` | `# Hawthorn Journal` plus a line "(codename: companion-forever)" |
+| `apps/web/index.html` | `<title>Companion Forever</title>`; meta description "Companion Forever is a free, open-source ..." | `Hawthorn Ledger` in both |
+| `apps/web/src/App.tsx` lines ~43, ~50, ~57 | `<h1>Companion Forever</h1>` (twice); "Companion Forever is a free, open-source ..." | `Hawthorn Ledger`. **Keep** `GITHUB_URL`/`LICENSE_URL` (repository name unchanged). |
+| `README.md` line 1 | `# Companion Forever` | `# Hawthorn Ledger` plus a line "(codename: companion-forever)" |
 | `HANDOFF.md` line 1 | `# HANDOFF — Companion Forever` | Optional: add public name; codename may stay |
 | `.github/FUNDING.yml` line 1 | comment "Companion Forever — GitHub Sponsors configuration (INACTIVE)" | Comment text only; file stays inactive (ADR-0002) |
-| `docs/BLIZZARD-CLIENT-SETUP.md` line 13 | example client name "Companion Forever" | "Hawthorn Journal" |
+| `docs/BLIZZARD-CLIENT-SETUP.md` | client name example | Done in the 2026-11-08 rewrite: client name `Hawthorn Ledger Dev` (the Blizzard client itself is not renamed by this ADR) |
 | `docs/adr/0006-blizzard-account-login.md` line 134 | attribution example with "Companion Forever" | Do not rewrite; note the rename in a follow-up if ADR-0006 is Accepted |
-| `icons-and-imagery/ICONS.md` line 11 | alt text "Companion Forever app icon: ..." | "Hawthorn Journal app icon: ..." |
+| `icons-and-imagery/ICONS.md` line 11 | alt text "Companion Forever app icon: ..." | "Hawthorn Ledger app icon: ..." |
 | `icons-and-imagery/UI-KIT-BRIEF.md` line ~215 | "Until that review is recorded, do not put a name into any prompt, file name or art." | Point to this ADR; banners stay text-free (UI-007 renders the name as live text) |
-| Art in post-production | ART-014 social preview (title text added in post), splash/title banner text | Add "Hawthorn Journal" as text in post; never baked into generated art |
-| Store listing text (not in repo yet) | n/a | Title "Hawthorn Journal" (<= 30 chars, optional descriptor), short/full description with plain compatibility wording and disclaimer |
+| Art in post-production | ART-014 social preview (title text added in post), splash/title banner text | Add "Hawthorn Ledger" as text in post; never baked into generated art |
+| Store listing text (not in repo yet) | n/a | Title "Hawthorn Ledger" (<= 30 chars, optional descriptor), short/full description with plain compatibility wording and disclaimer |
 | `DECISIONS.md` | 2026-11-07 naming row | New row recording the Accepted name (do not delete the old row) |
 
 Unchanged on purpose: `package.json` `"name": "companion-forever"`, `apps/mobile/src/persistence.ts` storage keys (`companion-forever:*`; renaming would orphan saved data), `apps/mobile/src/battlenet/config.ts` `APP_SCHEME`, `apps/mobile/src/battlenet/tokenStore.ts` `TOKEN_KEY`, backup file name `companion-forever-backup.json` in `apps/mobile/src/screens/Settings.tsx` (optional rename later, harmless either way).

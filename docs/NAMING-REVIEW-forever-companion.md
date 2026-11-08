@@ -152,9 +152,9 @@ Disclaimer wording already in use, which should appear in the store description,
 5. Before public launch, pay a qualified trademark professional for a clearance search and opinion on the chosen name in your launch markets. Consider registering it in class 9 later if budget allows (owner decision; no funding implications assumed).
 6. Record the outcome as an ADR (branding/trademark is a **Protected** area under GOVERNANCE.md), then rename the display name (`app.json` `name`, store listing, README) without changing the package id.
 
-## Hawthorn Journal (owner choice 2026-11-08)
+## Hawthorn Ledger (owner choice 2026-11-08)
 
-The owner chose "Hawthorn Journal" as the public app name (codename and package id unchanged). That name has its own review: [NAMING-REVIEW-hawthorn-journal.md](NAMING-REVIEW-hawthorn-journal.md) (Preliminary, not legal advice; agent rating MEDIUM, driven by a Class 9 "HAWTHORN" game-software filing by Near Studios Inc.). The proposed decision is [ADR-0007](adr/0007-public-app-name.md) (Proposed).
+The owner chose "Hawthorn Ledger" as the public app name (codename and package id unchanged); this replaces the same-day "Hawthorn Journal" draft. The name has its own review: [NAMING-REVIEW-hawthorn-journal.md](NAMING-REVIEW-hawthorn-journal.md) (Preliminary, not legal advice; agent rating MEDIUM for the Journal draft, driven by a Class 9 "HAWTHORN" game-software filing by Near Studios Inc.; the new "Ledger" word needs its own check). The proposed decision is [ADR-0007](adr/0007-public-app-name.md) (Proposed).
 
 ## Sources (all read or searched 2026-11-08)
 

@@ -9,6 +9,14 @@
 
 Scope: the public display name only. The internal codename `companion-forever` and the package id `io.github.embermleaf.companionforever` stay unchanged (DECISIONS.md, 2026-11-07).
 
+## Update: owner chose Hawthorn Ledger (2026-11-08)
+
+- The owner's later direction is the public name **"Hawthorn Ledger"**, not "Hawthorn Journal". The decision record is [ADR-0007](adr/0007-public-app-name.md) (still **Proposed**; the owner has not recorded acceptance, and the manual checks are not done). The HAWTHORN analysis below still applies to any "Hawthorn ..." name.
+- **Caveat 1, "Ledger":** "Ledger" collides with the live USPTO word mark LEDGER (software, Class 42; owner Ledger Teams, Inc., serial 98116224, as seen in third-party mirrors, **UNVERIFIED**), with the well-known Ledger crypto-wallet brand, and with many accounting apps. One web search on 2026-11-08 found no "Hawthorn Ledger" app, game or mark; that search is **inconclusive**. Not reviewed further here.
+- **Caveat 2, HAWTHORN (owner risk acceptance):** the owner has said they do not expect problems with the other "Hawthorn" developer (Near Studios Inc., international registration WO0000001879894, Class 9). This is the owner's **risk acceptance**, recorded as a decision by the owner. It is **not** a finding that the risk is gone. The registry checks in section 4 are still open.
+- **Corroborating source (contents not read):** the UK Trade Mark Journal page [ipo.gov.uk journal 2025/043, WO0000001879894](https://www.ipo.gov.uk/t-tmj/tm-journals/2025-043/WO0000001879894.html) shows that an entry for WO0000001879894 exists in journal 2025/043. Its goods list, classes and status were **not read** (the page is not fetched here) and remain **UNVERIFIED**.
+- The fallback names stay: Thornbook, Waymark Journal, Hedgerow Journal (section 6).
+
 ## Summary
 
 - **Overall risk rating: MEDIUM** (agent judgement, not a legal conclusion). Much lower than "Forever Companion" (HIGH), but not low.

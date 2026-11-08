@@ -51,9 +51,19 @@ if (-not (Test-Path $stamp) -or (Get-Content $stamp) -ne $hash) {
   Set-Content $stamp $hash
 }
 
+# Regenerate android/ when app.json changed (scheme/intent filters, plugins, allowBackup live in the
+# generated manifest; a stale android/ silently ships without them, e.g. no companionforever:// filter).
+$cfgStamp = Join-Path $ShortRoot "node_modules\.cfb-appjson-hash"
+$cfgHash = (Get-FileHash (Join-Path $app "app.json")).Hash
+if ((Test-Path $android) -and ((-not (Test-Path $cfgStamp)) -or (Get-Content $cfgStamp) -ne $cfgHash)) {
+  Write-Host "== app.json changed since last prebuild; regenerating android/"
+  if (Test-Path (Join-Path $android "gradlew.bat")) { Push-Location $android; .\gradlew.bat --stop | Out-Null; Pop-Location }
+  Remove-Item -Recurse -Force $android
+}
 if (-not (Test-Path $android)) {
   Write-Host "== expo prebuild (android/ missing)"
   Push-Location $app; npx expo prebuild --platform android; if ($LASTEXITCODE) { throw "expo prebuild failed" }; Pop-Location
+  Set-Content $cfgStamp $cfgHash
 }
 
 # app.json userInterfaceStyle is "automatic" (follow the system light/dark setting); keep an already-prebuilt android/ in sync.

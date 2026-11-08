@@ -98,3 +98,8 @@ Product-form correction (ADR-0005, Proposed; owner decision pending):
 - SKIN-008 divider (Midjourney, hawthorn sprig) processed with Adobe background removal and sliced into left/centre/right caps plus a tiling line in staging/regen (git-ignored). Not wired into the app yet.
 - THEME-D-BG first attempt arrived square (1024x1024) and without the cottage; owner is regenerating with --ar 9:20.
 - UI-005 stays 1:1 (2x2 grid), though the brief's sheet size says 512x256; fix the size text if the layout changes.
+
+## Update: prompt format (2026-11-08)
+
+- Every art prompt block is now two lines: `#JOB-ID short title` (tag so downloaded file names begin with the job id) and the prompt, ending ` --ar N:N [--tile] --no <list>`. Exclusions moved from the description to the Midjourney `--no` list (negative words in the description were read as positives). Copy only the two lines inside the fence; paste mistakes (heading/fence characters after `--ar`) caused the "Aspect ratio should be of the format width:height" error. 36 prompts, copies identical across prompts-copy-paste.md, art-queue.md, UI-KIT-BRIEF.md.
+- SKIN-001 candidates reviewed (originals in midjourney-originals, git-ignored): v1 (736x1632, 9:20, dark, cream strips ~30px each side, no baked border) preferred after crop; v2 (816x1456, 9:16) has a baked bronze rectangle that would misalign across aspect ratios. Pending: crop v1, regenerate day theme from it.

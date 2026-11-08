@@ -254,3 +254,96 @@ Seamless tile of a dark parchment and slate background in watercolor and gouache
 
 chars: 473
 
+## Screen skins (SKIN-001 to SKIN-008)
+
+Source: [SCREEN-SKIN-BRIEF.md](SCREEN-SKIN-BRIEF.md). Technical specs: [SCREEN-SKIN-SPEC.md](SCREEN-SKIN-SPEC.md). Paste the negative prompt below into the separate negative field with every SKIN job.
+
+### Negative prompt (SKIN jobs)
+
+```text
+text, letters, logo, watermark, signature, UI buttons, figures in focus areas, faces, photorealistic, 3d render, glossy highlights, lens flare, glowing drop shadow, flaming border, dragon-scale border, brand name, named artist, film still, recognizable character, existing game character, game or studio trade dress
+```
+
+chars: 315
+
+If the tool has no negative field, append `Avoid: <list>` to the prompt, but only if the total stays under 2000 characters. Whether the Firefly UI has a negative field is UNVERIFIED.
+
+## SKIN-001: Checklist full-screen background
+
+Target: 1080x2400 `skin-checklist-bg.png`, opaque, 9:20 portrait; painted edges and bands only, calm dark centre
+
+```text
+Full-height portrait phone background, 9 by 20, hand-painted pastoral fantasy scene in watercolor and gouache with clean expressive ink linework and soft colour fills. Warm lantern light from the upper left. Painted detail only at the edges, the corners and the top and bottom bands. A meadow with wind-swept grass, a winding dirt footpath, a wooden lantern post in the lower left corner, oak leaves framing the top corners, a distant stone watchtower in the top band. The centre is a large, calm, dark slate wash with almost no detail. Palette: Ink Night, Slate Ledger, Old Vellum touches, Leaf green, Aged Bronze, Candle gold glints on lanterns only. Detail must survive cropping to 16:9 through 21:9. No figures in focus areas. Original design, no text, no letters, no logo, no watermark.
+```
+
+chars: 791
+
+## SKIN-002: Characters full-screen background
+
+Target: 1080x2400 `skin-characters-bg.png`, opaque, 9:20 portrait; campfire and cottage glow at corners, calm dark centre
+
+```text
+Full-height portrait phone background, 9 by 20, hand-painted pastoral fantasy scene in watercolor and gouache with clean expressive ink linework and soft colour fills. Warm lantern light from the upper left. Painted detail only at the edges, the corners and the top and bottom bands. A stone cottage with a warm lit window glowing in the lower left corner, a small campfire ember ring in the lower right corner, a hay bale and low wooden fence along the bottom band, rolling meadow and a few distant trees in the top corners. The centre is a large, calm, dark slate wash with almost no detail. Palette: Ink Night, Slate Ledger, Old Vellum touches, Leaf green, Aged Bronze, Candle gold glints on lanterns only. Detail must survive cropping to 16:9 through 21:9. No figures in focus areas. Original design, no text, no letters, no logo, no watermark.
+```
+
+chars: 848
+
+## SKIN-003: Activities full-screen background
+
+Target: 1080x2400 `skin-activities-bg.png`, opaque, 9:20 portrait; trail and lantern posts at edges, calm dark centre
+
+```text
+Full-height portrait phone background, 9 by 20, hand-painted pastoral fantasy scene in watercolor and gouache with clean expressive ink linework and soft colour fills. Warm lantern light from the upper left. Painted detail only at the edges, the corners and the top and bottom bands. A row of wooden signposts and lantern posts receding along the left and right edges beside a winding footpath, a hand-drawn trail map pinned to a post in the top corner, wildflowers and grass in the bottom band. The centre is a large, calm, dark slate wash with almost no detail. Palette: Ink Night, Slate Ledger, Old Vellum touches, Leaf green, Aged Bronze, Candle gold glints on lanterns only. Detail must survive cropping to 16:9 through 21:9. No figures in focus areas. Original design, no text, no letters, no logo, no watermark.
+```
+
+chars: 818
+
+## SKIN-004: Settings full-screen background
+
+Target: 1080x2400 `skin-settings-bg.png`, opaque, 9:20 portrait; workshop shelf and brass tools at edges, calm dark centre
+
+```text
+Full-height portrait phone background, 9 by 20, hand-painted pastoral fantasy scene in watercolor and gouache with clean expressive ink linework and soft colour fills. Warm lantern light from the upper left. Painted detail only at the edges, the corners and the top and bottom bands. A wooden workshop shelf with brass tools, coiled rope and clay jars along the left and right edges, a hanging lantern in the upper right corner, a folded paper plan pinned at the top, a low bench of tools in the bottom band. The centre is a large, calm, dark slate wash with almost no detail. Palette: Ink Night, Slate Ledger, Old Vellum touches, Leaf green, Aged Bronze, Candle gold glints on lanterns only. Detail must survive cropping to 16:9 through 21:9. No figures in focus areas. Original design, no text, no letters, no logo, no watermark.
+```
+
+chars: 831
+
+## SKIN-005: About full-screen background
+
+Target: 1080x2400 `skin-about-bg.png`, opaque, 9:20 portrait; hilltop tower vista in top band, calm below
+
+```text
+Full-height portrait phone background, 9 by 20, hand-painted pastoral fantasy scene in watercolor and gouache with clean expressive ink linework and soft colour fills. Warm lantern light from the upper left. Painted detail only in the top band: a hilltop stone watchtower and a distant castle on a ridge under towering soft cumulus clouds in an open pale-to-blue sky, fading into slate. Below the top band the image is a calm, dark slate wash with only faint grass at the bottom edge and no focal object. Palette: Ink Night, Slate Ledger, Old Vellum, Leaf green, Aged Bronze, Candle gold on the tower windows only. Original design, no text, no letters, no logo, no watermark.
+```
+
+chars: 675
+
+## SKIN-006: Ornate frame, 9-slice
+
+Target: 512x512 `skin-frame-9slice.png`, transparent; 96 px slices; flat transparent centre, bronze/vine/leaf corners
+
+```text
+Square ornate picture frame for a phone screen, 512 by 512, hand-painted pastoral fantasy style in watercolor and gouache with clean expressive ink linework. Bronze, vine and leaf ornaments in all four corners only. Thin Aged Bronze double-line edges along the straight sides, repeating cleanly along each side so they stretch without seams. Perfectly symmetric on all four sides, flat straight-on view. The centre is fully transparent and empty. Palette: Aged Bronze, Leaf green, Candle gold highlight in the ornaments only, a soft Ember accent. No flame or dragon-scale border, no glow, no gloss. Transparent background. Original design, no text, no letters, no figures.
+```
+
+chars: 672
+
+## SKIN-007: Panel, 9-slice
+
+Target: 192x192 `skin-panel-9slice.png`, transparent; 40 px slices; flat transparent centre
+
+```text
+Square card panel frame, 192 by 192, hand-painted pastoral fantasy style in watercolor and gouache with clean expressive ink linework. A rounded card border in soft Aged Bronze wash, Old Vellum inner edge, a small leaf-and-vine ornament in each corner only, plain straight edges that repeat cleanly along each side. Perfectly symmetric on all four sides, flat straight-on view. Transparent centre, flat, nothing inside. Palette: Slate Ledger, Aged Bronze, Leaf green, Candle gold in the corner ornaments only. Original design, no text, no letters, no figures.
+```
+
+chars: 559
+
+## SKIN-008: Divider rule
+
+Target: 1024x48 `skin-divider.png`, transparent; horizontal stretch; leaf sprig at centre
+
+```text
+Horizontal ornamental divider rule, 1024 by 48, hand-painted watercolor and gouache with clean expressive ink linework. A thin Aged Bronze line with a small leaf sprig at the centre and a tiny Ember dot, tapering to fine ends. Straight, horizontal, perfectly symmetric left to right, one row only, centred vertically on a fully transparent background, nothing else on the canvas. Palette: Aged Bronze, Leaf green, Ember dot. Original design, no text, no letters, no figures.
+```
+
+chars: 474

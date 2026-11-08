@@ -19,7 +19,8 @@ import {
 import { createPersistence, DEFAULT_PREFS, type Prefs } from "./persistence";
 import { cancelReminders, rescheduleReminders } from "./reminderScheduler";
 import { colors } from "./theme";
-import { Background, Button } from "./ui";
+import { Button, ScreenBackground, ScreenFrame } from "./ui";
+import type { ScreenId } from "./skin";
 import { Onboarding } from "./Onboarding";
 import { ChecklistScreen } from "./screens/Checklist";
 import { CharactersScreen } from "./screens/Characters";
@@ -138,8 +139,10 @@ function AppContent() {
     });
   }
 
+  const screenId: ScreenId = loaded && !onboarded ? "onboarding" : (tab.toLowerCase() as ScreenId);
+
   return (
-    <Background>
+    <ScreenBackground screen={screenId}>
     <SafeAreaView edges={["top", "bottom", "left", "right"]} style={{ flex: 1 }}>
       <StatusBar style="light" />
       <View style={{ padding: 16, paddingBottom: 12, borderBottomWidth: 1, borderBottomColor: colors.border, backgroundColor: "rgba(31,36,48,0.6)" }}>
@@ -173,6 +176,7 @@ function AppContent() {
         {message}
       </Text>
 
+      <ScreenFrame screen={screenId}>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 16, paddingTop: 8 }}>
         {!loaded ? (
           <Text style={{ color: colors.text }}>Loading...</Text>
@@ -207,6 +211,7 @@ function AppContent() {
           <AboutScreen />
         )}
       </ScrollView>
+      </ScreenFrame>
       </>
       )}
 
@@ -214,6 +219,6 @@ function AppContent() {
         {DISCLAIMER}
       </Text>
     </SafeAreaView>
-    </Background>
+    </ScreenBackground>
   );
 }

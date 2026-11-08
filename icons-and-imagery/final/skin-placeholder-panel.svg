@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <title>skin-placeholder-panel</title>
+  <!-- PLACEHOLDER artwork, original, GPL-3.0-only. Not final art. 9-slice, slices 40px. -->
+  <defs><linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#262C3B"/><stop offset="1" stop-color="#1F2430"/></linearGradient></defs>
+  <rect x="4" y="4" width="184" height="184" rx="26" fill="#B58A4A"/>
+  <rect x="10" y="10" width="172" height="172" rx="20" fill="url(#f)"/>
+  <rect x="16" y="16" width="160" height="160" rx="15" fill="none" stroke="#F6D98A" stroke-opacity="0.3" stroke-width="2"/>
+  <g fill="#F6D98A" fill-opacity="0.8"><circle cx="22" cy="22" r="4"/><circle cx="170" cy="22" r="4"/><circle cx="22" cy="170" r="4"/><circle cx="170" cy="170" r="4"/></g>
+</svg>

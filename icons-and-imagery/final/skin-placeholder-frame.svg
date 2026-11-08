@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>skin-placeholder-frame</title>
+  <!-- PLACEHOLDER artwork, original, GPL-3.0-only. Not final art. 9-slice, slices 96px. -->
+  <rect x="14" y="14" width="484" height="484" rx="30" fill="none" stroke="#B58A4A" stroke-width="8"/>
+  <rect x="30" y="30" width="452" height="452" rx="20" fill="none" stroke="#F6D98A" stroke-opacity="0.45" stroke-width="3"/>
+  <g fill="#F6D98A" fill-opacity="0.9" stroke="#B58A4A" stroke-width="3">
+    <circle cx="48" cy="48" r="12"/><circle cx="464" cy="48" r="12"/><circle cx="48" cy="464" r="12"/><circle cx="464" cy="464" r="12"/>
+  </g>
+  <g stroke="#E0702B" stroke-width="6" stroke-linecap="round" stroke-opacity="0.8">
+    <path d="M70 22H88M22 70V88M424 22H442M490 70V88M70 490H88M22 424V442M424 490H442M490 424V442"/>
+  </g>
+</svg>

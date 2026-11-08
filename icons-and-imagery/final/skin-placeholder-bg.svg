@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 2400" width="1080" height="2400">
+  <title>skin-placeholder-bg</title>
+  <!-- PLACEHOLDER artwork, original, GPL-3.0-only. Not final art. -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1D2230"/><stop offset="0.5" stop-color="#14171F"/><stop offset="1" stop-color="#0D0F14"/>
+    </linearGradient>
+    <radialGradient id="e" cx="0.5" cy="0" r="0.8"><stop offset="0" stop-color="#E0702B" stop-opacity="0.16"/><stop offset="1" stop-color="#E0702B" stop-opacity="0"/></radialGradient>
+    <pattern id="stripe" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="20" height="40" fill="#E0702B" fill-opacity="0.22"/>
+    </pattern>
+    <g id="corner">
+      <path d="M0 0H260V28H28V260H0Z" fill="url(#stripe)"/>
+      <path d="M40 40H210M40 40V210" stroke="#B58A4A" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <circle cx="40" cy="40" r="14" fill="#F6D98A" fill-opacity="0.7"/>
+    </g>
+  </defs>
+  <rect width="1080" height="2400" fill="url(#g)"/>
+  <rect width="1080" height="2400" fill="url(#e)"/>
+  <use href="#corner"/>
+  <use href="#corner" transform="translate(1080 0) scale(-1 1)"/>
+  <use href="#corner" transform="translate(0 2400) scale(1 -1)"/>
+  <use href="#corner" transform="translate(1080 2400) scale(-1 -1)"/>
+</svg>

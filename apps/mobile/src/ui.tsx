@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Image, Pressable, Text, TextInput, View, type AccessibilityRole, type StyleProp, type TextInputProps, type ViewStyle } from "react-native";
 import { TOUCH, colors } from "./theme";
 import { getArt, type ArtKey } from "./art";
+import { getPanelSkin, getScreenSkin, type NineSliceSkin, type ScreenId } from "./skin";
+import { computeContentRect, computeCoverRect, computeNineSlice } from "./skinLayout";
 
 type Variant = "primary" | "plain" | "danger" | "tab";
 
@@ -11,39 +13,24 @@ const SLICE_SRC = 48; // sprite size in logical px
 
 /**
  * 9-slice renderer built from plain Views and Images (RN's capInsets is not reliable on Android).
- * Corners keep their pixel size; edges and center stretch to the measured size.
+ * Corners keep their size; edges and center stretch to the measured size. Layout math: skinLayout.ts.
+ * Defaults are the 48px button sprites (14px caps); skins pass their own image and slice sizes.
  */
-function NineSlice({ art }: { art: ArtKey }) {
+function NineSlice(props: { art?: ArtKey; skin?: NineSliceSkin }) {
   const [size, setSize] = useState({ w: 0, h: 0 });
-  const entry = getArt(art);
+  const entry = props.art ? getArt(props.art) : null;
+  const source = props.skin ? props.skin.source : entry?.source;
   const fill = { position: "absolute", top: 0, left: 0, right: 0, bottom: 0 } as const;
-  if (!entry) return null;
-  const { w, h } = size;
-  // Each non-last piece is clipped 1px wider/taller so neighbours overlap (no sub-pixel seam lines).
-  // Segments as [destStart, destEnd, srcStart, srcEnd] per axis.
-  const seg = (n: number): [number, number, number, number][] => [
-    [0, SLICE, 0, SLICE],
-    [SLICE, n - SLICE, SLICE, SLICE_SRC - SLICE],
-    [n - SLICE, n, SLICE_SRC - SLICE, SLICE_SRC],
-  ];
-  const pieces: React.ReactNode[] = [];
-  if (w >= SLICE * 2 && h >= SLICE * 2) {
-    seg(h).forEach(([y0, y1, sy0, sy1], i) => {
-      seg(w).forEach(([x0, x1, sx0, sx1], j) => {
-        const sx = (x1 - x0) / (sx1 - sx0);
-        const sy = (y1 - y0) / (sy1 - sy0);
-        pieces.push(
-          <View key={`${i}${j}`} style={{ position: "absolute", left: x0, top: y0, width: x1 - x0 + (j < 2 ? 1 : 0), height: y1 - y0 + (i < 2 ? 1 : 0), overflow: "hidden" }}>
-            <Image
-              source={entry.source}
-              resizeMode="stretch"
-              style={{ position: "absolute", left: -sx0 * sx, top: -sy0 * sy, width: SLICE_SRC * sx, height: SLICE_SRC * sy }}
-            />
-          </View>,
-        );
-      });
-    });
-  }
+  if (!source) return null;
+  const srcW = props.skin?.width ?? SLICE_SRC;
+  const srcH = props.skin?.height ?? SLICE_SRC;
+  const slice = props.skin?.slice ?? SLICE;
+  const cap = props.skin?.cap ?? SLICE;
+  const pieces = computeNineSlice(size.w, size.h, srcW, srcH, slice, cap).map((p, i) => (
+    <View key={i} style={{ position: "absolute", left: p.dest.x, top: p.dest.y, width: p.dest.w, height: p.dest.h, overflow: "hidden" }}>
+      <Image source={source} resizeMode="stretch" style={{ position: "absolute", left: p.image.x, top: p.image.y, width: p.image.w, height: p.image.h }} />
+    </View>
+  ));
   return (
     <View
       pointerEvents="none"
@@ -220,6 +207,58 @@ export function Background({ children }: { children: React.ReactNode }) {
   );
 }
 
+/**
+ * Full-screen painted background for a screen id, or the drawn Background when no skin is enabled.
+ * The image is cover-fitted (any aspect ratio) and anchored; it sits under everything and is hidden from a11y.
+ */
+export function ScreenBackground({ screen, children }: { screen: ScreenId; children: React.ReactNode }) {
+  const skin = getScreenSkin(screen);
+  const [box, setBox] = useState({ w: 0, h: 0 });
+  if (!skin) return <Background>{children}</Background>;
+  const r = computeCoverRect(skin.background.width, skin.background.height, box.w, box.h, skin.background.anchor);
+  return (
+    <View
+      style={{ flex: 1, backgroundColor: colors.bg, overflow: "hidden" }}
+      onLayout={(e) => setBox({ w: e.nativeEvent.layout.width, h: e.nativeEvent.layout.height })}
+    >
+      {box.w > 0 ? (
+        <Image
+          source={skin.background.source}
+          resizeMode="stretch"
+          accessible={false}
+          importantForAccessibility="no"
+          style={{ position: "absolute", left: r.x, top: r.y, width: r.w, height: r.h }}
+        />
+      ) : null}
+      {children}
+    </View>
+  );
+}
+
+/**
+ * Content window for a screen: the optional painted frame sits at the skin's contentInsets and children
+ * (a ScrollView) are laid out inside it, clear of the border. With no skin it is a plain flex:1 View.
+ */
+export function ScreenFrame({ screen, children }: { screen: ScreenId; children: React.ReactNode }) {
+  const skin = getScreenSkin(screen);
+  const [box, setBox] = useState({ w: 0, h: 0 });
+  if (!skin) return <View style={{ flex: 1 }}>{children}</View>;
+  const r = computeContentRect(box.w, box.h, skin.contentInsets);
+  const c = skin.frame ? (skin.frame.clearance ?? skin.frame.cap) : 0;
+  return (
+    <View style={{ flex: 1 }} onLayout={(e) => setBox({ w: e.nativeEvent.layout.width, h: e.nativeEvent.layout.height })}>
+      {box.w > 0 && skin.frame ? (
+        <View pointerEvents="none" style={{ position: "absolute", left: r.x, top: r.y, width: r.w, height: r.h, zIndex: 1 }}>
+          <NineSlice skin={skin.frame} />
+        </View>
+      ) : null}
+      <View style={{ position: "absolute", left: r.x + c, top: r.y + c, width: Math.max(0, r.w - 2 * c), height: Math.max(0, r.h - 2 * c) }}>
+        {children}
+      </View>
+    </View>
+  );
+}
+
 const CORNER = 8;
 function Corner({ pos }: { pos: "tl" | "tr" | "bl" | "br" }) {
   const top = pos[0] === "t";
@@ -257,6 +296,18 @@ export function Panel(props: {
   borderWidth?: number;
   style?: StyleProp<ViewStyle>;
 }) {
+  const skin = getPanelSkin();
+  if (skin) {
+    // Sprite panel: the painted 9-slice replaces fill, border and corner ornaments. A caller that manages its own
+    // padding (0) keeps full control, so only the 9-slice is drawn behind it.
+    const pad = props.padding === 0 ? 0 : Math.max(props.padding ?? 12, skin.padding);
+    return (
+      <View style={[{ padding: pad, marginBottom: 8 }, props.style]}>
+        <NineSlice skin={skin.image} />
+        {props.children}
+      </View>
+    );
+  }
   return (
     <View
       style={[

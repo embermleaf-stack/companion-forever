@@ -74,3 +74,12 @@ Product-form correction (ADR-0005, Proposed; owner decision pending):
 - Known gaps: Settings "Delete all data" does not yet clear the stored token (tokens expire; wire it when the flag goes live). Redirect handling relies on openAuthSessionAsync with the custom scheme; whether Blizzard accepts that redirect form is UNVERIFIED. expo-linking not added (not needed).
 - Owner-only actions still needed: register developer client (`docs/BLIZZARD-CLIENT-SETUP.md`), read portal guides to settle F3-F7 (PKCE without secret, scopes, endpoint, lifetime, redirect forms), decide the ADR, hosting only if the A1 fallback is needed, approve canaries C-11/C-12 and any C-03 allowlist change, privacy policy/Data safety, LICENSING.md review, qualified legal review. Nothing is marked compliant.
 - Next task: owner registers the client, then follow section 5 of `docs/BLIZZARD-CLIENT-SETUP.md` on emulator-5554 and record the F3/F7 answers.
+
+## Update: screen-skin system and art briefs (2026-11-08)
+
+- Added full-screen skin system (apps/mobile/src/skin.ts, skinLayout.ts, ScreenBackground/ScreenFrame in ui.tsx). All skins disabled by default; EXPO_PUBLIC_SKIN_DEMO=1 enables placeholder skins only. Verified: typecheck clean, vitest 167/167, emulator screenshots (demo and flag-off). Placeholders are programmatic stand-ins, not final art.
+- Known: EXPO_PUBLIC_* is baked in at bundle time and Gradle caches the bundle (delete android/app/build bundle+asset outputs to change the flag); nested panel-in-frame borders look busy; content hard-cut at frame bottom; ~10MB decoded bitmap per 1080x2400 background (prefer a shared background).
+- Briefs for owner-generated art: icons-and-imagery/UI-KIT-BRIEF.md (UI-001..006) and SCREEN-SKIN-BRIEF.md (SKIN-001..008); specs in SCREEN-SKIN-SPEC.md.
+- Raw Midjourney downloads moved to icons-and-imagery/midjourney-originals/ (git-ignored; output terms UNVERIFIED). Owner confirmed Midjourney as the tool (2026-11-08); plan/license terms still unchecked.
+- New art in staging/regen/ reviewed: 010, 011, 012, 013, 015 good; 014 has black bars (needs crop/expand); 005 usable, owner requesting a broken-fountain-pen redo. Not yet integrated.
+- Phone: last installed build is the pre-skin arm64 build (installed, never launched); reinstall after next verified change.

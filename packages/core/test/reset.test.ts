@@ -37,4 +37,19 @@ describe("reset math", () => {
     expect(isCompleteNow("nope", "daily", d("2026-11-07T00:00:00Z"), cfg)).toBe(false);
     expect(isCompleteNow(undefined, "daily", d("2026-11-07T00:00:00Z"), cfg)).toBe(false);
   });
+  it("toggle then render with the same instant shows done", () => {
+    const at = d("2026-11-07T10:00:00Z");
+    expect(isCompleteNow(at.toISOString(), "daily", at, cfg)).toBe(true);
+  });
+  it("stale 'now' one second earlier still shows done (clock-skew tolerance)", () => {
+    const at = d("2026-11-07T10:00:00Z");
+    expect(isCompleteNow(at.toISOString(), "daily", new Date(at.getTime() - 1000), cfg)).toBe(true);
+    expect(isCompleteNow(at.toISOString(), "daily", new Date(at.getTime() - 4 * 60_000), cfg)).toBe(true);
+    expect(isCompleteNow(at.toISOString(), "daily", new Date(at.getTime() - 6 * 60_000), cfg)).toBe(false);
+  });
+  it("a timestamp one day ahead is still not complete", () => {
+    const now = d("2026-11-07T10:00:00Z");
+    expect(isCompleteNow("2026-11-08T10:00:00Z", "daily", now, cfg)).toBe(false);
+    expect(isCompleteNow("2026-11-08T10:00:00Z", "once", now, cfg)).toBe(false);
+  });
 });

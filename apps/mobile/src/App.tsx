@@ -34,13 +34,13 @@ const TABS: Tab[] = ["Checklist", "Characters", "Activities", "Settings", "About
 
 export type Run = (fn: (s: AppState) => AppState) => void;
 
-function useNow(intervalMs = 30_000): Date {
+function useNow(intervalMs = 30_000): [Date, (d: Date) => void] {
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
     const t = setInterval(() => setNow(new Date()), intervalMs);
     return () => clearInterval(t);
   }, [intervalMs]);
-  return now;
+  return [now, setNow];
 }
 
 export default function App() {
@@ -62,7 +62,7 @@ function AppContent() {
   const [onboarded, setOnboarded] = useState(true); // true until loaded so the intro never flashes for returning users
   const [tab, setTab] = useState<Tab>("Checklist");
   const [message, setMessage] = useState("");
-  const now = useNow();
+  const [now, setNow] = useNow();
 
   useEffect(() => {
     let alive = true;
@@ -174,7 +174,12 @@ function AppContent() {
             done={done}
             total={total}
             now={now}
-            onToggle={(a, s) => run((st) => toggleDone(st, a, s, new Date()))}
+            onToggle={(a, s) => {
+              // Use one instant for both the stored completion and rendering so the toggle shows immediately.
+              const at = new Date();
+              setNow(at);
+              run((st) => toggleDone(st, a, s, at));
+            }}
           />
         ) : tab === "Characters" ? (
           <CharactersScreen state={state} run={run} />

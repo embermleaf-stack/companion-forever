@@ -34,14 +34,14 @@ export function CharactersScreen({ state, run }: { state: AppState; run: Run }) 
   return (
     <View>
       <H2>Characters</H2>
+      {state.characters.length === 0 ? (
+        <EmptyState art="emptyCharacters" title="No characters yet" body="Add one below to start tracking. Everything stays on this device." />
+      ) : null}
       <Field label="Name" value={name} onChangeText={setName} maxLength={60} />
       <Field label="Realm" value={realm} onChangeText={setRealm} maxLength={60} />
       <Field label="Class" value={className} onChangeText={setClassName} maxLength={60} />
       <Field label="Level" value={level} onChangeText={setLevel} keyboardType="numeric" maxLength={4} />
       <Button label="Add character" onPress={submit} />
-      {state.characters.length === 0 ? (
-        <EmptyState art="emptyCharacters" title="No characters yet" body="Add a character above to start tracking. Everything stays on this device." />
-      ) : null}
       {state.characters.map((c) => (
         <Card key={c.id}>
           <Text style={{ color: colors.text, fontWeight: "700", fontSize: 16 }}>{c.name}</Text>

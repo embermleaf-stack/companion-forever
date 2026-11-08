@@ -2,6 +2,8 @@
 import type { Cadence, ResetConfig } from "./types.js";
 
 const DAY_MS = 86_400_000;
+/** Completions this far ahead of `now` are treated as clock skew / a stale `now`; beyond it they are rejected. */
+export const CLOCK_SKEW_TOLERANCE_MS = 5 * 60_000;
 
 /** Most recent daily reset instant at or before `now`. */
 export function lastDailyReset(now: Date, cfg: ResetConfig): Date {
@@ -43,7 +45,7 @@ export function isCompleteNow(
 ): boolean {
   if (!completedAt) return false;
   const t = Date.parse(completedAt);
-  if (Number.isNaN(t) || t > now.getTime()) return false;
+  if (Number.isNaN(t) || t > now.getTime() + CLOCK_SKEW_TOLERANCE_MS) return false;
   const last = lastReset(cadence, now, cfg);
   return last === null ? true : t >= last.getTime();
 }

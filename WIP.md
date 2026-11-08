@@ -8,6 +8,7 @@
 - Web app `apps/web` (React + Vite PWA, local-only storage, manual checklist, import/export, user-set reset times). `npm run typecheck`, `npm run build` passed; storage tests: 4 passing.
 - Negative canaries C-02..C-09 as Vitest tests (22 tests), shown to fail on in-memory violations. C-01 (gitleaks) and C-10 (license check) still pending. Total run: 43 passing, `npx vitest run`, 2026-11-07.
 - 17 hand-authored original SVG icons in `icons-and-imagery/final/` (valid XML). Image-model briefs in `icons-and-imagery/` for hero art and illustrations.
+- Fix (2026-11-07, uncommitted): toggling a task now sets the UI `now` to the same Date used for the completion (`apps/mobile/src/App.tsx`), and core `isCompleteNow` tolerates up to 5 min of future skew (`CLOCK_SKEW_TOLERANCE_MS`; 1-day-ahead and garbage still rejected; 3 new tests in `packages/core/test/reset.test.ts`). Characters empty state moved above the form. Ran: `npm run typecheck` ok; `npx vitest run` 94 passing; `npx expo export --platform android` ok; emulator (Pixel_7_API34, Expo Go) screenshots `fix-*.png` in scratchpad: toggle shows done immediately, 5/5 shows all-done art at once, Characters empty state visible without scrolling.
 - CI workflow written but **not yet run on GitHub**.
 
 ## Next (ordered)

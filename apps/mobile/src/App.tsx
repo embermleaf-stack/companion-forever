@@ -129,7 +129,13 @@ function AppContent() {
         </Text>
       </View>
 
-      <View accessibilityRole="tablist" style={{ flexDirection: "row", paddingHorizontal: 8 }}>
+      <ScrollView
+        horizontal
+        accessibilityRole="tablist"
+        showsHorizontalScrollIndicator={false}
+        style={{ flexGrow: 0, flexShrink: 0 }}
+        contentContainerStyle={{ paddingHorizontal: 8, paddingBottom: 4 }}
+      >
         {TABS.map((t) => (
           <Button
             key={t}
@@ -140,16 +146,16 @@ function AppContent() {
             onPress={() => setTab(t)}
           />
         ))}
-      </View>
+      </ScrollView>
 
       <Text
         accessibilityLiveRegion="polite"
-        style={{ color: colors.highlight, paddingHorizontal: 16, minHeight: message ? undefined : 0 }}
+        style={{ color: colors.highlight, paddingHorizontal: 16, paddingTop: message ? 4 : 0, height: message ? undefined : 0 }}
       >
         {message}
       </Text>
 
-      <ScrollView contentContainerStyle={{ padding: 16 }}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 16, paddingTop: 8 }}>
         {!loaded ? (
           <Text style={{ color: colors.text }}>Loading...</Text>
         ) : tab === "Checklist" ? (

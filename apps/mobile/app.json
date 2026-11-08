@@ -7,8 +7,11 @@
     "userInterfaceStyle": "dark",
     "platforms": ["android"],
     "backgroundColor": "#14171F",
+    "ios": {
+      "bundleIdentifier": "io.github.embermleaf.companionforever"
+    },
     "android": {
-      "package": "org.example.companionforever",
+      "package": "io.github.embermleaf.companionforever",
       "backgroundColor": "#14171F"
     },
     "plugins": ["expo-sharing", "expo-notifications"]

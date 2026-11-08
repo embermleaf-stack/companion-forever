@@ -11,3 +11,8 @@ Durable index of decisions. Full rationale lives in [docs/adr/](docs/adr/). Acce
 | [0005](docs/adr/0005-native-mobile-app.md) | Native mobile app (React Native/Expo, Android first); partially supersedes ADR-0003's PWA element | Proposed | 2026-11-07 |
 
 Open (no ADR yet): "Forever" product naming/API support verification; public branding/trademark review; primary-source Blizzard terms audit.
+
+## Owner decisions
+
+- 2026-11-07: Android package id and iOS bundle identifier are `io.github.embermleaf.companionforever`.
+- 2026-11-07: The public product name stays the codename "Companion Forever" until trademark review.

@@ -27,7 +27,7 @@ export function Button(props: {
       style={{
         minHeight: TOUCH,
         minWidth: TOUCH,
-        paddingHorizontal: v === "tab" ? 6 : 14,
+        paddingHorizontal: v === "tab" ? 12 : 14,
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 8,
@@ -35,15 +35,15 @@ export function Button(props: {
         borderColor: props.selected ? colors.highlight : colors.border,
         backgroundColor: bg,
         marginRight: 6,
-        marginBottom: 6,
-        flexGrow: v === "tab" ? 1 : 0,
-        flexShrink: v === "tab" ? 1 : 0,
+        marginBottom: v === "tab" ? 0 : 6,
+        flexGrow: 0,
+        flexShrink: 0,
         // Underline-style marker so selection is not conveyed by color alone.
-        borderBottomWidth: props.selected ? 4 : 1,
+        borderBottomWidth: props.selected ? 5 : 1,
       }}
     >
-      <Text style={{ color: fg, fontWeight: "600", fontSize: v === "tab" ? 12 : 15 }} numberOfLines={1}>
-        {props.glyph ?? (props.selected && v === "tab" ? `[${props.label}]` : props.label)}
+      <Text style={{ color: fg, fontWeight: v === "tab" && props.selected ? "800" : "600", fontSize: v === "tab" ? 14 : 15 }} numberOfLines={1}>
+        {props.glyph ?? props.label}
       </Text>
     </Pressable>
   );

@@ -17,14 +17,14 @@ Every external source (API, dataset, library, asset) needs a row before use.
 | Blizzard addon / UI policy | Policy | **UNREVIEWED** | — | — | — | — | — |
 | Google Play Developer Program Policies | Store policy | **UNREVIEWED** | https://play.google.com/about/developer-content-policy/ (to verify) | — | — | — | — |
 | Apple App Store Review Guidelines | Store policy | **UNREVIEWED** | https://developer.apple.com/app-store/review/guidelines/ (to verify) | — | — | — | — |
-| Expo (SDK and tooling) | Library license | **UNREVIEWED** (believed MIT; to verify) | https://github.com/expo/expo (to verify) | — | — | — | — |
-| React Native | Library license | **UNREVIEWED** (believed MIT; to verify) | https://github.com/facebook/react-native (to verify) | — | — | — | — |
+| Expo (SDK and tooling) | Library license | **MIT per installed package.json** (expo 58.0.23, @expo/cli 58.1.19, expo-status-bar 58.0.4); not a legal review | https://github.com/expo/expo | 2026-11-07 | `license` field in node_modules package.json | C-10 | Pending |
+| React Native | Library license | **MIT per installed package.json** (react-native 0.88.1, react 19.3.0, metro 0.87.1, hermes-compiler 260318099.0.5); not a legal review | https://github.com/facebook/react-native | 2026-11-07 | `license` field in node_modules package.json | C-10 | Pending |
 
 ## Dependency policy
 
 - Permitted: licenses compatible with GPL-3.0-only (MIT, BSD, ISC, Apache-2.0, LGPL-3.0, GPL-3.0, MPL-2.0 with care).
 - Prohibited without ADR: proprietary, source-available, GPL-2.0-only, "no commercial use" licenses, unlicensed code.
-- CI runs a license check once a package manifest exists (see `.github/workflows/ci.yml`).
+- Canary C-10 (`tests/canaries/licenses.ts`, run by Vitest) classifies every package in `package-lock.json`. Allowed: MIT, BSD-2/3-Clause, ISC, Apache-2.0, 0BSD, CC0-1.0, BlueOak-1.0.0, Python-2.0, Unlicense, LGPL-3.0, GPL-3.0, CC-BY-4.0; MPL-2.0 allowed with a recorded note; AGPL needs ADR-0004. OR = any allowed branch; AND = all branches must be allowed. Anything else needs an entry in `tests/canaries/license-exceptions.json` (`reviewedBy: pending-owner` until the owner signs off).
 
 ## Release gates (first external release)
 

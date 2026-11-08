@@ -19,7 +19,6 @@ Expo (React Native, TypeScript) Android-first app. Proposed in ADR-0005. Reuses 
 ## Known gaps / TODO
 
 - App icon and adaptive icon are not set in `app.json` (TODO). `apps/web/public/icon.svg` is the reference design; export PNGs from it by hand or via an approved asset pipeline. No binary art is committed.
-- `android.package` is a placeholder (`org.example.companionforever`); the owner must choose the real id before any store build.
 - Not run on a device or emulator yet; only typecheck, unit tests, and a Metro bundle were verified.
 - Exact-time notifications are not requested; Android may deliver reminders a few minutes late (best effort).
 - Dependency licenses for Expo/React Native packages still need the C-10 check.

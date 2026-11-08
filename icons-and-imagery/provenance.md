@@ -302,3 +302,23 @@ Disabled, no pixels shipped in `apps/`: ART-005 (legible "Error" text), ART-006 
 
   Muted #B9AE93 (3.7:1 at 0.80) and Ember #E0702B (2.5:1) are NOT used for text directly on the background (Ember is a button fill with dark label text; the footer is vellum), so they were not given a scrim. Text inside Panels sits on the opaque Slate Ledger surface and is unchanged. The status-bar clock is drawn by Android over the sky and is not controlled by the app. Measurement is by script (Pillow, WCAG relative luminance, Lanczos downscale); the drawn Background keeps the original 0.6 tint.
 - **Reviewed by / approved by owner (date):** PENDING
+
+## SKIN-002 Characters screen background (2026-11-08)
+
+- **Tool:** Midjourney (owner-confirmed). **Output license: UNVERIFIED** (no URL/clause checked). **Approval: provisional** (owner approved for in-place review only). Similarity check: visual inspection by an AI agent only; no logo, game art or legible text recognized. Not a legal review.
+- **Source:** `icons-and-imagery/midjourney-originals/SKIN-002_characters-background-UPSCALED-1472x3264_IN-USE.png` (git-ignored; never committed).
+- **Processing:** Midjourney image, upscaled in Midjourney to 1472x3264, cropped 37 px (left) / 60 px (top) / 38 px (right) / 100 px (bottom) to remove cream paper edges and a stray mark, downscaled to 1080x2400, JPEG q65. Output `apps/mobile/assets/art/skin/bg-characters.jpg` (188 KB).
+- **Use:** the Characters screen only, via `SCREEN_SKINS.characters` in `apps/mobile/src/skin.ts` (job SKIN-002, enabled; every other screen keeps SKIN-001). Cover-fit, anchor x 0.5 / y 0.5, hidden from accessibility (decorative). Set `enabled: false` for the Characters skin to fall back to the drawn Background.
+- **Alt text:** "A quiet night farm with a stone cottage, hay bale, fence and campfire under a dark cloudy sky, a lantern hanging from an oak at the top left" (decorative).
+- **Anchor check:** the image is 9:20. At 360x800, 411x891, 412x915 and 1080x2400 it is shown whole (or within 1%); at 360x640 (16:9) 20% of the height is cropped, 10% at each edge, so the lantern (top-left) and cottage/campfire (bottom) lose the same small amount and the bottom of the picture still sits above the disclaimer band. Wider 21:9 screens crop sides, not height. Covered by `skinLayout.test.ts`.
+- **Contrast (worst single pixel in each region; cover-fit crops at 360x640, 360x800, 411x891, 412x915, 1080x2400; backing colour rgba(31,36,48); same alphas as SKIN-001, no per-skin change needed):** the painting is dark in the centre but has bright spots (campfire, lantern, window), so bare vellum over the whole image is 1.0:1 at the worst pixel.
+
+| Region (text colour) | Bare (worst of sizes) | With backing (worst of sizes) | Backing alpha |
+|---|---|---|---|
+| Header + tab bar, top 140 dp (Candle / vellum) | 1.0 (2.24 at 360x640) | 5.01 / 5.09 (1080x2400); 7.65+ at 360x640 | 0.75 |
+| Message line (Candle) | 7.66 | 10.30 | 0.75 |
+| Footer disclaimer, bottom 120 dp (vellum at 85%) | 1.0 | 5.05 | 0.80 |
+| Section headings, paragraphs, field labels (vellum chip, whole image) | 1.0 | 6.02 | 0.80 |
+
+  Measured by script (Pillow, WCAG relative luminance, Lanczos downscale); regions are approximate dp bands, the chip row is the worst pixel of the whole image. All values are at or above 4.5:1.
+- **Reviewed by / approved by owner (date):** PENDING

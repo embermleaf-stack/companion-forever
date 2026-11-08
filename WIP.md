@@ -109,3 +109,10 @@ Product-form correction (ADR-0005, Proposed; owner decision pending):
 - SKIN-001 (Midjourney, upscaled then downscaled to 1080x2400 JPEG q65, ~430 KB) is now the shared background for all six screens (apps/mobile/src/skin.ts; drawn Background stays as fallback; placeholder skins only with EXPO_PUBLIC_SKIN_DEMO=1). Provisional; license UNVERIFIED. Text readability measured on worst pixel: header/tabs 5.03-5.11:1, footer 4.86:1, onboarding 6.1-6.2:1, headings/labels about 5.9:1, via backing alphas 0.75-0.8 and text chips. Muted #B9AE93 and ember are not used directly on the painting.
 - Verified: typecheck clean, vitest 167/167, expo export OK, emulator screenshots (onboarding, checklist, activities, settings, about). Characters with a list of characters not viewed after the change. arm64 build installed on the owner's phone, never launched.
 - Open: frame art (SKIN-006/007), divider wiring (SKIN-008 parts in staging/regen), day theme (THEME-D-BG regenerate with --ar 9:20), light-mode palette and parchment buttons, Blizzard client registration (owner), Delete-all-data token wipe.
+
+## Update: Characters background (SKIN-002) wired (2026-11-08)
+
+- Characters screen now uses its own painting (bg-characters.jpg, 1080x2400 JPEG q65, 188 KB; Midjourney, upscaled, cropped of cream paper edges, provisional, license UNVERIFIED); other screens keep the night meadow (SKIN-001). Worst-pixel contrast with backing: header/tabs 5.0, message line 10.3, footer 5.05, headings/labels 6.0 (alphas unchanged). Verified: typecheck clean, vitest 172/172, expo export OK, emulator screenshots (characters empty/with two characters, checklist). arm64 build installed on phone, never launched.
+- SKIN-003 (activities) candidate: richer forest-at-night painting with one signpost per side (approved by owner pending upscale; not yet wired). SKIN-004 old-prompt candidate (workshop shelves) reviewed; new richer prompts for SKIN-004/005 given to owner.
+- Observed: character avatars show as cream squares on the dark UI; consider circular/transparent avatars.
+- Note for owner: Midjourney filenames contain the account name; it is stripped from all committed files.

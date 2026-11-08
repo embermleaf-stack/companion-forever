@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Registry of full-screen painted skins. Same conventions as art.ts: job id, alt text, provisional, enabled flag.
-// DEFAULT: the shared painted night background (SKIN-001, provisional) is enabled for every screen; frame and
+// DEFAULT: the shared painted night background (SKIN-001, provisional) is enabled for every screen except Characters
+// (own painting, SKIN-002, provisional); frame and
 // panel skins are off (no art yet), so drawn Panels sit on top. Set `enabled: false` to fall back to the drawn
 // Background. See icons-and-imagery/SCREEN-SKIN-SPEC.md. Text and controls always stay native; skins never contain text.
 // EXPO_PUBLIC_SKIN_DEMO=1 (build time) swaps in the generated placeholder skins (`placeholder: true`), for screenshots only.
@@ -80,6 +81,23 @@ function placeholderScreen(id: ScreenId): ScreenSkinDef {
 /** Shared dark background: ONE painting for all screens (owner decision), 1080x2400 JPEG q65. */
 const NIGHT_BG: SkinImage = { source: require("../assets/art/skin/bg-night.jpg"), width: 1080, height: 2400 };
 
+/** Characters-screen background (SKIN-002): lantern top-left, cottage lower-left, campfire lower-right. 1080x2400 JPEG q65. */
+const CHARACTERS_BG: SkinImage = { source: require("../assets/art/skin/bg-characters.jpg"), width: 1080, height: 2400 };
+
+function charactersScreen(): ScreenSkinDef {
+  return {
+    job: "SKIN-002",
+    alt: "A quiet night farm with a stone cottage, hay bale, fence and campfire under a dark cloudy sky, a lantern hanging from an oak at the top left",
+    provisional: true,
+    placeholder: false,
+    enabled: true,
+    // y 0.5 keeps the lantern (top) and the cottage/campfire (bottom) equally on 16:9 screens (about 10% lost at each edge).
+    background: { ...CHARACTERS_BG, anchor: { x: 0.5, y: 0.5 } },
+    contentInsets: { top: 0, right: 0, bottom: 0, left: 0 },
+    note: "Midjourney, output license UNVERIFIED, approval provisional. Text backings as for SKIN-001 (see provenance.md contrast table).",
+  };
+}
+
 function nightScreen(): ScreenSkinDef {
   return {
     job: "SKIN-001",
@@ -96,7 +114,7 @@ function nightScreen(): ScreenSkinDef {
 const SCREEN_IDS: ScreenId[] = ["checklist", "characters", "activities", "settings", "about", "onboarding"];
 const build = (f: (id: ScreenId) => ScreenSkinDef) => Object.fromEntries(SCREEN_IDS.map((id) => [id, f(id)])) as Record<ScreenId, ScreenSkinDef>;
 
-export const SCREEN_SKINS: Record<ScreenId, ScreenSkinDef> = build(nightScreen);
+export const SCREEN_SKINS: Record<ScreenId, ScreenSkinDef> = build((id) => (id === "characters" ? charactersScreen() : nightScreen()));
 export const PLACEHOLDER_SCREEN_SKINS: Record<ScreenId, ScreenSkinDef> = build(placeholderScreen);
 
 export const PANEL_SKIN: PanelSkinDef = {

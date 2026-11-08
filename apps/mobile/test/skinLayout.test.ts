@@ -92,3 +92,14 @@ describe("computeNineSlice", () => {
     expect(p[1]!.image.w).toBeCloseTo(48 * (172 / 20));
   });
 });
+
+describe("SKIN-002 characters background (1080x2400, anchor y 0.5)", () => {
+  it.each([[360, 640], [360, 800], [411, 891], [412, 915], [360, 840]] as [number, number][])("keeps at least 80%% of the height visible at %ix%i", (w, h) => {
+    const r = computeCoverRect(1080, 2400, w, h, { x: 0.5, y: 0.5 });
+    const visibleH = Math.min(h, r.h) / r.h;
+    expect(r.y).toBeLessThanOrEqual(0);
+    expect(visibleH).toBeGreaterThanOrEqual(0.8);
+    // top and bottom crops are equal, so lantern and campfire lose the same amount
+    expect(-r.y).toBeCloseTo(r.h - h + r.y);
+  });
+});

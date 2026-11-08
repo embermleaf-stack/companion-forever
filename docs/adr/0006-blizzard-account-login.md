@@ -29,8 +29,8 @@ Sources:
 | F1 | Endpoints | issuer `https://oauth.battle.net`; `authorization_endpoint` `/authorize`; `token_endpoint` `/token`; `userinfo_endpoint` `/userinfo`; `revocation_endpoint` `/revoke`; introspection and device-authorization endpoints are also listed | [OIDC] | Verified (metadata only) |
 | F2 | Grant types | `grant_types_supported` lists `authorization_code`, `client_credentials`, `implicit`, `refresh_token`, `device_code`, token-exchange and several Blizzard-specific grants. The metadata does not say which grants a third-party developer client may use | [OIDC] | Listed; availability to our client **UNVERIFIED** |
 | F3 | PKCE / public clients | `code_challenge_methods_supported` and `token_endpoint_auth_methods_supported` are **absent** from the discovery document. No official statement that PKCE or public (secret-less) clients are supported was found. Community forum threads (not staff and not primary) suggest the token endpoint expects client credentials via HTTP Basic | [OIDC]; forum threads us.forums.blizzard.com/t/388 and /t/11513 (non-authoritative) | **UNVERIFIED: assume not supported** |
-| F4 | Scopes | `scopes_supported` is absent from [OIDC]. That `wow.profile` (and `openid`) exist and that `wow.profile` is the scope for the account character list is **UNVERIFIED** (portal unreadable) | [OIDC], [PORTAL] | **UNVERIFIED** |
-| F5 | Account character list endpoint | Believed to be `GET https://{region}.api.blizzard.com/profile/user/wow` with namespace `profile-{region}` and a user token carrying `wow.profile`. Not read on a primary source | [PORTAL] | **UNVERIFIED** |
+| F4 | Scopes | `scopes_supported` is absent from [OIDC]. A web search on 2026-11-07 returned search-result excerpts of the portal's Authorization Code Flow and Profile APIs pages saying `wow.profile` gives access to a user's WoW characters; forum answers say the scope must be sent at `/authorize` and at token exchange. Full pages were still not read | search excerpts of [PORTAL] + forums | **Partly confirmed (excerpts only); re-read pages in a browser** |
+| F5 | Account character list endpoint | Search excerpts of the Profile APIs page give `https://us.api.blizzard.com/profile/user/wow`, requiring a token from the Authorization Code Flow (not client credentials). Namespace `profile-{region}` not confirmed | search excerpts of [PORTAL] | **Partly confirmed (excerpts only)** |
 | F6 | Token lifetime / refresh | Believed to be about 24 h with no refresh token for third-party auth-code clients. Not read on a primary source. [OIDC] lists a `refresh_token` grant but does not say who can use it | [PORTAL], [OIDC] | **UNVERIFIED** |
 | F7 | Redirect URI rules (HTTPS only? custom schemes? exact match?) | Not read | [PORTAL] | **UNVERIFIED** |
 | F8 | Client secret confidentiality | "You shall keep Your API Key confidential, and not share it with any third party." Report a compromised key immediately. §1 defines the API Key as "one or more OAuth clients ('API Key') provided to You by Blizzard" | [TOU] §2(l), §1 | Verified text. Our reading (shipping the secret in an APK would share it with every user) is an interpretation, not a legal finding |
@@ -94,6 +94,10 @@ Keep `ManualProvider`. No Blizzard data, no API terms obligations, no backend.
 
 ## Decision (proposed)
 
+> **Owner direction (2026-11-07), not an acceptance.** The owner wants Battle.net login with a temporary token and character data cached locally on the device, purged together with the app. A second direction the same day: the owner cannot register the developer client yet and wants as much as possible built around **PKCE as the primary path (option B)**, with the backend handoff (A1) kept only as a config-selected fallback interface. This ADR stays **Proposed** until the owner says Accept. Implementation proceeds behind a feature flag (`FEATURE_BATTLENET` in `apps/mobile/src/config.ts`, default OFF), with no real Blizzard client, no secret, no hostnames and no backend. Auth config is injected from environment and is absent by default.
+>
+> **Open question F3 stays open.** The code sends a secret-less PKCE token exchange. If Blizzard rejects it (400/401), the app maps that to a typed `pkce-not-supported-or-invalid` error, shows "Sign-in not available yet" and manual entry remains the way to add characters. The first real test with the owner's client settles F3. The redirect form (custom scheme `companionforever://bnet-callback`) is also UNVERIFIED (F7).
+
 **Not decided; owner decision required.** The agent's recommendation is at the end.
 
 ## Design details (apply to A; mostly also to B)
@@ -102,13 +106,16 @@ Keep `ManualProvider`. No Blizzard data, no API terms obligations, no backend.
 
 - Request only the scope needed for the character list (expected `wow.profile`, F4 UNVERIFIED). **Do not request `openid`** unless needed, so we do not receive BattleTag or account id claims.
 - Keep the access token only in `expo-secure-store` (Keystore-backed, F20). Never put it in AsyncStorage, logs, crash reports, exports, or the existing JSON import/export feature.
-- Exclude SecureStore from Android Auto Backup (`configureAndroidBackup: false`, F20).
+- The token is short-lived: the app stores only `access_token` and an expiry computed from `expires_in`, treats it as expired 60 seconds early, wipes it on expiry, on a 401 from the API, and on sign-out. No refresh token is assumed or stored.
+- Android Auto Backup must not be able to restore the token or the character cache after a reinstall. `android.allowBackup` is `false` in `apps/mobile/app.json` (this disables Auto Backup and device-transfer of app data entirely), and the `expo-secure-store` plugin is also enabled (its default backup exclusion, F20). **Not yet tested on a device**: manual test is in `docs/BLIZZARD-CLIENT-SETUP.md` (back up, uninstall, reinstall, confirm empty). Until then this is a configuration claim, not a verified result.
 - On expiry (F6 UNVERIFIED, assume about 24 h with no refresh), prompt the user to sign in again. Do not use a background refresh.
+- In the PKCE path the app builds the authorize URL (`response_type=code`, `code_challenge_method=S256`, random `state`), opens it in the system browser (expo-web-browser, Custom Tabs) and exchanges the code itself with no client secret. The `state` must match or the response is rejected. The app never loads Blizzard pages in a WebView and has no password field.
 - On sign-out: call `/revoke` (F1) through the backend, since whether revocation needs client auth is UNVERIFIED. Then delete the SecureStore entry and all imported character data.
 
 ### Data minimization, retention and offline behaviour
 
 - Map the response to `{ name, realm, className, level }` (the existing `Character` shape) plus the Blizzard character id, which is used only for the §2(s) existence check. Drop account ids, guild and other fields at the parsing boundary.
+- Imported characters are cached on the device only (the app's normal local state), never exported: the JSON backup export drops API-derived records and the import drops any API-tagged records. They are purged on sign-out/disconnect (including their completion history), by the 30-day TTL (below, mandatory), and with the app on uninstall (app data is removed; Auto Backup disabled as above). Records carry `source: "blizzard"`, `importedAt` and the provider character id (`blizzardId`, used only for the existence check).
 - Store imported characters on device only, tagged `source: blizzard`, with `importedAt`. **Purge or re-validate any Blizzard-sourced record older than 30 days** (F11). The purge runs at app start and on resume, so it also works offline.
 - Offline: imported characters stay usable until their 30-day TTL expires, then they are deleted, not shown (F11). User-entered checklist state is user data and is kept. Only API-derived fields are purged, and the character can be converted to a manual entry if the user re-types it. **Whether the user may keep a manually re-typed copy is a question for the owner/legal review.**
 - No server-side storage of tokens beyond the 60-second handoff, and no character data on the backend. The backend logs no codes, tokens or IP addresses beyond what the hosting platform logs by default (Cloudflare platform logging to be reviewed).
@@ -189,7 +196,7 @@ Expected load is tiny: about 3 requests per sign-in, with sign-in at most daily.
 ## Recommendation (agent, not a decision)
 
 1. **Now:** keep D (manual) as the shipping default. Do owner actions 1–2 first, because the key technical facts (F3–F7) are UNVERIFIED.
-2. **If Blizzard confirms public PKCE clients:** choose **B** (no backend, no secret custody, lowest cost).
+2. **Per the owner direction above, B is the primary implementation path** (built and unit-tested against a synthetic fake server; unverified against Blizzard). **If Blizzard confirms public PKCE clients:** choose **B** (no backend, no secret custody, lowest cost).
 3. **Otherwise:** choose **A1** on Cloudflare Workers Free, behind a feature flag. Implement the core retention helper and synthetic-fixture tests first, then the backend, then the app flow.
 4. **Do not choose C.** It needs the same backend as A, creates an anonymous quota-spending relay, and adds little over manual entry.
 

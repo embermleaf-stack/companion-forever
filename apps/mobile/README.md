@@ -40,3 +40,14 @@ cd apps\mobile; npx expo start --android   # installs Expo Go and opens the app
 ```
 
 Fixed (verified on the emulator, Expo Go): the title overlapped the status bar and a white strip showed under the footer, because RN core `SafeAreaView` does not inset on Android under edge-to-edge. The app now uses `react-native-safe-area-context` (`SafeAreaProvider` + `SafeAreaView`), `expo-system-ui` and `backgroundColor: #14171F` in `app.json` so the window behind the system bars is the app's dark color.
+
+## Building an APK from a short path (Windows)
+
+Native builds fail under deep paths (MAX_PATH / CMake). `scripts/build-android-short-path.ps1` syncs the repo to `C:\cfb` (excluding `.git`, `node_modules`, `android/`, `icons-and-imagery/staging`), runs `npm install` there when `package-lock.json` changed, runs `npx expo prebuild --platform android` there if `android/` is missing, ensures `externalNativeBuild.cmake.buildStagingDirectory` is set, then runs `gradlew assembleRelease --no-parallel` with `JAVA_HOME` (JDK 21), `ANDROID_HOME` (`%LOCALAPPDATA%\Android\Sdk`) and `CI=0`. The APK is copied to `icons-and-imagery/staging/companion-forever-<abi>-release.apk` (git-ignored).
+
+```powershell
+.\scripts\build-android-short-path.ps1 -Abi x86_64 -InstallSerial emulator-5554     # emulator
+.\scripts\build-android-short-path.ps1 -Abi arm64-v8a -InstallSerial <phone-serial>  # physical phone
+```
+
+`-Abi` is `arm64-v8a` or `x86_64` (default `x86_64`). `-InstallSerial` is optional and only runs `adb -s <serial> install -r <apk>`; the script never launches the app.

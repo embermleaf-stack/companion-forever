@@ -196,6 +196,42 @@ const ART_ENTRIES = [
     provisional: true,
     enabled: true,
   },
+  {
+    key: "toggleBoxOff",
+    job: "UI-TOGGLE",
+    // 32x32 with @2x/@3x siblings; original SVG in icons-and-imagery/final/toggle-box-off.svg
+    source: require("../assets/art/ui/toggle-box-off.png"),
+    alt: "Toggle graphic",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "toggleBoxOn",
+    job: "UI-TOGGLE",
+    // 32x32 with @2x/@3x siblings; original SVG in icons-and-imagery/final/toggle-box-on.svg
+    source: require("../assets/art/ui/toggle-box-on.png"),
+    alt: "Toggle graphic",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "toggleSwitchOff",
+    job: "UI-TOGGLE",
+    // 56x32 with @2x/@3x siblings; original SVG in icons-and-imagery/final/toggle-switch-off.svg
+    source: require("../assets/art/ui/toggle-switch-off.png"),
+    alt: "Toggle graphic",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "toggleSwitchOn",
+    job: "UI-TOGGLE",
+    // 56x32 with @2x/@3x siblings; original SVG in icons-and-imagery/final/toggle-switch-on.svg
+    source: require("../assets/art/ui/toggle-switch-on.png"),
+    alt: "Toggle graphic",
+    provisional: true,
+    enabled: true,
+  },
 ] as const satisfies readonly ArtEntry[];
 
 export type ArtKey = (typeof ART_ENTRIES)[number]["key"];

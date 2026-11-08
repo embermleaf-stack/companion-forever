@@ -5,6 +5,7 @@ import { addCharacter, removeCharacter, type AppState } from "@companion/core";
 import type { Run } from "../App";
 import { Button, Card, Field, H2 } from "../ui";
 import { colors } from "../theme";
+import { BLIZZARD_ATTRIBUTION } from "../format";
 import { EmptyState } from "../ArtImage";
 
 export function CharactersScreen({ state, run }: { state: AppState; run: Run }) {
@@ -41,14 +42,18 @@ export function CharactersScreen({ state, run }: { state: AppState; run: Run }) 
       <Field label="Realm" value={realm} onChangeText={setRealm} maxLength={60} />
       <Field label="Class" value={className} onChangeText={setClassName} maxLength={60} />
       <Field label="Level" value={level} onChangeText={setLevel} keyboardType="numeric" maxLength={4} />
-      <Button label="Add character" onPress={submit} />
+      <Button fullWidth label="Add character" onPress={submit} />
       {state.characters.map((c) => (
         <Card key={c.id}>
-          <Text style={{ color: colors.text, fontWeight: "700", fontSize: 16 }}>{c.name}</Text>
+          <Text style={{ color: colors.text, fontWeight: "700", fontSize: 16 }}>
+            {c.name}
+            {c.source === "blizzard" ? <Text style={{ color: colors.highlight, fontSize: 12, fontWeight: "400" }}>{"  imported"}</Text> : null}
+          </Text>
           <Text style={{ color: colors.text, opacity: 0.8, marginBottom: 6 }}>
             {[c.realm, c.className, c.level ? `Lv ${c.level}` : ""].filter(Boolean).join(" · ")}
           </Text>
           <Button
+            fullWidth
             label={`Remove ${c.name}`}
             variant="plain"
             onPress={() =>
@@ -60,6 +65,9 @@ export function CharactersScreen({ state, run }: { state: AppState; run: Run }) 
           />
         </Card>
       ))}
+      {state.characters.some((c) => c.source === "blizzard") ? (
+        <Text style={{ color: colors.text, opacity: 0.8, fontSize: 12, marginTop: 8 }}>{BLIZZARD_ATTRIBUTION}</Text>
+      ) : null}
     </View>
   );
 }

@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import { Alert, Switch, Text, View } from "react-native";
+import { Alert, Text, View } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
 import { File, Paths } from "expo-file-system";
 import * as Sharing from "expo-sharing";
-import { exportState, importState, setResetConfig, type AppState } from "@companion/core";
+import { disconnectProvider, exportState, importState, setResetConfig, type AppState } from "@companion/core";
+import { FEATURE_BATTLENET } from "../config";
+import { BattleNetSection } from "./BattleNetSection";
 import type { Run } from "../App";
 import { MAX_LEAD_MINUTES, MIN_LEAD_MINUTES, type Prefs } from "../persistence";
 import { ensurePermission } from "../reminderScheduler";
-import { Button, Choice, H2, P, Panel, Stepper } from "../ui";
+import { Button, Choice, H2, P, Panel, Stepper, ToggleSwitch } from "../ui";
 import { DAYS } from "../format";
 import { TOUCH, colors } from "../theme";
 
@@ -29,7 +31,8 @@ export function SettingsScreen(props: {
     try {
       const file = new File(Paths.cache, "companion-forever-backup.json");
       file.create({ overwrite: true });
-      file.write(exportState(state));
+      // API-derived (Battle.net) data is never exported: it stays on this device only.
+      file.write(exportState(disconnectProvider(state)));
       if (!(await Sharing.isAvailableAsync())) {
         setMessage("Sharing is not available on this device.");
         return;
@@ -48,7 +51,8 @@ export function SettingsScreen(props: {
       if (!asset) return;
       const file = new File(asset.uri);
       if (file.size > MAX_IMPORT_BYTES) throw new Error("File too large");
-      setState(importState(await file.text()));
+      // A file cannot carry authentic API data, so any API-tagged records in it are dropped.
+      setState(disconnectProvider(importState(await file.text())));
       setMessage("Imported.");
     } catch (e) {
       setMessage(`Import failed: ${e instanceof Error ? e.message : "invalid file"}`);
@@ -93,20 +97,14 @@ export function SettingsScreen(props: {
 
       </Panel>
 
+      {FEATURE_BATTLENET ? <BattleNetSection state={state} run={run} setMessage={setMessage} /> : null}
+
       <Panel>
       <H2>Reminders</H2>
       <P dim>Optional. Schedules a local notification shortly before the next daily and weekly reset you set above. Off by default.</P>
       <View style={{ flexDirection: "row", alignItems: "center", minHeight: TOUCH, marginBottom: 8 }}>
         <Text style={{ color: colors.text, flex: 1, fontSize: 16 }}>Remind me before resets: {prefs.remindersEnabled ? "On" : "Off"}</Text>
-        <Switch
-          accessibilityLabel="Remind me before resets"
-          accessibilityRole="switch"
-          value={prefs.remindersEnabled}
-          onValueChange={toggleReminders}
-          trackColor={{ false: colors.surface, true: colors.ok }}
-          thumbColor={colors.text}
-          style={{ minHeight: TOUCH, minWidth: TOUCH }}
-        />
+        <ToggleSwitch label="Remind me before resets" value={prefs.remindersEnabled} onValueChange={toggleReminders} />
       </View>
       <Stepper label="Minutes before reset" value={prefs.reminderLeadMinutes} min={MIN_LEAD_MINUTES} max={MAX_LEAD_MINUTES} step={5}
         onChange={(v) => setPrefs({ ...prefs, reminderLeadMinutes: v })} />

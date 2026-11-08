@@ -8,6 +8,9 @@ export function formatRemaining(target: Date | null, now: Date): string {
   return `Resets in ${h}h ${m}m`;
 }
 
+/** Owner approval of this wording is PENDING (ADR-0006 / WIP.md). Keep on one line (canary C-09 negation check). */
+export const BLIZZARD_ATTRIBUTION = "Character data provided by Blizzard Entertainment via the Battle.net API. Companion Forever is an independent project and is not affiliated with or endorsed by Blizzard Entertainment.";
+
 export const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 export const DISCLAIMER =

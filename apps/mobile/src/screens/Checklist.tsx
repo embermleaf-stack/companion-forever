@@ -2,7 +2,7 @@
 import { Pressable, Text, View } from "react-native";
 import type { buildChecklist } from "@companion/core";
 import { TOUCH, colors } from "../theme";
-import { H2, P, Panel } from "../ui";
+import { H2, P, Panel, ToggleBoxGraphic } from "../ui";
 import { formatRemaining } from "../format";
 import { ArtImage, EmptyState } from "../ArtImage";
 import { getArt } from "../art";
@@ -65,9 +65,9 @@ export function ChecklistScreen(props: {
               padding: 12,
             }}
           >
-            <Text style={{ color: r.done ? colors.ok : colors.text, fontSize: 24, width: 36 }} importantForAccessibility="no">
-              {r.done ? "✔" : "○"}
-            </Text>
+            <View style={{ width: 44, alignItems: "flex-start" }}>
+              <ToggleBoxGraphic checked={r.done} />
+            </View>
             <View style={{ flex: 1 }}>
               <Text style={{ color: colors.text, fontSize: 16, fontWeight: "600", textDecorationLine: r.done ? "line-through" : "none" }}>
                 {r.activity.title}

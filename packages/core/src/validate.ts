@@ -27,6 +27,17 @@ function parseCharacter(v: unknown): Character {
   if (realm !== undefined) c.realm = realm;
   if (className !== undefined) c.className = className;
   if (notes !== undefined) c.notes = notes;
+  if (v.source !== undefined) {
+    if (v.source !== "manual" && v.source !== "blizzard") throw new Error("invalid character source");
+    c.source = v.source;
+  }
+  const importedAt = str(v.importedAt, "importedAt", false);
+  if (importedAt !== undefined) {
+    // Garbage timestamps are kept as-is; purgeExpired treats them as expired for API-derived records.
+    c.importedAt = importedAt;
+  }
+  const blizzardId = str(v.blizzardId, "blizzardId", false);
+  if (blizzardId !== undefined) c.blizzardId = blizzardId;
   if (v.level !== undefined) {
     if (typeof v.level !== "number" || !Number.isInteger(v.level) || v.level < 1 || v.level > 1000)
       throw new Error("level must be a positive integer");

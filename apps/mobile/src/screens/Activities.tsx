@@ -40,7 +40,7 @@ export function ActivitiesScreen({ state, run }: { state: AppState; run: Run }) 
           { value: "account", label: "Whole account" },
         ]}
       />
-      <Button label="Add activity" onPress={submit} />
+      <Button fullWidth label="Add activity" onPress={submit} />
       {state.activities.length === 0 ? (
         <EmptyState art="emptyActivities" title="No activities yet" body="Add something you repeat, like a daily or weekly task, using the form above." />
       ) : null}
@@ -51,6 +51,7 @@ export function ActivitiesScreen({ state, run }: { state: AppState; run: Run }) 
             {a.cadence} · {a.scope === "account" ? "account" : "per character"}
           </Text>
           <Button
+            fullWidth
             label={`Remove ${a.title}`}
             variant="plain"
             onPress={() =>

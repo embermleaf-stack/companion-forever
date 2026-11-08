@@ -1,0 +1,34 @@
+{
+  "synthetic": true,
+  "_note": "Invented data in the documented (UNVERIFIED) shape. Not a real API response. Extra fields exist to prove they are dropped.",
+  "id": 900000001,
+  "collections": { "href": "synthetic-link-not-real" },
+  "wow_accounts": [
+    {
+      "id": 900000002,
+      "characters": [
+        {
+          "character": { "href": "synthetic-link-not-real" },
+          "name": "Testwarden",
+          "id": 910000001,
+          "realm": { "name": "Examplia", "id": 9001, "slug": "examplia" },
+          "playable_class": { "name": "Sample Class A", "id": 91 },
+          "playable_race": { "name": "Sample Race", "id": 92 },
+          "gender": { "type": "FEMALE", "name": "Female" },
+          "faction": { "type": "NEUTRAL", "name": "Neutral" },
+          "level": 10,
+          "guild": "Invented Guild Name"
+        },
+        {
+          "name": "Fixturebard",
+          "id": 910000002,
+          "realm": { "name": "Examplia", "id": 9001, "slug": "examplia" },
+          "playable_class": { "name": "Sample Class B", "id": 93 },
+          "level": 20
+        },
+        { "name": "Brokenentry", "id": "not-a-number", "level": 5 }
+      ]
+    },
+    { "id": 900000003, "characters": [] }
+  ]
+}

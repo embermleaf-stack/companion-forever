@@ -76,6 +76,10 @@ export function GameButton(props: {
   hint?: string;
   glyph?: string;
   compact?: boolean;
+  /** Stretch to the container width with no right margin (aligns with inputs/panels). */
+  fullWidth?: boolean;
+  /** Equal-width tab cell: flex 1, tight padding, text shrinks to fit. */
+  tab?: boolean;
   style?: StyleProp<ViewStyle>;
 }) {
   const set = SPRITES[props.look ?? "primary"];
@@ -91,18 +95,25 @@ export function GameButton(props: {
       accessibilityState={Object.keys(state).length ? state : undefined}
       disabled={props.disabled}
       onPress={props.onPress}
-      style={[{ minHeight: TOUCH, minWidth: TOUCH, marginRight: 6, marginBottom: 6, flexGrow: 0, flexShrink: 0 }, props.style]}
+      style={[
+        { minHeight: TOUCH, minWidth: TOUCH, marginRight: 6, marginBottom: 6, flexGrow: 0, flexShrink: 0 },
+        props.fullWidth && { marginRight: 0, alignSelf: "stretch" },
+        props.tab && { flexGrow: 1, flexShrink: 1, flexBasis: 0, minWidth: 0, marginRight: 3, marginBottom: 0 },
+        props.style,
+      ]}
     >
       {({ pressed }) => (
         <>
           <NineSlice art={props.disabled ? "btnDisabled" : pressed ? set.pressed : set.normal} />
-          <View style={{ flex: 1, minHeight: TOUCH, justifyContent: "center", alignItems: "center", paddingHorizontal: props.compact ? 10 : 16 }}>
+          <View style={{ flex: 1, minHeight: TOUCH, justifyContent: "center", alignItems: "center", paddingHorizontal: props.tab ? 2 : props.compact ? 10 : 16 }}>
             <Text
               numberOfLines={1}
+              adjustsFontSizeToFit={props.tab}
+              minimumFontScale={0.7}
               style={{
                 color: props.disabled ? DISABLED_FG : set.fg,
                 fontWeight: props.selected || props.checked ? "800" : "600",
-                fontSize: props.compact ? 14 : 15,
+                fontSize: props.tab ? 12 : props.compact ? 14 : 15,
               }}
             >
               {props.glyph ?? props.label}
@@ -124,6 +135,7 @@ export function Button(props: {
   disabled?: boolean;
   /** Visible text when it should differ from the accessibility label. */
   glyph?: string;
+  fullWidth?: boolean;
 }) {
   const v = props.variant ?? "primary";
   const look = v === "danger" ? "danger" : v === "primary" || (v === "tab" && props.selected) ? "primary" : "secondary";
@@ -138,7 +150,41 @@ export function Button(props: {
       disabled={props.disabled}
       glyph={props.glyph}
       compact={v === "tab"}
+      tab={v === "tab"}
+      fullWidth={props.fullWidth}
     />
+  );
+}
+
+/** Sprite checkbox graphic (32dp). Decorative: the enclosing Pressable carries role, label and checked state. */
+export function ToggleBoxGraphic({ checked }: { checked: boolean }) {
+  const entry = getArt(checked ? "toggleBoxOn" : "toggleBoxOff");
+  if (!entry) {
+    return (
+      <Text style={{ color: checked ? colors.ok : colors.text, fontSize: 24, width: 32, textAlign: "center" }}>{checked ? "✔" : "○"}</Text>
+    );
+  }
+  return <Image source={entry.source} accessible={false} importantForAccessibility="no" style={{ width: 32, height: 32 }} />;
+}
+
+/** Sprite switch (56x32 graphic, 48dp-high target). Same a11y contract as RN Switch: role switch, checked state, label. */
+export function ToggleSwitch(props: { value: boolean; onValueChange: (v: boolean) => void; label: string; hint?: string }) {
+  const entry = getArt(props.value ? "toggleSwitchOn" : "toggleSwitchOff");
+  return (
+    <Pressable
+      accessibilityRole="switch"
+      accessibilityLabel={props.label}
+      accessibilityHint={props.hint}
+      accessibilityState={{ checked: props.value }}
+      onPress={() => props.onValueChange(!props.value)}
+      style={{ minHeight: TOUCH, minWidth: TOUCH + 8, justifyContent: "center", alignItems: "center" }}
+    >
+      {entry ? (
+        <Image source={entry.source} accessible={false} importantForAccessibility="no" style={{ width: 56, height: 32 }} />
+      ) : (
+        <Text style={{ color: colors.text, fontWeight: "700" }}>{props.value ? "On" : "Off"}</Text>
+      )}
+    </Pressable>
   );
 }
 

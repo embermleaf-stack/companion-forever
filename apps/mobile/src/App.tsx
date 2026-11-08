@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { AppState as RNAppState, ScrollView, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as SystemUI from "expo-system-ui";
 import { StatusBar } from "expo-status-bar";
@@ -8,6 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   addActivity,
   addCharacter,
+  applyRetention,
   buildChecklist,
   emptyState,
   progress,
@@ -69,7 +70,8 @@ function AppContent() {
     (async () => {
       const [s, p, ob] = await Promise.all([persistence.loadState(), persistence.loadPrefs(), persistence.loadOnboardingDone()]);
       if (!alive) return;
-      setState(s);
+      // 30-day TTL purge of API-derived data (ADR-0006) on every start.
+      setState(applyRetention(s, new Date()));
       setPrefsState(p);
       setOnboarded(ob);
       setLoaded(true);
@@ -77,6 +79,14 @@ function AppContent() {
     return () => {
       alive = false;
     };
+  }, []);
+
+  // Same purge whenever the app returns to the foreground (works offline).
+  useEffect(() => {
+    const sub = RNAppState.addEventListener("change", (st) => {
+      if (st === "active") setState((s) => applyRetention(s, new Date()));
+    });
+    return () => sub.remove();
   }, []);
 
   // Never write before the initial load finishes, or we would clobber saved data.
@@ -140,12 +150,9 @@ function AppContent() {
 
       {loaded && !onboarded ? <Onboarding onDone={finishOnboarding} /> : (
       <>
-      <ScrollView
-        horizontal
+      <View
         accessibilityRole="tablist"
-        showsHorizontalScrollIndicator={false}
-        style={{ flexGrow: 0, flexShrink: 0, borderBottomWidth: 1, borderBottomColor: colors.border, backgroundColor: "rgba(31,36,48,0.6)" }}
-        contentContainerStyle={{ paddingHorizontal: 8, paddingVertical: 4 }}
+        style={{ flexDirection: "row", flexGrow: 0, flexShrink: 0, borderBottomWidth: 1, borderBottomColor: colors.border, backgroundColor: "rgba(31,36,48,0.6)", paddingLeft: 8, paddingRight: 5, paddingVertical: 4 }}
       >
         {TABS.map((t) => (
           <Button
@@ -157,7 +164,7 @@ function AppContent() {
             onPress={() => setTab(t)}
           />
         ))}
-      </ScrollView>
+      </View>
 
       <Text
         accessibilityLiveRegion="polite"

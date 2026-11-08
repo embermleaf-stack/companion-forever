@@ -3,7 +3,13 @@
 export type Cadence = "daily" | "weekly" | "once";
 export type Scope = "character" | "account";
 
-/** User-entered character record. Contains no provider/Blizzard data. */
+export type CharacterSource = "manual" | "blizzard";
+
+/**
+ * Character record. Absent `source` means "manual" (user-entered; also all data saved before
+ * provider support existed). Records with source "blizzard" are API-derived and subject to the
+ * retention policy in ADR-0006 (see purgeExpired).
+ */
 export interface Character {
   id: string;
   name: string;
@@ -11,6 +17,12 @@ export interface Character {
   className?: string;
   level?: number;
   notes?: string;
+  /** Where the record came from. Absent = manual. */
+  source?: CharacterSource;
+  /** ISO timestamp of when API-derived data was fetched. Required for TTL purge of blizzard records. */
+  importedAt?: string;
+  /** Provider character id, kept only for the provider's existence/refresh check. */
+  blizzardId?: string;
 }
 
 /** A user-defined (or rights-cleared template) recurring activity. */

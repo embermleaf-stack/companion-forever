@@ -34,7 +34,7 @@ export function App() {
   return (
     <div className="page">
       <header>
-        <img src="./icon.svg" alt="" width="72" height="72" />
+        <img src="./icon-192.png" alt="" width="72" height="72" />
         <h1>Companion Forever</h1>
         <p className="working">Working name</p>
       </header>

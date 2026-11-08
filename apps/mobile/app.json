@@ -5,15 +5,31 @@
     "version": "0.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
-    "platforms": ["android"],
+    "platforms": [
+      "android"
+    ],
     "backgroundColor": "#14171F",
     "ios": {
       "bundleIdentifier": "io.github.embermleaf.companionforever"
     },
     "android": {
       "package": "io.github.embermleaf.companionforever",
+      "backgroundColor": "#14171F",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#161C22"
+      }
+    },
+    "plugins": [
+      "expo-sharing",
+      "expo-notifications"
+    ],
+    "icon": "./assets/icon.png",
+    "splash": {
       "backgroundColor": "#14171F"
     },
-    "plugins": ["expo-sharing", "expo-notifications"]
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
   }
 }

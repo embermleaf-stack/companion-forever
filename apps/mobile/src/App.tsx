@@ -21,7 +21,7 @@ import { cancelReminders, rescheduleReminders } from "./reminderScheduler";
 import { colors } from "./theme";
 import { Button, ScreenBackground, ScreenFrame } from "./ui";
 import { ArtImage } from "./ArtImage";
-import type { ScreenId } from "./skin";
+import { getScreenSkin, type ScreenId } from "./skin";
 import { Onboarding } from "./Onboarding";
 import { ChecklistScreen } from "./screens/Checklist";
 import { CharactersScreen } from "./screens/Characters";
@@ -152,11 +152,17 @@ function AppContent() {
 
   const screenId: ScreenId = loaded && !onboarded ? "onboarding" : (tab.toLowerCase() as ScreenId);
 
+  // Text that sits directly on the painting gets a backing (alphas from the contrast table in provenance.md);
+  // the drawn Background keeps the original lighter 0.6 tint.
+  const painted = getScreenSkin(screenId) !== null;
+  const barBg = painted ? "rgba(31,36,48,0.75)" : "rgba(31,36,48,0.6)";
+  const footBg = painted ? "rgba(31,36,48,0.8)" : "transparent";
+
   return (
     <ScreenBackground screen={screenId}>
     <SafeAreaView edges={["top", "bottom", "left", "right"]} style={{ flex: 1 }}>
       <StatusBar style="light" />
-      <View style={{ padding: 16, paddingBottom: 12, borderBottomWidth: 1, borderBottomColor: colors.border, backgroundColor: "rgba(31,36,48,0.6)" }}>
+      <View style={{ padding: 16, paddingBottom: 12, borderBottomWidth: 1, borderBottomColor: colors.border, backgroundColor: barBg }}>
         <Text accessibilityRole="header" style={{ color: colors.highlight, fontSize: 24, fontWeight: "700" }}>
           Companion Forever
         </Text>
@@ -166,7 +172,7 @@ function AppContent() {
       <>
       <View
         accessibilityRole="tablist"
-        style={{ flexDirection: "row", flexGrow: 0, flexShrink: 0, borderBottomWidth: 1, borderBottomColor: colors.border, backgroundColor: "rgba(31,36,48,0.6)", paddingLeft: 8, paddingRight: 5, paddingVertical: 4 }}
+        style={{ flexDirection: "row", flexGrow: 0, flexShrink: 0, borderBottomWidth: 1, borderBottomColor: colors.border, backgroundColor: barBg, paddingLeft: 8, paddingRight: 5, paddingVertical: 4 }}
       >
         {TABS.map((t) => (
           <Button
@@ -180,7 +186,7 @@ function AppContent() {
         ))}
       </View>
 
-      <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: 16, paddingTop: message ? 4 : 0, height: message ? undefined : 0, overflow: "hidden" }}>
+      <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: 16, paddingTop: message ? 4 : 0, height: message ? undefined : 0, overflow: "hidden", backgroundColor: message && painted ? barBg : "transparent" }}>
         {message && errorArt ? <ArtImage art="errorGeneric" width={64} height={48} style={{ marginRight: 10, borderRadius: 4 }} /> : null}
         <Text accessibilityLiveRegion="polite" style={{ color: colors.highlight, flexShrink: 1 }}>
           {message}
@@ -229,7 +235,7 @@ function AppContent() {
       </>
       )}
 
-      <Text style={{ color: colors.text, fontSize: 12, padding: 12, textAlign: "center", opacity: 0.85 }}>
+      <Text style={{ color: "rgba(232,220,192,0.85)", fontSize: 12, padding: 12, textAlign: "center", backgroundColor: footBg }}>
         {DISCLAIMER}
       </Text>
     </SafeAreaView>

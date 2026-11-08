@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Registry of full-screen painted skins. Same conventions as art.ts: job id, alt text, provisional, enabled flag.
-// DEFAULT: nothing is enabled, so the app renders its drawn UI (Background + Panel). To use real art, drop the
-// files into assets/art/skin/ (see icons-and-imagery/SCREEN-SKIN-SPEC.md), point `source` at them and set
-// `enabled: true`. Text and controls always stay native; skins never contain text.
-// EXPO_PUBLIC_SKIN_DEMO=1 (build time) force-enables entries marked `placeholder: true`, for screenshots only.
+// DEFAULT: the shared painted night background (SKIN-001, provisional) is enabled for every screen; frame and
+// panel skins are off (no art yet), so drawn Panels sit on top. Set `enabled: false` to fall back to the drawn
+// Background. See icons-and-imagery/SCREEN-SKIN-SPEC.md. Text and controls always stay native; skins never contain text.
+// EXPO_PUBLIC_SKIN_DEMO=1 (build time) swaps in the generated placeholder skins (`placeholder: true`), for screenshots only.
 import type { ImageSourcePropType } from "react-native";
 import type { Insets } from "./skinLayout";
 
@@ -77,14 +77,27 @@ function placeholderScreen(id: ScreenId): ScreenSkinDef {
   };
 }
 
-export const SCREEN_SKINS: Record<ScreenId, ScreenSkinDef> = {
-  checklist: placeholderScreen("checklist"),
-  characters: placeholderScreen("characters"),
-  activities: placeholderScreen("activities"),
-  settings: placeholderScreen("settings"),
-  about: placeholderScreen("about"),
-  onboarding: placeholderScreen("onboarding"),
-};
+/** Shared dark background: ONE painting for all screens (owner decision), 1080x2400 JPEG q65. */
+const NIGHT_BG: SkinImage = { source: require("../assets/art/skin/bg-night.jpg"), width: 1080, height: 2400 };
+
+function nightScreen(): ScreenSkinDef {
+  return {
+    job: "SKIN-001",
+    alt: "A quiet night meadow with lanterns and a footpath, framed by hawthorn branches with red berries",
+    provisional: true,
+    placeholder: false,
+    enabled: true,
+    background: { ...NIGHT_BG, anchor: { x: 0.5, y: 0.5 } },
+    contentInsets: { top: 0, right: 0, bottom: 0, left: 0 },
+    note: "Candidate THEME-N-BG. Midjourney, output license UNVERIFIED, approval provisional. Text regions get backings in App.tsx (see provenance.md contrast table).",
+  };
+}
+
+const SCREEN_IDS: ScreenId[] = ["checklist", "characters", "activities", "settings", "about", "onboarding"];
+const build = (f: (id: ScreenId) => ScreenSkinDef) => Object.fromEntries(SCREEN_IDS.map((id) => [id, f(id)])) as Record<ScreenId, ScreenSkinDef>;
+
+export const SCREEN_SKINS: Record<ScreenId, ScreenSkinDef> = build(nightScreen);
+export const PLACEHOLDER_SCREEN_SKINS: Record<ScreenId, ScreenSkinDef> = build(placeholderScreen);
 
 export const PANEL_SKIN: PanelSkinDef = {
   job: "SKIN-panel",
@@ -110,8 +123,9 @@ const on = (s: SkinBase) => s.enabled || (DEMO && s.placeholder);
 
 /** Skin for a screen, or null when disabled (caller renders the drawn UI). */
 export function getScreenSkin(id: ScreenId): ScreenSkinDef | null {
+  if (DEMO) return PLACEHOLDER_SCREEN_SKINS[id];
   const s = SCREEN_SKINS[id];
-  return on(s) ? s : null;
+  return s.enabled ? s : null;
 }
 
 /** Panel sprite skin, or null when disabled. */

@@ -41,3 +41,183 @@ Entries are appended below this line.
 - **Limits:** the tool offers no prompt; seed-dependent; output is RGB without alpha.
 - **Alt text:** A bronze lantern with an orange flame glows against a dark navy background, centered with generous margin.
 - **Reviewed by / approved by owner (date):** PENDING
+
+## ART-002-empty-characters-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Satchel on a wooden peg with a quill and a lit lantern; ivy leaves. Not a legal review; human check still required.
+- **Alt text:** An empty brown leather satchel hangs from a wooden post beside a feather quill and a glowing lantern.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-003-empty-activities-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Blank parchment scroll unrolling, lantern at the lower right. Not a legal review; human check still required.
+- **Alt text:** A blank parchment scroll unrolls beside a weathered lantern.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-004-empty-checklist-done-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Sleeping red fox curled beside embers and smoke. Not a legal review; human check still required.
+- **Alt text:** A red fox sleeps curled beside a banked ember fire with a wisp of smoke.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-005-error-generic-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Quill with snapped-off nib and spilled ink pot. Ink-pot label contains legible cursive text reading approximately 'Error' (unwanted; text is forbidden). Not a legal review; human check still required.
+- **Alt text:** A feather quill with a broken nib lies by a spilled ink pot.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-006-offline-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Lantern hanging from a post on a grassy hill at dusk beside a blank wooden signpost. Not a legal review; human check still required.
+- **Alt text:** A lantern glows on a grassy hill at dusk beside a wooden signpost.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-007-onboard-1-characters-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Open ledger with illegible pseudo-handwriting, quill, lantern, coin stacks on a desk; a hanging cloak (no person) at top. Not a legal review; human check still required.
+- **Alt text:** An open handwritten ledger with a quill and a lit lantern on a wooden desk.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-008-onboard-2-plan-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Hourglass with ember-colored sand beside an open ruled ledger, leaf sprigs. Not a legal review; human check still required.
+- **Alt text:** An hourglass with amber sand stands beside an open ledger in warm light.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-009-onboard-3-data-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Green-bronze lockbox with leaf relief and a heart-shaped padlock on a wooden shelf. Not a legal review; human check still required.
+- **Alt text:** A leaf-carved bronze and green lockbox with a heart-shaped padlock sits on a wooden shelf.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-010-tex-parchment-light-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Aged parchment with faint compass roses and lines (candidate tile; not seamless). Not a legal review; human check still required.
+- **Alt text:** Faint compass rose lines on aged parchment.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-011-tex-parchment-dark-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Blue-teal textured paper with a large chalk-like compass rose (candidate tile; not seamless, high contrast). Not a legal review; human check still required.
+- **Alt text:** A chalk-line compass rose on dark blue textured paper.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-012-avatars-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Sheet of 8 cloaked/hooded figures (brief asked for 6); one helm has horns (forbidden); includes a lute bard and an archer. Not a legal review; human check still required.
+- **Alt text:** Eight cloaked silhouette travelers in watercolor, some with a staff, lute or bow.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-013-hero-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Arched window onto towering cumulus, meadow, path, distant watchtower; lantern and map on a desk. Square 1024, not wide. Not a legal review; human check still required.
+- **Alt text:** A study window overlooks towering clouds, green meadows, a footpath and a distant stone tower, with a lantern and map on the desk.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-014-social-preview-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Footpath through windswept grass toward a hilltop watchtower under glowing cumulus; small lantern lower right. Square 1024, not 2:1. Not a legal review; human check still required.
+- **Alt text:** A lantern-lit footpath winds through wind-swept grass toward a stone watchtower under glowing clouds at dusk.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-015-reset-trail-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Winding dirt path across green meadows; artwork occupies only the middle band of a white square, with ragged white margins. Not a legal review; human check still required.
+- **Alt text:** A winding dirt footpath crosses rolling green meadows under a pale sky.
+- **Reviewed by / approved by owner (date):** PENDING
+
+## ART-016-reset-lantern-midjourney.png (candidate; staging only, not for merge)
+
+- **Date generated:** 2026-11-07 (date delivered by owner; generation date UNCONFIRMED)
+- **Created by:** AI tool, owner-run image generator; the file-name pattern suggests Midjourney. OWNER TO CONFIRM tool, version and plan.
+- **Prompt (verbatim) / brief used:** Per the matching job in `art-queue.md` / `prompts-copy-paste.md`; owner pasted the job title into the prompt (file name shows it). Actual prompt UNCONFIRMED.
+- **Reference images used:** none known (OWNER TO CONFIRM)
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked; plan unknown)
+- **Human edits:** none. Delivered as 1024x1024 RGB PNG, no alpha channel. See `REVIEW-2026-11-07.md`.
+- **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Single weathered lantern with orange flame on opaque white background. Not a legal review; human check still required.
+- **Alt text:** A weathered metal lantern with a glowing orange flame.
+- **Reviewed by / approved by owner (date):** PENDING

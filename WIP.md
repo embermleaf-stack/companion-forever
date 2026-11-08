@@ -83,3 +83,11 @@ Product-form correction (ADR-0005, Proposed; owner decision pending):
 - Raw Midjourney downloads moved to icons-and-imagery/midjourney-originals/ (git-ignored; output terms UNVERIFIED). Owner confirmed Midjourney as the tool (2026-11-08); plan/license terms still unchecked.
 - New art in staging/regen/ reviewed: 010, 011, 012, 013, 015 good; 014 has black bars (needs crop/expand); 005 usable, owner requesting a broken-fountain-pen redo. Not yet integrated.
 - Phone: last installed build is the pre-skin arm64 build (installed, never launched); reinstall after next verified change.
+
+## Update: Midjourney regen batch integrated; crash fix; day/night brief (2026-11-08)
+
+- Integrated (provisional, Midjourney, license UNVERIFIED): ART-005 error pen (960x720), ART-013 hero (1200x450, web+mobile About), ART-014 social preview (1280x640; PNG 1.3MB, JPG 169KB for GitHub), ART-015 trail (1200x240), ART-012 six avatars (320x320, hashed per character), ART-011 dark texture at opacity 0.08 (contrast >= 4.67 for ember worst case; 0.08 is the ceiling). ART-010 light texture left disabled until a light theme exists. Details in provenance.md "Regen batch integration (2026-11-08)".
+- Fixed crash: "Add character" with an empty name threw inside a setState updater (`run` in App.tsx); now evaluated against a state ref and shown as a message with the error art.
+- Verified: typecheck clean, vitest 167/167, expo export and web build OK, emulator screenshots (checklist, characters, about, error). arm64 build (built after the last source change) installed on the phone, never launched.
+- Added day/night theme set to SCREEN-SKIN-BRIEF.md (THEME-D/N BG, FRAME, PANEL). Theme system (light palette, parchment buttons, system-follow + override) not started.
+- Next: theme system; owner generates six day/night images; then register skins; wire Settings "Delete all data" to clear the Battle.net token; owner registers Blizzard client.

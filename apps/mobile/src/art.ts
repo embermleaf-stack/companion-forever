@@ -50,11 +50,11 @@ const ART_ENTRIES = [
   {
     key: "errorGeneric",
     job: "ART-005",
-    source: null,
-    alt: "A feather quill with a broken nib lies by a spilled ink pot.",
+    // 960x720 JPEG (v3 fountain pen, cropped 4:3; no legible text). Shown beside the message line when a state change throws.
+    source: require("../assets/art/art-005.jpg"),
+    alt: "A feather pen with a broken nib and ink splatter on paper",
     provisional: true,
-    enabled: false,
-    note: "Disabled: legible 'Error' text on the ink-pot label. Text-only error message is used.",
+    enabled: true,
   },
   {
     key: "offline",
@@ -93,34 +93,84 @@ const ART_ENTRIES = [
     key: "textureLight",
     job: "ART-010",
     source: null,
-    alt: "Faint compass rose lines on aged parchment.",
+    alt: "Soft mottled aged-parchment texture.",
     provisional: true,
     enabled: false,
-    note: "Disabled: not seamless, contrast below 4.5:1 in places.",
+    note: "Seamless at the tile edges, but the app is dark-themed and has no light surface to put it on; a cream texture would fail contrast with the light text. Not shipped.",
   },
   {
     key: "textureDark",
     job: "ART-011",
-    source: null,
-    alt: "Faint compass rose lines on dark slate-blue paper.",
+    // 512x512 wrap-aware downscale of the 1024 tile; drawn repeated at TEXTURE_DARK_OPACITY under all content.
+    source: require("../assets/art/texture-dark.jpg"),
+    alt: "Soft mottled dark slate-blue paper texture.",
     provisional: true,
-    enabled: false,
-    note: "Disabled: not seamless, light scratches fail contrast.",
+    enabled: true,
+    note: "Decoration only, opacity 0.08 (worst-case text contrast 11.0:1 for body text, 4.67:1 for ember).",
   },
   {
-    key: "avatars",
+    key: "avatar1",
     job: "ART-012",
-    source: null,
-    alt: "Sheet of hooded and helmed adventurer silhouettes.",
+    source: require("../assets/art/avatars/avatar-1.png"),
+    alt: "Hooded figure in a long cloak, drawn as a dark silhouette.",
     provisional: true,
-    enabled: false,
-    note: "Disabled: eight figures instead of six, one horned. Characters show text only.",
+    enabled: true,
+  },
+  {
+    key: "avatar2",
+    job: "ART-012",
+    source: require("../assets/art/avatars/avatar-2.png"),
+    alt: "Round-headed figure in a scarf and cloak, drawn as a dark silhouette.",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "avatar3",
+    job: "ART-012",
+    source: require("../assets/art/avatars/avatar-3.png"),
+    alt: "Hooded traveler holding a tall staff, drawn as a dark silhouette.",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "avatar4",
+    job: "ART-012",
+    source: require("../assets/art/avatars/avatar-4.png"),
+    alt: "Short-haired child in a cape, drawn as a dark silhouette.",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "avatar5",
+    job: "ART-012",
+    source: require("../assets/art/avatars/avatar-5.png"),
+    alt: "Hooded figure with a satchel strap, drawn as a dark silhouette.",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "avatar6",
+    job: "ART-012",
+    source: require("../assets/art/avatars/avatar-6.png"),
+    alt: "Figure carrying a lantern, drawn as a dark silhouette.",
+    provisional: true,
+    enabled: true,
   },
   {
     key: "resetTrail",
     job: "ART-015",
+    // 1200x240 (5:1) JPEG; darkened by an overlay in ResetStrip.tsx for text contrast.
     source: require("../assets/art/art-015.jpg"),
-    alt: "A winding dirt path crosses green meadow hills.",
+    alt: "A winding pale dirt path crosses green and golden meadow hills under a soft sky.",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "aboutHero",
+    job: "ART-013",
+    // 1200x450 (8:3) JPEG shown above the About panel.
+    source: require("../assets/art/art-013-hero.jpg"),
+    alt: "A golden-hour painting of a small stone watchtower on a distant hill above a winding path, seen past a ruined stone archway.",
     provisional: true,
     enabled: true,
   },
@@ -240,6 +290,21 @@ export const ART: Record<ArtKey, ArtEntry> = Object.fromEntries(ART_ENTRIES.map(
   ArtKey,
   ArtEntry
 >;
+
+/** Opacity of the dark texture drawn under all content (contrast verified at this value; see provenance.md). */
+export const TEXTURE_DARK_OPACITY = 0.08;
+
+const AVATAR_KEYS = ["avatar1", "avatar2", "avatar3", "avatar4", "avatar5", "avatar6"] as const satisfies readonly ArtKey[];
+
+/** Stable avatar for a character: FNV-1a hash of its id (falling back to name) picks one of the six avatars. */
+export function avatarKeyFor(seed: string): ArtKey {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return AVATAR_KEYS[h % AVATAR_KEYS.length]!;
+}
 
 /** Returns the entry only when it is enabled and has pixels; otherwise null (caller shows text only). */
 export function getArt(key: ArtKey): (ArtEntry & { source: ImageSourcePropType }) | null {

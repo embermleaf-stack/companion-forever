@@ -1,6 +1,6 @@
 # Art generation queue
 
-Ordered by value to the Android app first, then marketing. Each job cites its brief in [ICONS.md](ICONS.md) or [IMAGERY.md](IMAGERY.md). Every prompt needs the [STYLE-GUIDE.md](STYLE-GUIDE.md) palette and this negative prompt where the tool supports one:
+The Day/Night theme set is listed first (owner: recommended first, 2026-11-08). Otherwise ordered by value to the Android app first, then marketing. Each job cites its brief in [ICONS.md](ICONS.md) or [IMAGERY.md](IMAGERY.md). Every prompt needs the [STYLE-GUIDE.md](STYLE-GUIDE.md) palette and this negative prompt where the tool supports one:
 
 `logo, text, watermark, signature, existing game character, orc, tauren, murloc, lion crest, wolf crest, red versus blue factions, flaming border, glowing blue rune, hearthstone, photorealistic, 3d render, lens flare, blurry, extra fingers, low contrast, brand name, named artist, film still, recognizable character`
 
@@ -9,6 +9,32 @@ If the tool has no negative-prompt field, append `Avoid: <the same list>` to the
 Credit cost for every job is UNVERIFIED. Log actual cost in [credit-ledger.md](credit-ledger.md).
 
 Rule: generated output is concept material only. Finals for the app icon and SVG icons are human-drawn or human-edited (see ICONS.md and the README rules).
+
+## Day/Night theme set (recommended first)
+
+Owner direction (2026-11-08): a light ("day") and a dark ("night") theme with the same pastoral scene. Brief: [SCREEN-SKIN-BRIEF.md](SCREEN-SKIN-BRIEF.md#daynight-theme-set-recommended-first). Prompts and the shared negative prompt: [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first). Make THEME-D-BG first so THEME-N-BG can match it. Tool terms and output ownership are UNVERIFIED for every job. Each output needs a provenance entry before merge. Contrast checks are in the brief.
+
+- [ ] **THEME-D-BG: Day background** (SCREEN-SKIN-BRIEF.md, Day/Night). Target: 1080x2400 `bg-day.png`, opaque, 9:20 portrait; pale calm centre for ink text (mean luminance at least 0.45; darkest centre pixel at least 0.214). Credit cost: UNVERIFIED.
+  > Full-height portrait phone background, 9 by 20, hand-painted pastoral anime-fantasy scene in watercolor and gouache with clean expressive ink linework and soft colour fills. Daytime, warm late-morning sun from the upper left. Top band: towering soft cumulus clouds in an open pale-blue sky over rolling hills. Bottom band: a wildflower meadow with wind-swept grass and a winding dirt footpath. Painted detail only at the edges, the corners and the top and bottom bands. The centre is a large, calm, pale parchment-cream wash with almost no detail, bright enough for dark ink text. Palette: Old Vellum, soft sky blue, Leaf green, Aged Bronze, Candle gold touches. Detail must survive cropping to 16:9 through 21:9. No people, no figures, no text, no letters, no logo, no watermark. Original design.
+
+- [ ] **THEME-N-BG: Night background, same composition** (SCREEN-SKIN-BRIEF.md, Day/Night). Target: 1080x2400 `bg-night.png`, opaque, 9:20 portrait; same layout as THEME-D-BG; dark centre for vellum text (mean at most 0.12; brightest centre pixel at most 0.121). Matching tip (UNVERIFIED): use the day image as an image reference, or vary with "same composition at night". Credit cost: UNVERIFIED.
+  > Full-height portrait phone background, 9 by 20, hand-painted pastoral anime-fantasy scene in watercolor and gouache with clean expressive ink linework and soft colour fills. The same composition as the daytime scene: soft clouds and hills in the top band, a wildflower meadow and winding footpath in the bottom band. Night-time: a deep starry sky above, lantern glow along the footpath, a warm cottage window glowing at one edge. Painted detail only at the edges, the corners and the top and bottom bands. The centre is a large, calm, very dark slate wash with almost no detail, dark enough for light text. Palette: Ink Night, Slate Ledger, Dusk Teal, pale starlight, Candle gold lantern glints. Detail must survive cropping to 16:9 through 21:9. No people, no figures, no text, no letters, no logo, no watermark. Original design.
+
+- [ ] **THEME-D-FRAME: Day frame, 9-slice** (SCREEN-SKIN-BRIEF.md, Day/Night). Target: 512x512 `frame-day.png`, transparent; 96 px slices; transparent centre. Credit cost: UNVERIFIED.
+  > Square ornate picture frame for a phone screen, 512 by 512, hand-painted pastoral anime-fantasy style in watercolor and gouache with clean expressive ink linework. Pale carved wood and brass with leaf vines in all four corners only. Straight edges of plain pale carved wood with one thin brass line, repeating cleanly along each side so they stretch without seams. Perfectly symmetric on all four sides, flat straight-on view. The centre is fully transparent and empty. Palette: pale oak, Aged Bronze, Leaf green vines, Candle gold highlight in the ornaments only. No flame, no dragon-scale border, no glow, no gloss. Transparent background. Original design, no text, no letters, no figures.
+
+- [ ] **THEME-N-FRAME: Night frame, 9-slice** (SCREEN-SKIN-BRIEF.md, Day/Night). Target: 512x512 `frame-night.png`, transparent; 96 px slices; transparent centre. Credit cost: UNVERIFIED.
+  > Square ornate picture frame for a phone screen, 512 by 512, hand-painted pastoral anime-fantasy style in watercolor and gouache with clean expressive ink linework. Aged bronze and dark vine ornaments in all four corners only, with a few small lantern-shaped studs at the corners and mid-edges. Straight edges of plain bronze with a thin double line, repeating cleanly along each side so they stretch without seams. Perfectly symmetric on all four sides, flat straight-on view. The centre is fully transparent and empty. Palette: Aged Bronze, dark Leaf green vines, Candle gold on the lantern studs only. No flame, no dragon-scale border, no glow, no gloss. Transparent background. Original design, no text, no letters, no figures.
+
+- [ ] **THEME-D-PANEL: Day panel, 9-slice** (SCREEN-SKIN-BRIEF.md, Day/Night). Target: 192x192 `panel-day.png`, transparent outside the border; 40 px slices; opaque parchment centre (passes the day contrast test). Credit cost: UNVERIFIED.
+  > Square card panel frame, 192 by 192, hand-painted pastoral anime-fantasy style in watercolor and gouache with clean expressive ink linework. Warm parchment card with a thin Aged Bronze border line, plain straight edges that repeat cleanly along each side. Perfectly symmetric on all four sides, flat straight-on view. The centre is a flat, even, warm parchment fill with no texture or marks, fully opaque, pale enough for dark ink text. Transparent outside the rounded border. Palette: Old Vellum, Aged Bronze, faint Leaf green only in the corners. Original design, no text, no letters, no figures.
+
+- [ ] **THEME-N-PANEL: Night panel, 9-slice** (SCREEN-SKIN-BRIEF.md, Day/Night). Target: 192x192 `panel-night.png`, transparent outside the border; 40 px slices; opaque slate centre (passes the night contrast test). Credit cost: UNVERIFIED.
+  > Square card panel frame, 192 by 192, hand-painted pastoral anime-fantasy style in watercolor and gouache with clean expressive ink linework. Dark slate card with a thin Aged Bronze border line, plain straight edges that repeat cleanly along each side. Perfectly symmetric on all four sides, flat straight-on view. The centre is a flat, even Slate Ledger fill with no texture or marks, fully opaque, dark enough for light parchment text. Transparent outside the rounded border. Palette: Slate Ledger, Aged Bronze, tiny Candle gold dots in the corners only. Original design, no text, no letters, no figures.
+
+- [ ] **THEME-D-BTN: Day button variants** (optional, spec only; no prompt yet). Parchment variants of the dark button sprites, for light mode. Generate or hand-author later, after THEME-D-BG and THEME-N-BG are approved. See SCREEN-SKIN-BRIEF.md, Day/Night.
+
+Owner workflow: generate the six images (THEME-D-BG, THEME-N-BG, THEME-D-FRAME, THEME-N-FRAME, THEME-D-PANEL, THEME-N-PANEL) into Downloads, then tell Claude which file is which job.
 
 ## Android app (priority)
 

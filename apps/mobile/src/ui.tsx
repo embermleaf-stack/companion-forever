@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Image, Pressable, Text, TextInput, View, type AccessibilityRole, type StyleProp, type TextInputProps, type ViewStyle } from "react-native";
 import { TOUCH, colors } from "./theme";
-import { getArt, type ArtKey } from "./art";
+import { TEXTURE_DARK_OPACITY, getArt, type ArtKey } from "./art";
 import { getPanelSkin, getScreenSkin, type NineSliceSkin, type ScreenId } from "./skin";
 import { computeContentRect, computeCoverRect, computeNineSlice } from "./skinLayout";
 
@@ -194,8 +194,18 @@ export function Background({ children }: { children: React.ReactNode }) {
   const N = 24;
   const top = Array.from({ length: N }, (_, i) => ({ i, a: (0.06 * (N - i)) / N }));
   const bot = Array.from({ length: 12 }, (_, i) => ({ i, a: (0.2 * (12 - i)) / 12 }));
+  const tex = getArt("textureDark");
   return (
     <View style={{ flex: 1, backgroundColor: colors.bg }}>
+      {tex ? (
+        <Image
+          source={tex.source}
+          resizeMode="repeat"
+          accessible={false}
+          importantForAccessibility="no"
+          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, opacity: TEXTURE_DARK_OPACITY }}
+        />
+      ) : null}
       {top.map((t) => (
         <View key={`t${t.i}`} pointerEvents="none" importantForAccessibility="no-hide-descendants" style={[deco, { top: t.i * 12, height: 12, backgroundColor: `rgba(224,112,43,${t.a.toFixed(4)})` }]} />
       ))}

@@ -6,7 +6,147 @@ Owner direction (2026-11-08): a prettier, full-sprite look for the app: painted 
 
 Technical asset specs (slice insets, final file names, registry keys, rasterization) live in [SCREEN-SKIN-SPEC.md](SCREEN-SKIN-SPEC.md), which is written separately. Where a size here and a size there disagree, the spec is the technical source and this brief must be corrected to match. Always supply [STYLE-GUIDE.md](STYLE-GUIDE.md) with each prompt.
 
-Job ids are SKIN-001 to SKIN-008 (one per item below). Queue entries live in [art-queue.md](art-queue.md) and copy-paste prompts in [prompts-copy-paste.md](prompts-copy-paste.md#screen-skins-skin-001-to-skin-008). Related optional kit: [UI-KIT-BRIEF.md](UI-KIT-BRIEF.md).
+Job ids are SKIN-001 to SKIN-008 (one per item below). The Day/Night theme set (THEME-* jobs) is listed first, in the section below, and is recommended before the per-screen skins. Queue entries live in [art-queue.md](art-queue.md) and copy-paste prompts in [prompts-copy-paste.md](prompts-copy-paste.md#screen-skins-skin-001-to-skin-008). Related optional kit: [UI-KIT-BRIEF.md](UI-KIT-BRIEF.md).
+
+## Day/Night theme set (recommended first)
+
+Status: proposed, 2026-11-08. Docs only. Nothing has been generated for this set. Tool terms and output ownership are UNVERIFIED (see "Tool terms" below). Not a legal clearance.
+
+Owner direction (2026-11-08): the app gets a light ("day") theme and a dark ("night") theme. Both show the same pastoral scene: a daytime version for light mode and the same scene at night for dark mode. Make this set before the per-screen skins below.
+
+Prompts: [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first). Queue: [art-queue.md](art-queue.md#daynight-theme-set-recommended-first).
+
+### Why this set, and what changes
+
+- **One shared background per theme** (`THEME-D-BG`, `THEME-N-BG`) is preferred over five per-screen backgrounds. A 1080 x 2400 RGBA bitmap decodes to about 10 MB (1080 x 2400 x 4 bytes is about 10.4 MB). Five backgrounds per theme would hold about 50 MB decoded.
+- **SKIN-001 to SKIN-005 are now optional extras.** The per-screen backgrounds are made only after the theme set is approved, and only for a screen that needs its own scene.
+- **Frames and panels use the spec rules.** The `THEME-*-FRAME` items follow SKIN-006 and the `THEME-*-PANEL` items follow SKIN-007, with the same slice sizes, transparency and seam rules. The SKIN-006 and SKIN-007 checks below apply to them.
+- **File names are suggestions.** `bg-day.png`, `bg-night.png`, `frame-day.png`, `frame-night.png`, `panel-day.png` and `panel-night.png` follow the spec's naming style (`bg-<screen>.png`, `frame-<screen>.png`, `panel.png`). [SCREEN-SKIN-SPEC.md](SCREEN-SKIN-SPEC.md) is the technical source; if it names them differently, it wins. Staging names use the job id, for example `THEME-D-BG_day_v1.png`.
+
+### Theme jobs
+
+| Job | Output (suggested name) | Size (px) | Role |
+|---|---|---|---|
+| THEME-D-BG | `bg-day.png` | 1080 x 2400 | Light-mode full-screen background |
+| THEME-N-BG | `bg-night.png` | 1080 x 2400 | Dark-mode full-screen background, same composition as THEME-D-BG |
+| THEME-D-FRAME | `frame-day.png` | 512 x 512, 96 px slices | Light-mode ornate frame |
+| THEME-N-FRAME | `frame-night.png` | 512 x 512, 96 px slices | Dark-mode ornate frame |
+| THEME-D-PANEL | `panel-day.png` | 192 x 192, 40 px slices | Light-mode panel (parchment) |
+| THEME-N-PANEL | `panel-night.png` | 192 x 192, 40 px slices | Dark-mode panel (slate) |
+| THEME-D-BTN | none yet (spec only) | see below | Light-mode button variants, optional |
+
+Shared negative prompt for every THEME job (also in [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first)):
+
+`text, letters, logo, watermark, signature, figures in focus areas, faces, people, photorealistic, 3d render, glossy highlights, lens flare, glowing drop shadow, flaming border, dragon-scale border, brand name, named artist, film still, recognizable character, existing game character, Blizzard imagery, World of Warcraft, game or studio trade dress`
+
+Style for all items: the Emberleaf palette and pastoral hand-painted look in [STYLE-GUIDE.md](STYLE-GUIDE.md). Describe the look only; never name an artist, studio, film or game.
+
+### Contrast check for the theme backgrounds
+
+Measure the centre rectangle of the finished 1080 x 2400 image: x 120 to 960, y 360 to 2040 (the safe zone in [SCREEN-SKIN-SPEC.md](SCREEN-SKIN-SPEC.md), section 2).
+
+1. For each pixel, convert each sRGB channel `c` (0 to 1) to linear: `c / 12.92` if `c <= 0.04045`, otherwise `((c + 0.055) / 1.055) ^ 2.4`. Then relative luminance `L = 0.2126 R + 0.7152 G + 0.0722 B`.
+2. **Day (THEME-D-BG, ink text).** Ink `#14171F` has `L` about 0.0086. Contrast is `(L + 0.05) / (0.0086 + 0.05)`. For 4.5:1 every centre pixel needs `L` of at least **0.214**. The owner target is a centre **mean** of at least **0.45** (about 8.5:1), which leaves margin. Record the mean and the darkest pixel.
+3. **Night (THEME-N-BG, vellum text).** Vellum `#E8DCC0` has `L` about 0.72. For 4.5:1 every centre pixel needs `L` of at most **0.121**. Target a centre **mean** of at most 0.12. Record the mean and the brightest pixel.
+4. A background that fails is rejected, not darkened or lightened by hand without re-checking. If a few specks break the strict pixel limit, fix the specks and measure again.
+5. Panels: the same test applies to the panel centre (day against ink, night against vellum).
+
+### THEME-D-BG: Day background
+
+- **Purpose:** the light-mode background behind every screen. Ink text sits on the pale centre.
+- **Output:** `bg-day.png`, 1080 x 2400 px, opaque (alpha 255 everywhere), 9:20 portrait.
+- **Prompt:** copy the `THEME-D-BG` block from [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first).
+- **Scene:** pastoral hand-painted anime-fantasy meadow. Hills and soft clouds in the top band, wildflower meadow and a path in the bottom band. Large calm pale centre. Detail only at the edges and corners.
+- **Acceptance:**
+  - [ ] Centre mean luminance at least 0.45; darkest centre pixel at least 0.214 (ink text at 4.5:1 or better), measured per the Contrast check
+  - [ ] Painted detail only in the edges, corners and top and bottom bands; no figures, no text, no logo in the centre
+  - [ ] Crops hold up: the 1080 x 1920 16:9 crop at top, centre and bottom anchors, and a 60 px side trim (the spec's 9:21 allowance), all still read as the same scene
+  - [ ] Opaque; sRGB; under about 400 KB (quantise if larger)
+- **Post-processing:** crop or resize to 1080 x 2400 (Lanczos or bicubic); flatten to opaque; run the Contrast check; run the crop checks; export PNG to `icons-and-imagery/staging/`.
+- **Tool terms:** UNVERIFIED. **Provenance:** required before merge (see "Provenance for theme jobs" below).
+
+### THEME-N-BG: Night background (same composition)
+
+- **Purpose:** the dark-mode background. It must match THEME-D-BG so the app looks like one scene in two lights.
+- **Output:** `bg-night.png`, 1080 x 2400 px, opaque, 9:20 portrait.
+- **Prompt:** copy the `THEME-N-BG` block from [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first).
+- **Scene:** the same layout as the day image: hills and clouds in the top band, meadow and footpath in the bottom band. At night: starry sky, lantern glow along the path, a warm cottage window glowing at one edge.
+- **Matching tip (UNVERIFIED, tool behaviour not tested):** generate THEME-D-BG first, then use that image as an image reference with "same composition at night" (or this prompt) so the two match. The reference feature's name and weighting vary by tool and version; check them before relying on this. The owner may use other tools.
+- **Acceptance:**
+  - [ ] Centre mean luminance at most 0.12; brightest centre pixel at most 0.121 (vellum text at 4.5:1 or better), measured per the Contrast check
+  - [ ] Same layout as THEME-D-BG: when the two are overlaid at 50% opacity, hills, path and clouds line up
+  - [ ] Glow stays at the edges and corners; the centre has no glow
+  - [ ] Crop checks and file checks as THEME-D-BG
+- **Post-processing:** as THEME-D-BG, plus the overlay test against the approved day image.
+- **Tool terms:** UNVERIFIED. **Provenance:** required before merge. Record any reference image used, and confirm it is the owner's own day output.
+
+### THEME-D-FRAME: Day frame, 9-slice
+
+- **Purpose:** frame for hero cards and screen headers in light mode.
+- **Output:** `frame-day.png`, 512 x 512 px, RGBA. Pale carved wood and brass with leaf vines in the corners. Slice at 96 px on every side. The 320 x 320 centre is fully transparent.
+- **Prompt:** copy the `THEME-D-FRAME` block from [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first).
+- **Acceptance:** all SKIN-006 checks in this brief, with the pale-wood and brass look in place of bronze.
+- **Post-processing:** generate on a plain background if the tool does not give alpha; remove it with the connector's background removal or by hand, then check for halo fringing; clear the 320 x 320 centre to alpha 0; run the mirror test (flip horizontally and vertically and compare) and the seam test (offset by half the width and height).
+- **Tool terms:** UNVERIFIED. **Provenance:** required before merge.
+
+### THEME-N-FRAME: Night frame, 9-slice
+
+- **Purpose:** frame for hero cards and screen headers in dark mode.
+- **Output:** `frame-night.png`, 512 x 512 px, RGBA. Aged bronze and dark vine ornaments with small lantern studs. Slice at 96 px. Transparent centre.
+- **Prompt:** copy the `THEME-N-FRAME` block from [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first).
+- **Acceptance:** all SKIN-006 checks in this brief. Studs are small and sit in the corners or on the mid-edges, not across the content window.
+- **Post-processing:** as THEME-D-FRAME.
+- **Tool terms:** UNVERIFIED. **Provenance:** required before merge.
+
+### THEME-D-PANEL: Day panel, 9-slice
+
+- **Purpose:** card and row surround in light mode. Ink text sits on the parchment.
+- **Output:** `panel-day.png`, 192 x 192 px, RGBA. Warm parchment with a thin bronze border. Slice at 40 px, leaving a 112 x 112 px flat centre.
+- **Prompt:** copy the `THEME-D-PANEL` block from [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first).
+- **Acceptance:**
+  - [ ] All SKIN-007 checks in this brief, scaled to 40 px slices
+  - [ ] Centre is opaque (alpha at least 0.9, ideally 255) and flat; no marks
+  - [ ] Centre passes the day contrast test (mean at least 0.45, darkest pixel at least 0.214)
+  - [ ] The border reads at phone scale
+- **Post-processing:** as THEME-D-FRAME, with the centre check.
+- **Tool terms:** UNVERIFIED. **Provenance:** required before merge.
+
+### THEME-N-PANEL: Night panel, 9-slice
+
+- **Purpose:** card and row surround in dark mode. Vellum text sits on the slate.
+- **Output:** `panel-night.png`, 192 x 192 px, RGBA. Slate Ledger with a thin bronze border. Slice at 40 px, leaving a 112 x 112 px flat centre.
+- **Prompt:** copy the `THEME-N-PANEL` block from [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first).
+- **Acceptance:**
+  - [ ] All SKIN-007 checks in this brief, scaled to 40 px slices
+  - [ ] Centre is opaque (alpha at least 0.9, ideally 255) and flat, matching the Slate Ledger surface `#1F2430`
+  - [ ] Centre passes the night contrast test (mean at most 0.12; brightest pixel at most 0.121)
+  - [ ] The border reads at phone scale
+- **Post-processing:** as THEME-D-FRAME, with the centre check.
+- **Tool terms:** UNVERIFIED. **Provenance:** required before merge.
+
+### THEME-D-BTN: Day button variants (optional, spec only)
+
+- **Status:** not generated and not queued. The app's existing button sprites are dark, so day mode will need parchment variants: primary, secondary and danger, each in normal, pressed and disabled states.
+- **Size:** to be set when the set is generated; the UI-KIT-BRIEF.md button sheet (UI-001) is the nearest reference.
+- **Spec:** parchment fills with ink-readable labels drawn by the app, not by the image. Labels stay native for accessibility. Same no-text, no-figure, no-logo rules.
+- **Next step:** generate later or hand-author by the agent team, after THEME-D-BG and THEME-N-BG are approved. No prompt is written yet.
+- **Tool terms:** UNVERIFIED. **Provenance:** required before merge.
+
+### Tool terms for theme jobs (UNVERIFIED)
+
+Terms, output ownership and commercial use depend on the tool. Every theme output needs a provenance entry (see below). Tool names are recorded as the owner reports them, for example "Midjourney, version shown in the app, UNVERIFIED terms". No tool's terms are recorded as read in this brief.
+
+### Provenance for theme jobs
+
+Each output gets an entry in [provenance.md](provenance.md) from [PROVENANCE-TEMPLATE.md](PROVENANCE-TEMPLATE.md), with: job id (for example `THEME-D-BG`); tool, model and version shown, and the date generated; the prompt verbatim; the terms URL, date checked and clause, or UNVERIFIED; any reference image used; the human edits; the similarity check and reviewer; the contrast result (mean and strictest pixel); alt text (decorative, hidden from screen readers); and owner approval with date. Nothing is merged without these.
+
+### Owner workflow (theme set, six images)
+
+1. **Generate six images.** In your tool, one at a time, paste the prompts from [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first) and the shared negative prompt: THEME-D-BG, THEME-N-BG, THEME-D-FRAME, THEME-N-FRAME, THEME-D-PANEL, THEME-N-PANEL. Make THEME-D-BG first so the night image can match it.
+2. **Save to Downloads.** Keep the file names or note the job id for each.
+3. **Tell Claude.** Say which files in Downloads are which job ids.
+4. **Claude crops, validates and stages.** Claude crops to the exact sizes, runs the Contrast check, the crop checks, the mirror and seam tests, saves to `icons-and-imagery/staging/` and drafts the provenance entries. You supply the tool names and the terms you read.
+5. **Review in place.** Look at the day and night pair in the app or a preview, then approve or reject. Nothing moves to `final/` or `apps/*` before your approval.
 
 ## Why this exists, and the fallback
 

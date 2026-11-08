@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AppState as RNAppState, ScrollView, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as SystemUI from "expo-system-ui";
@@ -20,6 +20,7 @@ import { createPersistence, DEFAULT_PREFS, type Prefs } from "./persistence";
 import { cancelReminders, rescheduleReminders } from "./reminderScheduler";
 import { colors } from "./theme";
 import { Button, ScreenBackground, ScreenFrame } from "./ui";
+import { ArtImage } from "./ArtImage";
 import type { ScreenId } from "./skin";
 import { Onboarding } from "./Onboarding";
 import { ChecklistScreen } from "./screens/Checklist";
@@ -59,11 +60,17 @@ export default function App() {
 
 function AppContent() {
   const [state, setState] = useState<AppState>(emptyState);
+  // Latest committed state, so `run` can evaluate a change eagerly and catch validation errors (a throw inside a
+  // setState updater would surface during render and crash the app).
+  const stateRef = useRef(state);
+  stateRef.current = state;
   const [prefs, setPrefsState] = useState<Prefs>(DEFAULT_PREFS);
   const [loaded, setLoaded] = useState(false);
   const [onboarded, setOnboarded] = useState(true); // true until loaded so the intro never flashes for returning users
   const [tab, setTab] = useState<Tab>("Checklist");
   const [message, setMessage] = useState("");
+  // True only for errors thrown by a state change (run); shows the error illustration beside the message.
+  const [errorArt, setErrorArt] = useState(false);
   const [now, setNow] = useNow();
 
   useEffect(() => {
@@ -112,10 +119,14 @@ function AppContent() {
 
   const run: Run = useCallback((fn) => {
     try {
-      setState((s) => fn(s));
+      const next = fn(stateRef.current);
+      stateRef.current = next;
+      setState(next);
       setMessage("");
+      setErrorArt(false);
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "Something went wrong");
+      setErrorArt(true);
     }
   }, []);
 
@@ -169,12 +180,12 @@ function AppContent() {
         ))}
       </View>
 
-      <Text
-        accessibilityLiveRegion="polite"
-        style={{ color: colors.highlight, paddingHorizontal: 16, paddingTop: message ? 4 : 0, height: message ? undefined : 0 }}
-      >
-        {message}
-      </Text>
+      <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: 16, paddingTop: message ? 4 : 0, height: message ? undefined : 0, overflow: "hidden" }}>
+        {message && errorArt ? <ArtImage art="errorGeneric" width={64} height={48} style={{ marginRight: 10, borderRadius: 4 }} /> : null}
+        <Text accessibilityLiveRegion="polite" style={{ color: colors.highlight, flexShrink: 1 }}>
+          {message}
+        </Text>
+      </View>
 
       <ScreenFrame screen={screenId}>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 16, paddingTop: 8 }}>
@@ -202,7 +213,10 @@ function AppContent() {
             state={state}
             run={run}
             setState={setState}
-            setMessage={setMessage}
+            setMessage={(m: string) => {
+              setMessage(m);
+              setErrorArt(false);
+            }}
             prefs={prefs}
             setPrefs={setPrefs}
             loadSample={loadSample}

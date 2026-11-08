@@ -20,6 +20,68 @@ If the tool has no negative field, append `Avoid: <list>` (the same list) to the
 4. Log the credit cost and tool in [credit-ledger.md](credit-ledger.md) and the source and terms in [provenance.md](provenance.md).
 5. Check each tool's output license terms before merging anything. Output from generators is not automatically cleared for use.
 
+## Day/Night theme set (recommended first)
+
+Source: [SCREEN-SKIN-BRIEF.md](SCREEN-SKIN-BRIEF.md#daynight-theme-set-recommended-first). Light ("day") and dark ("night") app themes, one shared scene each. Paste the negative prompt below with every THEME job. Tool terms and output ownership are UNVERIFIED.
+
+### Negative prompt (THEME jobs)
+
+```text
+text, letters, logo, watermark, signature, figures in focus areas, faces, people, photorealistic, 3d render, glossy highlights, lens flare, glowing drop shadow, flaming border, dragon-scale border, brand name, named artist, film still, recognizable character, existing game character, Blizzard imagery, World of Warcraft, game or studio trade dress
+```
+
+If the tool has no negative field, append `Avoid: <list>` to the prompt, but only if the total stays under 2000 characters.
+
+### THEME-D-BG: Day background
+
+Target: 1080x2400 `bg-day.png`, opaque, 9:20 portrait; centre pale enough for ink text
+
+```text
+Full-height portrait phone background, 9 by 20, hand-painted pastoral anime-fantasy scene in watercolor and gouache with clean expressive ink linework and soft colour fills. Daytime, warm late-morning sun from the upper left. Top band: towering soft cumulus clouds in an open pale-blue sky over rolling hills. Bottom band: a wildflower meadow with wind-swept grass and a winding dirt footpath. Painted detail only at the edges, the corners and the top and bottom bands. The centre is a large, calm, pale parchment-cream wash with almost no detail, bright enough for dark ink text. Palette: Old Vellum, soft sky blue, Leaf green, Aged Bronze, Candle gold touches. Detail must survive cropping to 16:9 through 21:9. No people, no figures, no text, no letters, no logo, no watermark. Original design.
+```
+
+### THEME-N-BG: Night background (same composition)
+
+Target: 1080x2400 `bg-night.png`, opaque, 9:20 portrait; same layout as THEME-D-BG; centre dark enough for vellum text
+
+```text
+Full-height portrait phone background, 9 by 20, hand-painted pastoral anime-fantasy scene in watercolor and gouache with clean expressive ink linework and soft colour fills. The same composition as the daytime scene: soft clouds and hills in the top band, a wildflower meadow and winding footpath in the bottom band. Night-time: a deep starry sky above, lantern glow along the footpath, a warm cottage window glowing at one edge. Painted detail only at the edges, the corners and the top and bottom bands. The centre is a large, calm, very dark slate wash with almost no detail, dark enough for light text. Palette: Ink Night, Slate Ledger, Dusk Teal, pale starlight, Candle gold lantern glints. Detail must survive cropping to 16:9 through 21:9. No people, no figures, no text, no letters, no logo, no watermark. Original design.
+```
+
+Midjourney tip (UNVERIFIED: tool behaviour not tested): generate THEME-D-BG first, then use that image as an image reference with the text "same composition at night" (or the THEME-N-BG prompt) so the two match. Check the current feature name and how it weights the reference before relying on it. Other tools are fine; the owner may choose them. Do not use any film, game or other third-party image as a reference.
+
+### THEME-D-FRAME: Day frame, 9-slice
+
+Target: 512x512 `frame-day.png`, transparent; 96 px slices; transparent centre
+
+```text
+Square ornate picture frame for a phone screen, 512 by 512, hand-painted pastoral anime-fantasy style in watercolor and gouache with clean expressive ink linework. Pale carved wood and brass with leaf vines in all four corners only. Straight edges of plain pale carved wood with one thin brass line, repeating cleanly along each side so they stretch without seams. Perfectly symmetric on all four sides, flat straight-on view. The centre is fully transparent and empty. Palette: pale oak, Aged Bronze, Leaf green vines, Candle gold highlight in the ornaments only. No flame, no dragon-scale border, no glow, no gloss. Transparent background. Original design, no text, no letters, no figures.
+```
+
+### THEME-N-FRAME: Night frame, 9-slice
+
+Target: 512x512 `frame-night.png`, transparent; 96 px slices; transparent centre
+
+```text
+Square ornate picture frame for a phone screen, 512 by 512, hand-painted pastoral anime-fantasy style in watercolor and gouache with clean expressive ink linework. Aged bronze and dark vine ornaments in all four corners only, with a few small lantern-shaped studs at the corners and mid-edges. Straight edges of plain bronze with a thin double line, repeating cleanly along each side so they stretch without seams. Perfectly symmetric on all four sides, flat straight-on view. The centre is fully transparent and empty. Palette: Aged Bronze, dark Leaf green vines, Candle gold on the lantern studs only. No flame, no dragon-scale border, no glow, no gloss. Transparent background. Original design, no text, no letters, no figures.
+```
+
+### THEME-D-PANEL: Day panel, 9-slice
+
+Target: 192x192 `panel-day.png`, transparent outside the border; 40 px slices; opaque parchment centre
+
+```text
+Square card panel frame, 192 by 192, hand-painted pastoral anime-fantasy style in watercolor and gouache with clean expressive ink linework. Warm parchment card with a thin Aged Bronze border line, plain straight edges that repeat cleanly along each side. Perfectly symmetric on all four sides, flat straight-on view. The centre is a flat, even, warm parchment fill with no texture or marks, fully opaque, pale enough for dark ink text. Transparent outside the rounded border. Palette: Old Vellum, Aged Bronze, faint Leaf green only in the corners. Original design, no text, no letters, no figures.
+```
+
+### THEME-N-PANEL: Night panel, 9-slice
+
+Target: 192x192 `panel-night.png`, transparent outside the border; 40 px slices; opaque slate centre
+
+```text
+Square card panel frame, 192 by 192, hand-painted pastoral anime-fantasy style in watercolor and gouache with clean expressive ink linework. Dark slate card with a thin Aged Bronze border line, plain straight edges that repeat cleanly along each side. Perfectly symmetric on all four sides, flat straight-on view. The centre is a flat, even Slate Ledger fill with no texture or marks, fully opaque, dark enough for light parchment text. Transparent outside the rounded border. Palette: Slate Ledger, Aged Bronze, tiny Candle gold dots in the corners only. Original design, no text, no letters, no figures.
+```
+
 ## Jobs
 
 ## ART-001: App icon concept variants

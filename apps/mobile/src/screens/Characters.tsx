@@ -6,7 +6,8 @@ import type { Run } from "../App";
 import { Button, Card, Field, H2 } from "../ui";
 import { colors } from "../theme";
 import { BLIZZARD_ATTRIBUTION } from "../format";
-import { EmptyState } from "../ArtImage";
+import { ArtImage, EmptyState } from "../ArtImage";
+import { avatarKeyFor } from "../art";
 
 export function CharactersScreen({ state, run }: { state: AppState; run: Run }) {
   const [name, setName] = useState("");
@@ -45,13 +46,18 @@ export function CharactersScreen({ state, run }: { state: AppState; run: Run }) 
       <Button fullWidth label="Add character" onPress={submit} />
       {state.characters.map((c) => (
         <Card key={c.id}>
+          <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 6 }}>
+          <ArtImage art={avatarKeyFor(c.id || c.name)} width={56} height={56} decorative style={{ marginRight: 12, borderRadius: 8 }} />
+          <View style={{ flex: 1 }}>
           <Text style={{ color: colors.text, fontWeight: "700", fontSize: 16 }}>
             {c.name}
             {c.source === "blizzard" ? <Text style={{ color: colors.highlight, fontSize: 12, fontWeight: "400" }}>{"  imported"}</Text> : null}
           </Text>
-          <Text style={{ color: colors.text, opacity: 0.8, marginBottom: 6 }}>
+          <Text style={{ color: colors.text, opacity: 0.8 }}>
             {[c.realm, c.className, c.level ? `Lv ${c.level}` : ""].filter(Boolean).join(" · ")}
           </Text>
+          </View>
+          </View>
           <Button
             fullWidth
             label={`Remove ${c.name}`}

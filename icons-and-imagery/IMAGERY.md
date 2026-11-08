@@ -2,11 +2,13 @@
 
 Always supply [STYLE-GUIDE.md](STYLE-GUIDE.md) and its negative prompt with these.
 
+Use the pastoral hand-painted terms in [STYLE-GUIDE.md](STYLE-GUIDE.md#pastoral-hand-painted-direction-owner-request-2026-11-07). Negative prompt (in STYLE-GUIDE) includes "named artist, film still, recognizable character".
+
 ## 1. Hero banner — `final/hero.webp` (2400×900, plus 1200×450)
 
-- **Scene:** a cozy cartographer's study at dusk seen through an arched window; a lantern and open ledger on a desk; rolling hills and a winding trail outside; no characters.
-- **Composition:** subject on right third; left 40% calm, dark, and low-detail for overlaid text.
-- **Prompt:** "Wide painterly fantasy illustration of a cartographer's study at dusk, arched window onto rolling moss-green hills and a winding trail, bronze lantern and open ledger on a wooden desk, warm ember light, deep ink-blue shadows, calm negative space on the left, storybook style, original design, no text, no people."
+- **Scene:** a cozy cartographer's study at late afternoon seen through an arched window; a lantern and open trail-map ledger on a desk; towering soft clouds, rolling meadows, and a winding footpath outside; a distant stone watchtower on a hill; no characters.
+- **Composition:** subject on right third; left 40% calm, low-detail, and low-contrast for overlaid text.
+- **Prompt:** "Wide hand-painted pastoral fantasy illustration in watercolor and gouache of a cartographer's study at late afternoon, arched window onto towering soft cumulus clouds, lush rolling meadows with wind-swept grass and a winding footpath, distant stone watchtower on a hill, bronze lantern and open trail-map ledger on a wooden desk, gentle warm light, clean expressive ink linework with soft color fills, calm negative space on the left, original design, no text, no people."
 - **Alt text:** "A lantern-lit study with a map ledger overlooking rolling hills at dusk."
 
 ## 2. App background texture — `final/bg-parchment.webp` (1024×1024, seamless tile)

@@ -42,6 +42,19 @@ Avoid lettering in art where possible. If needed: a humanist serif with calligra
 
 Lantern, quill and ledger, compass rose, sprouting acorn, ember-lit hearth, signpost, rune-less abstract sigils, hourglass, lockbox, satchel, clover, trail map, bridge, standing stone circle (generic), moth, fox, heron, oak leaf.
 
+## Pastoral hand-painted direction (owner request, 2026-11-07)
+
+Layered onto the Emberleaf palette and mood above. This describes the look only. No living artist, studio, film, or game is a reference for it.
+
+- **Painting:** watercolor and gouache-style painted backgrounds with soft wash edges and faint paper texture. Foreground objects get cleaner, flatter fills.
+- **Linework:** clean, expressive ink lines of varying weight, with soft color fills inside them. No heavy outlines, no glossy highlights.
+- **Sky:** towering soft cumulus clouds over an open, pale-to-blue sky; generous sky area.
+- **Land:** lush rolling meadows, wind-swept grass leaning in one direction, small groves of trees, distant hills.
+- **Light:** gentle warm late-afternoon sun from the upper left, soft shadows, low contrast. No harsh rays, no lens effects.
+- **Cozy rural details:** stone cottages with slate or thatched roofs, hanging lanterns, dirt footpaths, hay bales, wooden signposts, low fences.
+- **Adventure-world vibe (generic fantasy only):** cloth banners, stone watchtowers, tavern lanterns, hand-drawn trail maps, standing stone circles, distant castles on hills.
+- **Mood and scale:** calm, unhurried, hopeful. Where a person appears, they are small and distant against a grand landscape. Many briefs still specify no people.
+
 ## Do not (hard list)
 
 - No orcs, humans-vs-orcs faction iconography, tauren, murlocs, or other creatures/races defined by an existing game; no generic "horned helm on crossed axes" or "lion/wolf head crest" faction emblems.
@@ -52,10 +65,14 @@ Lantern, quill and ledger, compass rose, sprouting acorn, ember-lit hearth, sign
 - No Blizzard, Activision, Battle.net, Wowhead, or other third-party logos or text.
 - No real people, no real screenshots.
 - No watermarks, signatures, or tool logos in output.
+- **Never name a living artist, animation studio, film, or video game** in prompts, filenames, reference lists, or notes. Adobe's tools also forbid artist names in prompts.
+- Do not recreate any recognizable film or game character, creature, vehicle, building, or composition.
+- Explicitly avoid: soot-like fuzzy sprites; large gentle forest-spirit creatures; flying castles or airships as set pieces; bus-like creature vehicles; any faction crest or zone taken from a game.
+- No reference images from any film or game, including as style references, mood boards, or inpainting sources.
 
 ## Negative prompt (paste with generation prompts)
 
-`logo, text, watermark, signature, existing game character, orc, tauren, murloc, lion crest, wolf crest, red versus blue factions, flaming border, glowing blue rune, hearthstone, photorealistic, 3d render, lens flare, blurry, extra fingers, low contrast, brand name`
+`logo, text, watermark, signature, existing game character, orc, tauren, murloc, lion crest, wolf crest, red versus blue factions, flaming border, glowing blue rune, hearthstone, photorealistic, 3d render, lens flare, blurry, extra fingers, low contrast, brand name, named artist, film still, recognizable character`
 
 ## Accessibility
 

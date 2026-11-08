@@ -21,6 +21,10 @@ These follow the repository's boundaries in [AGENTS.md](../AGENTS.md) and [docs/
 6. **No claim of affiliation.** Imagery must not suggest it is official, endorsed, or sponsored.
 7. **Owner approval.** Assets are not merged until the owner approves them and the provenance entry exists.
 
+## Generation tool note
+
+The Adobe Firefly connector available to this repo cannot generate images from text prompts. It only supports canvas expansion and editing of existing images. Initial art must therefore come from the Firefly web app, another image tool with an API, or a human illustrator, using the prompts in [IMAGERY.md](IMAGERY.md) and [art-queue.md](art-queue.md). Record the actual tool in the provenance entry.
+
 ## Delivery format
 
 - Vector (SVG) where possible for icons; otherwise PNG with transparent background at the sizes listed.

@@ -282,3 +282,23 @@ Disabled, no pixels shipped in `apps/`: ART-005 (legible "Error" text), ART-006 
 - **Texture contrast (computed over every pixel, worst case, including the 6% ember glow at the top):** at opacity 0.08, body text #E8DCC0 min 11.04:1, Candle #F6D98A 10.88:1, 80%-opacity text 7.60:1, header Candle on header tint 11.11:1, Ember #E0702B 4.67:1 (baseline without texture: 13.16, 12.98, 5.56). Opacity 0.12 would drop Ember to 4.39, so 0.08 is used.
 - **Defect found and fixed while testing:** adding a character with an empty name crashed the app (a throw inside a `setState` updater). `run` in `apps/mobile/src/App.tsx` now evaluates the change eagerly against a state ref so the error shows as a message.
 - **Reviewed by / approved by owner (date):** PENDING
+
+## SKIN-001 shared dark background (2026-11-08; candidate id THEME-N-BG)
+
+- **Tool:** Midjourney (owner-confirmed). **Output license: UNVERIFIED** (no URL/clause checked). **Approval: provisional** (owner approved for in-place review only). Similarity check: visual inspection by an AI agent only; no logo, game art or legible text recognized. Not a legal review.
+- **Source:** `icons-and-imagery/midjourney-originals/SKIN-001_upscaled_1472x3264_checklist_full-screen_background_Full_01d79c9f-7a34-4f1c-ba9c-27579208c33d.png` (git-ignored; never committed).
+- **Processing:** upscaled in Midjourney (1472x3264), downscaled to 1080x2400, JPEG q65. Output `apps/mobile/assets/art/skin/bg-night.jpg` (about 430 KB).
+- **Use:** ONE image for all six screens via `SCREEN_SKINS` in `apps/mobile/src/skin.ts` (job SKIN-001, enabled by default; set `enabled: false` to return to the drawn Background, which is also the fallback). Cover-fit, centered, hidden from accessibility (decorative). Frame and panel skins stay off; drawn Panels sit on top. The 0.08 dark texture is part of the drawn Background only, so it is not drawn over the painting.
+- **Alt text:** "A quiet night meadow with lanterns and a footpath, framed by hawthorn branches with red berries" (decorative; hidden from accessibility).
+- **Contrast (worst single pixel in each region, cover-fit crops at 360x800, 411x891 and 1080x2400; backing colour rgba(31,36,48)):** the raw painting is bright in places (worst-pixel luminance 0.77 to 0.98 in the message line, footer and onboarding bands), so bare text fails everywhere: vellum #E8DCC0 over the painting alone is 1.0 to 1.3:1.
+
+| Region (text colour) | Before (as drawn) | After backing | Backing alpha |
+|---|---|---|---|
+| Header + tab bar (Candle / vellum) | 3.12 / 3.17 at alpha 0.6 | 5.03 / 5.11 | 0.75 |
+| Message line (Candle) | 3.24 at 0.6 | 5.16 | 0.75 |
+| Footer disclaimer (vellum at 85% opacity) | 1.12 bare | 4.86 | 0.80 |
+| Onboarding title/body block (Candle / vellum) | 1.01 bare | 6.13 / 6.22 | 0.80 |
+| Section headings, paragraphs, field labels (H2, P, Field, Segmented label) | 1.2 bare | 5.91 to 6.00 (worst pixel of the whole image) | 0.80 chip |
+
+  Muted #B9AE93 (3.7:1 at 0.80) and Ember #E0702B (2.5:1) are NOT used for text directly on the background (Ember is a button fill with dark label text; the footer is vellum), so they were not given a scrim. Text inside Panels sits on the opaque Slate Ledger surface and is unchanged. The status-bar clock is drawn by Android over the sky and is not controlled by the app. Measurement is by script (Pillow, WCAG relative luminance, Lanczos downscale); the drawn Background keeps the original 0.6 tint.
+- **Reviewed by / approved by owner (date):** PENDING

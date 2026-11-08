@@ -175,16 +175,25 @@ export function ToggleSwitch(props: { value: boolean; onValueChange: (v: boolean
   );
 }
 
+/**
+ * Backing chip for text that sits directly on the painted background (alpha from the contrast table in
+ * provenance.md). Empty on the drawn Background, where the base colour already gives enough contrast.
+ */
+export function textBacking(): ViewStyle {
+  if (!getScreenSkin("checklist")) return {};
+  return { backgroundColor: "rgba(31,36,48,0.8)", alignSelf: "flex-start", paddingHorizontal: 6, paddingVertical: 1, borderRadius: 6, overflow: "hidden" };
+}
+
 export function H2({ children }: { children: string }) {
   return (
-    <Text accessibilityRole="header" style={{ color: colors.highlight, fontSize: 20, fontWeight: "700", marginTop: 12, marginBottom: 8 }}>
+    <Text accessibilityRole="header" style={[{ color: colors.highlight, fontSize: 20, fontWeight: "700", marginTop: 12, marginBottom: 8 }, textBacking()]}>
       {children}
     </Text>
   );
 }
 
 export function P({ children, dim }: { children: React.ReactNode; dim?: boolean }) {
-  return <Text style={{ color: colors.text, opacity: dim ? 0.8 : 1, marginBottom: 8, fontSize: 15 }}>{children}</Text>;
+  return <Text style={[{ color: dim ? "rgba(232,220,192,0.8)" : colors.text, marginBottom: 8, fontSize: 15 }, textBacking()]}>{children}</Text>;
 }
 
 /** Screen background: ink base with a faint ember glow at the top and a darker vignette at the bottom. */
@@ -351,7 +360,7 @@ export function Field(props: { label: string } & Pick<TextInputProps, "value" | 
   const { label, ...rest } = props;
   return (
     <View style={{ marginBottom: 8 }}>
-      <Text style={{ color: colors.text, marginBottom: 4 }}>{label}</Text>
+      <Text style={[{ color: colors.text, marginBottom: 4 }, textBacking()]}>{label}</Text>
       <TextInput
         {...rest}
         accessibilityLabel={label}
@@ -379,7 +388,7 @@ export function Choice<T extends string | number>(props: {
 }) {
   return (
     <View style={{ marginBottom: 8 }}>
-      <Text style={{ color: colors.text, marginBottom: 4 }}>{props.label}</Text>
+      <Text style={[{ color: colors.text, marginBottom: 4 }, textBacking()]}>{props.label}</Text>
       <View accessibilityRole="radiogroup" accessibilityLabel={props.label} style={{ flexDirection: "row", flexWrap: "wrap" }}>
         {props.options.map((o) => {
           const sel = o.value === props.value;
@@ -407,7 +416,7 @@ export function Stepper(props: { label: string; value: number; min: number; max:
   const set = (v: number) => props.onChange(Math.min(props.max, Math.max(props.min, v)));
   return (
     <View style={{ marginBottom: 8 }}>
-      <Text style={{ color: colors.text, marginBottom: 4 }}>{props.label}</Text>
+      <Text style={[{ color: colors.text, marginBottom: 4 }, textBacking()]}>{props.label}</Text>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Button glyph="-" label={`Decrease ${props.label}`} onPress={() => set(props.value - step)} variant="plain" />
         <Text accessibilityLabel={`${props.label}: ${props.value}`} style={{ color: colors.text, minWidth: 48, textAlign: "center", fontSize: 18, fontWeight: "700" }}>

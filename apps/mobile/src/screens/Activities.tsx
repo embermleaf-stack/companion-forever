@@ -5,6 +5,7 @@ import { addActivity, removeActivity, type AppState, type Cadence, type Scope } 
 import type { Run } from "../App";
 import { Button, Card, Choice, Field, H2 } from "../ui";
 import { colors } from "../theme";
+import { EmptyState } from "../ArtImage";
 
 export function ActivitiesScreen({ state, run }: { state: AppState; run: Run }) {
   const [title, setTitle] = useState("");
@@ -40,6 +41,9 @@ export function ActivitiesScreen({ state, run }: { state: AppState; run: Run }) 
         ]}
       />
       <Button label="Add activity" onPress={submit} />
+      {state.activities.length === 0 ? (
+        <EmptyState art="emptyActivities" title="No activities yet" body="Add something you repeat, like a daily or weekly task, using the form above." />
+      ) : null}
       {state.activities.map((a) => (
         <Card key={a.id}>
           <Text style={{ color: colors.text, fontWeight: "700", fontSize: 16 }}>{a.title}</Text>

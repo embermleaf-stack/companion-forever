@@ -12,6 +12,8 @@ export interface KeyValueStorage {
 
 export const STATE_KEY = "companion-forever:state:v1";
 export const PREFS_KEY = "companion-forever:prefs:v1";
+/** First-launch onboarding completion flag. Kept out of Prefs so the prefs shape is unchanged. */
+export const ONBOARDING_KEY = "companion-forever:onboarding:v1";
 
 /** Device-local preferences that are not part of the portable backup. */
 export interface Prefs {
@@ -44,6 +46,8 @@ export interface Persistence {
   saveState(s: AppState): Promise<boolean>;
   loadPrefs(): Promise<Prefs>;
   savePrefs(p: Prefs): Promise<boolean>;
+  loadOnboardingDone(): Promise<boolean>;
+  saveOnboardingDone(done: boolean): Promise<boolean>;
   clearAll(): Promise<void>;
 }
 
@@ -82,9 +86,26 @@ export function createPersistence(storage: KeyValueStorage): Persistence {
         return false;
       }
     },
+    async loadOnboardingDone() {
+      try {
+        return (await storage.getItem(ONBOARDING_KEY)) === "done";
+      } catch {
+        return false;
+      }
+    },
+    async saveOnboardingDone(done) {
+      try {
+        if (done) await storage.setItem(ONBOARDING_KEY, "done");
+        else await storage.removeItem(ONBOARDING_KEY);
+        return true;
+      } catch {
+        return false;
+      }
+    },
     async clearAll() {
       await storage.removeItem(STATE_KEY);
       await storage.removeItem(PREFS_KEY);
+      await storage.removeItem(ONBOARDING_KEY);
     },
   };
 }

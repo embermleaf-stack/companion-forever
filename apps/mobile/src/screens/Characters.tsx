@@ -5,6 +5,7 @@ import { addCharacter, removeCharacter, type AppState } from "@companion/core";
 import type { Run } from "../App";
 import { Button, Card, Field, H2 } from "../ui";
 import { colors } from "../theme";
+import { EmptyState } from "../ArtImage";
 
 export function CharactersScreen({ state, run }: { state: AppState; run: Run }) {
   const [name, setName] = useState("");
@@ -38,6 +39,9 @@ export function CharactersScreen({ state, run }: { state: AppState; run: Run }) 
       <Field label="Class" value={className} onChangeText={setClassName} maxLength={60} />
       <Field label="Level" value={level} onChangeText={setLevel} keyboardType="numeric" maxLength={4} />
       <Button label="Add character" onPress={submit} />
+      {state.characters.length === 0 ? (
+        <EmptyState art="emptyCharacters" title="No characters yet" body="Add a character above to start tracking. Everything stays on this device." />
+      ) : null}
       {state.characters.map((c) => (
         <Card key={c.id}>
           <Text style={{ color: colors.text, fontWeight: "700", fontSize: 16 }}>{c.name}</Text>

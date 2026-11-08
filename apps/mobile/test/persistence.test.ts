@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { describe, expect, it } from "vitest";
 import { addCharacter, emptyState } from "@companion/core";
-import { DEFAULT_PREFS, PREFS_KEY, STATE_KEY, createPersistence, parsePrefs, type KeyValueStorage } from "../src/persistence";
+import { DEFAULT_PREFS, ONBOARDING_KEY, PREFS_KEY, STATE_KEY, createPersistence, parsePrefs, type KeyValueStorage } from "../src/persistence";
 
 function memStorage(initial: Record<string, string> = {}): KeyValueStorage & { data: Record<string, string> } {
   const data = { ...initial };
@@ -60,5 +60,27 @@ describe("persistence", () => {
     await p.clearAll();
     expect(st.data[STATE_KEY]).toBeUndefined();
     expect(st.data[PREFS_KEY]).toBeUndefined();
+  });
+
+  it("onboarding flag defaults to not done, persists, and is cleared by clearAll", async () => {
+    const st = memStorage();
+    const p = createPersistence(st);
+    expect(await p.loadOnboardingDone()).toBe(false);
+    expect(await p.saveOnboardingDone(true)).toBe(true);
+    expect(st.data[ONBOARDING_KEY]).toBe("done");
+    expect(await createPersistence(st).loadOnboardingDone()).toBe(true);
+    await p.clearAll();
+    expect(await p.loadOnboardingDone()).toBe(false);
+  });
+
+  it("onboarding ignores unexpected stored values and survives storage errors", async () => {
+    expect(await createPersistence(memStorage({ [ONBOARDING_KEY]: "garbage" })).loadOnboardingDone()).toBe(false);
+    const bad: KeyValueStorage = {
+      getItem: async () => { throw new Error("x"); },
+      setItem: async () => { throw new Error("x"); },
+      removeItem: async () => { throw new Error("x"); },
+    };
+    expect(await createPersistence(bad).loadOnboardingDone()).toBe(false);
+    expect(await createPersistence(bad).saveOnboardingDone(true)).toBe(false);
   });
 });

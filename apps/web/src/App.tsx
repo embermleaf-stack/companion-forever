@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
+import { ART } from "./art";
+
 const GITHUB_URL = "https://github.com/embermleaf-stack/companion-forever";
 const LICENSE_URL = "https://github.com/embermleaf-stack/companion-forever/blob/main/LICENSE";
 
@@ -33,11 +35,22 @@ function StoreButton({ id, label, href }: { id: string; label: string; href: str
 export function App() {
   return (
     <div className="page">
-      <header>
-        <img src="./icon-192.png" alt="" width="72" height="72" />
-        <h1>Companion Forever</h1>
-        <p className="working">Working name</p>
-      </header>
+      {ART.hero.enabled ? (
+        <header className="hero">
+          <img className="hero-img" src={ART.hero.src} alt={ART.hero.alt} width={ART.hero.width} height={ART.hero.height} />
+          <div className="hero-text">
+            <img src="./icon-192.png" alt="" width="72" height="72" />
+            <h1>Companion Forever</h1>
+            <p className="working">Working name</p>
+          </div>
+        </header>
+      ) : (
+        <header>
+          <img src="./icon-192.png" alt="" width="72" height="72" />
+          <h1>Companion Forever</h1>
+          <p className="working">Working name</p>
+        </header>
+      )}
 
       <main>
         <p className="lead">

@@ -19,6 +19,7 @@ import { createPersistence, DEFAULT_PREFS, type Prefs } from "./persistence";
 import { cancelReminders, rescheduleReminders } from "./reminderScheduler";
 import { colors } from "./theme";
 import { Button } from "./ui";
+import { Onboarding } from "./Onboarding";
 import { ChecklistScreen } from "./screens/Checklist";
 import { CharactersScreen } from "./screens/Characters";
 import { ActivitiesScreen } from "./screens/Activities";
@@ -58,6 +59,7 @@ function AppContent() {
   const [state, setState] = useState<AppState>(emptyState);
   const [prefs, setPrefsState] = useState<Prefs>(DEFAULT_PREFS);
   const [loaded, setLoaded] = useState(false);
+  const [onboarded, setOnboarded] = useState(true); // true until loaded so the intro never flashes for returning users
   const [tab, setTab] = useState<Tab>("Checklist");
   const [message, setMessage] = useState("");
   const now = useNow();
@@ -65,10 +67,11 @@ function AppContent() {
   useEffect(() => {
     let alive = true;
     (async () => {
-      const [s, p] = await Promise.all([persistence.loadState(), persistence.loadPrefs()]);
+      const [s, p, ob] = await Promise.all([persistence.loadState(), persistence.loadPrefs(), persistence.loadOnboardingDone()]);
       if (!alive) return;
       setState(s);
       setPrefsState(p);
+      setOnboarded(ob);
       setLoaded(true);
     })();
     return () => {
@@ -105,6 +108,11 @@ function AppContent() {
     }
   }, []);
 
+  const finishOnboarding = useCallback(() => {
+    setOnboarded(true);
+    void persistence.saveOnboardingDone(true);
+  }, []);
+
   const rows = useMemo(() => buildChecklist(state, now), [state, now]);
   const { done, total } = progress(rows);
 
@@ -129,6 +137,8 @@ function AppContent() {
         </Text>
       </View>
 
+      {loaded && !onboarded ? <Onboarding onDone={finishOnboarding} /> : (
+      <>
       <ScrollView
         horizontal
         accessibilityRole="tablist"
@@ -184,6 +194,8 @@ function AppContent() {
           <AboutScreen />
         )}
       </ScrollView>
+      </>
+      )}
 
       <Text style={{ color: colors.text, fontSize: 12, padding: 12, textAlign: "center", opacity: 0.85 }}>
         {DISCLAIMER}

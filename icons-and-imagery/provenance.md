@@ -221,3 +221,19 @@ Entries are appended below this line.
 - **Similarity check:** Limited: visual inspection only by an AI agent, which cannot search image databases or run reverse-image search. No game, film or logo asset recognized and no watermark seen. Observed: Single weathered lantern with orange flame on opaque white background. Not a legal review; human check still required.
 - **Alt text:** A weathered metal lantern with a glowing orange flame.
 - **Reviewed by / approved by owner (date):** PENDING
+
+## Integration (2026-11-07): provisionally approved by owner 2026-11-07, final decision pending in-place review
+
+All art loads through one registry per app: `apps/mobile/src/art.ts` and `apps/web/src/art.ts` (each entry: job id, asset, alt text, `provisional: true`, `enabled` flag). Setting `enabled: false` removes the art and the UI falls back to text only. Tool unconfirmed; output license UNVERIFIED.
+
+Used (processed files in `apps/mobile/assets/art/`, `apps/web/public/art/`):
+- ART-002: Characters empty state (background removed locally by flood fill plus edge matte, 256-color quantized, 800x600).
+- ART-003: Activities empty state and Checklist "Nothing to track yet" (same method).
+- ART-004: Checklist all-complete state (background removed with the Adobe Firefly connector `image_remove_background`, quantized, 800x600; smoke is cut flat at the top edge).
+- ART-007, 008, 009: first-launch onboarding panels 1-3 (4:3 crop, 800x600 JPEG; 007 cropped from the top to keep the lantern).
+- ART-013: About page hero (web only), 1024x384 crop (y 400), low resolution, temporary.
+- ART-015: reset-countdown strip background in Checklist, 1024x205 crop, darkened by an overlay for contrast.
+- ART-016: reset-countdown lantern icon (120x120 plus @2x 240x240) in the strip and on completed rows.
+- ART-014: cropped to 1024x512 as `icons-and-imagery/final/social-preview-draft.png`; not wired anywhere.
+
+Disabled, no pixels shipped in `apps/`: ART-005 (legible "Error" text), ART-006 (the app has no network access or connectivity check, so no offline state exists), ART-010, ART-011 (not seamless, contrast), ART-012 (eight figures, one horned).

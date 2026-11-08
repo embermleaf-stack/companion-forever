@@ -4,6 +4,9 @@ import type { buildChecklist } from "@companion/core";
 import { TOUCH, colors } from "../theme";
 import { H2, P } from "../ui";
 import { formatRemaining } from "../format";
+import { ArtImage, EmptyState } from "../ArtImage";
+import { getArt } from "../art";
+import { ResetStrip } from "../ResetStrip";
 
 export function ChecklistScreen(props: {
   rows: ReturnType<typeof buildChecklist>;
@@ -14,12 +17,24 @@ export function ChecklistScreen(props: {
 }) {
   const { rows, done, total, now } = props;
   if (rows.length === 0) {
-    return <P>Nothing to track yet. Add characters and activities, or load the sample data in Settings.</P>;
+    return (
+      <EmptyState
+        art="emptyActivities"
+        title="Nothing to track yet"
+        body="Add characters and activities, or load the sample data in Settings."
+      />
+    );
   }
+  const allDone = total > 0 && done === total;
+  const nextReset = rows.reduce<Date | null>((acc, r) => (r.resetsAt && (!acc || r.resetsAt < acc) ? r.resetsAt : acc), null);
   const pct = total ? Math.round((done / total) * 100) : 0;
   return (
     <View>
       <H2>Today and this week</H2>
+      {nextReset ? <ResetStrip target={nextReset} now={now} /> : null}
+      {allDone ? (
+        <EmptyState art="checklistDone" title="All done for now" body="Every task is complete. Rest by the fire until the next reset." />
+      ) : null}
       <View
         accessible
         accessibilityRole="progressbar"
@@ -62,7 +77,12 @@ export function ChecklistScreen(props: {
               <Text style={{ color: colors.text, fontSize: 16, fontWeight: "600", textDecorationLine: r.done ? "line-through" : "none" }}>
                 {r.activity.title}
               </Text>
-              <Text style={{ color: colors.text, opacity: 0.8, fontSize: 13 }}>{meta}</Text>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                {r.done && getArt("resetLantern") ? (
+                  <ArtImage art="resetLantern" width={20} height={20} decorative style={{ marginRight: 4 }} />
+                ) : null}
+                <Text style={{ color: colors.text, opacity: 0.8, fontSize: 13, flexShrink: 1 }}>{meta}</Text>
+              </View>
             </View>
           </Pressable>
         );

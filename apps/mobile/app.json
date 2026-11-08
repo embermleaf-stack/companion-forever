@@ -5,7 +5,7 @@
     "scheme": "companionforever",
     "version": "0.0.0",
     "orientation": "portrait",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "automatic",
     "platforms": [
       "android"
     ],

@@ -4,12 +4,13 @@ import { Alert, Text, View } from "react-native";
 import { addCharacter, removeCharacter, type AppState } from "@companion/core";
 import type { Run } from "../App";
 import { Button, Card, Field, H2 } from "../ui";
-import { colors } from "../theme";
+import { useTheme } from "../ThemeContext";
 import { BLIZZARD_ATTRIBUTION } from "../format";
 import { ArtImage, EmptyState } from "../ArtImage";
 import { avatarKeyFor } from "../art";
 
 export function CharactersScreen({ state, run }: { state: AppState; run: Run }) {
+  const { colors } = useTheme();
   const [name, setName] = useState("");
   const [realm, setRealm] = useState("");
   const [className, setClassName] = useState("");

@@ -2,7 +2,7 @@
 
 Status: proposed, 2026-11-07. Docs only. No art has been generated for this brief. Not a legal clearance: the output terms and ownership of any generator are UNVERIFIED (see "Tool terms" below).
 
-Always supply [STYLE-GUIDE.md](STYLE-GUIDE.md) (palette, pastoral hand-painted direction, "do not" list) with each prompt below. Job ids are UI-001 to UI-006 (one per item below). Queue entries live in [art-queue.md](art-queue.md) and copy-paste prompts in [prompts-copy-paste.md](prompts-copy-paste.md).
+Always supply [STYLE-GUIDE.md](STYLE-GUIDE.md) (palette, pastoral hand-painted direction, "do not" list) with each prompt below. Job ids are UI-001 to UI-010 (one per item below; UI-007 also has variants UI-007a and UI-007b). Queue entries live in [art-queue.md](art-queue.md) and copy-paste prompts in [prompts-copy-paste.md](prompts-copy-paste.md).
 
 ## Why this exists, and the fallback
 
@@ -99,6 +99,78 @@ Hand-painted pastoral fantasy checkbox and toggle set in gouache and watercolor 
 Seamless tile of a dark parchment and slate background in watercolor and gouache: subtle Slate Ledger paper grain with faint wash mottling and barely visible hand-drawn compass lines, very low contrast, deep blue-grey with a faint warm vellum tint. Edges match exactly on all four sides so the tile repeats without seams. Uniform value, watercolor paper texture only. Original design. --ar 1:1 --tile --no text, letters, words, logo, watermark, signature, vignette, central motif, bright lines, scratches, stains, dark spots, figures, people
 ```
 
+### UI-007: Title banner (blank)
+
+- **Purpose:** App title nameplate on the splash and the header of each screen. The art carries no text: the app renders the app name as real text on the centre panel, so the banner works for any name.
+- **Output:** Base `UI-007` (aged parchment centre, mid tone, for ink text), plus variant `UI-007a` (dark slate centre, for vellum text) and `UI-007b` (light parchment centre, for ink text). Staging name example: `UI-007a_title-banner-dark_v1.png`.
+- **Post-processing:** Slice as 9-slice: fixed end caps (200 px left and right, 40 px top and bottom), centre band stretches horizontally. Sample the centre at five points and record the luminance spread.
+- **Acceptance (item):** Centre flat (luminance spread under 8 percent across five samples). Ink `#14171F` text on the UI-007 and UI-007b centre reaches 4.5:1. Vellum `#E8DCC0` text on the UI-007a centre reaches 4.5:1. Ends symmetric; no hawthorn in the centre.
+- **Tool terms:** UNVERIFIED (see Tool terms below). Each output needs a provenance entry before merge.
+- **Prompt:**
+
+```text
+#UI-007 title banner, blank ornate nameplate
+Blank ornate horizontal nameplate banner in hand-painted watercolor and gouache: a wide ribbon with rolled scroll ends, clean expressive ink linework, Aged Bronze trim with a thin double-line edge. The centre is a flat, evenly lit, unmarked aged parchment panel in a mid warm tone, very low contrast, reserved for an overlay. Thin sparse hawthorn sprigs with a few small round red berries at the two outer ends only. Straight-on flat view, symmetric left to right, the centre band repeats cleanly along its length. Warm lantern light from the upper left, soft wash fills, Candle gold highlight on the trim only. Palette: Old Vellum, Aged Bronze, Leaf green, berry red. Transparent outside the banner. Original design. --ar 4:1 --no text, letters, words, logo, watermark, signature, figures, people, faces, flame, dragon scales, glow, gloss, shadows, photorealistic, 3d render, lens flare
+```
+
+- **Prompt UI-007a:**
+
+```text
+#UI-007a title banner, dark slate centre
+Blank ornate horizontal nameplate banner in hand-painted watercolor and gouache: a wide ribbon with rolled scroll ends, clean expressive ink linework, Aged Bronze trim with a thin double-line edge. The centre is a flat, evenly lit deep Slate Ledger panel with a faint Old Vellum inner edge, very low contrast, reserved for an overlay. Thin sparse hawthorn sprigs with a few small round red berries at the two outer ends only. Straight-on flat view, symmetric left to right, the centre band repeats cleanly along its length. Warm lantern light from the upper left, soft wash fills, Candle gold highlight on the trim only. Palette: Old Vellum, Aged Bronze, Leaf green, berry red. Transparent outside the banner. Original design. --ar 4:1 --no text, letters, words, logo, watermark, signature, figures, people, faces, flame, dragon scales, glow, gloss, shadows, photorealistic, 3d render, lens flare
+```
+
+- **Prompt UI-007b:**
+
+```text
+#UI-007b title banner, light parchment centre
+Blank ornate horizontal nameplate banner in hand-painted watercolor and gouache: a wide ribbon with rolled scroll ends, clean expressive ink linework, Aged Bronze trim with a thin double-line edge. The centre is a flat, evenly lit pale Old Vellum parchment panel with faint paper grain, very low contrast, reserved for an overlay. Thin sparse hawthorn sprigs with a few small round red berries at the two outer ends only. Straight-on flat view, symmetric left to right, the centre band repeats cleanly along its length. Warm lantern light from the upper left, soft wash fills, Candle gold highlight on the trim only. Palette: Old Vellum, Aged Bronze, Leaf green, berry red. Transparent outside the banner. Original design. --ar 4:1 --no text, letters, words, logo, watermark, signature, figures, people, faces, flame, dragon scales, glow, gloss, shadows, photorealistic, 3d render, lens flare
+```
+
+### UI-008: Wide blank buttons, 3 styles by 3 states
+
+- **Purpose:** Wide text buttons (primary, secondary, danger) for screens that need a longer label than the GameButton sprites. The buttons carry no text; the app draws the label on top.
+- **Output:** One sheet, 3 styles (columns: primary, secondary, danger) by 3 states (rows: normal, pressed, disabled). Staging name example: `UI-008_wide-button-sheet_v1.png`. Optional painted upgrade only: the app already ships hand-authored 9-slice button sprites (GameButton, see UI-001 and the Button sprites in Why this exists).
+- **Post-processing:** Crop to the nine 480x160 cells, centre each 480x120 button, slice each as 9-slice (40 px left and right, 30 px top and bottom). Check that the centre is flat and the corner studs are the only berries.
+- **Acceptance (item):** Pressed is darker with an inset bevel; disabled is flat and pale; all nine states read by shape and by value, not colour alone. Berry studs at the corners only. Centre flat and even.
+- **Tool terms:** UNVERIFIED (see Tool terms below). Each output needs a provenance entry before merge.
+- **Prompt:**
+
+```text
+#UI-008 wide blank buttons, 3 styles by 3 states
+Hand-painted pastoral fantasy set of wide blank buttons in watercolor and gouache on a fixed 3 by 3 grid: each row holds three wide rounded-rectangle buttons with clean expressive ink outlines, soft wash fills and a thin Aged Bronze bevel edge. Columns left to right: primary in Ember orange, secondary in Aged Bronze wash with slate, danger in muted Rust. Rows top to bottom: normal, pressed (slightly darker, inset bevel), disabled (desaturated, flat, pale vellum). Each button has a flat, even, empty centre, with tiny hawthorn berry studs at the four corners only. Even spacing, symmetric, transparent background around each button. Original design. --ar 3:1 --no text, letters, words, logo, watermark, signature, figures, people, faces, flame, dragon scales, glow, gloss, shadows, photorealistic, 3d render, lens flare
+```
+
+### UI-009: Splash lantern, 8-frame flicker sheet
+
+- **Purpose:** Animated lantern on the splash screen. The frames are flicker-only: same lantern, only the flame, glow radius and tiny embers change.
+- **Output:** One sheet, 2048x256, eight frames of 256x256. Staging name example: `UI-009_splash-lantern-sheet_v1.png`. Frame order is a loop (8 wraps to 1).
+- **Post-processing:** Crop the sheet into eight 256x256 frames and check that the lantern sits on the same pixels in every frame (overlay the frames at 50 percent opacity). Export the sheet and a frame list; the app steps the frames by code.
+- **Acceptance (item):** Lantern identical in every frame (same silhouette and position, within 2 px). Flame varies smoothly. Frame 8 to frame 1 is seamless. No scene or background in the frames. Midjourney may not hold identical frames; if it cannot, use the fallback below.
+- **Tool terms:** UNVERIFIED (see Tool terms below). Each output needs a provenance entry before merge.
+- **Prompt:**
+
+```text
+#UI-009 splash lantern, 8-frame flicker sheet
+Sprite sheet of eight frames in one row, left to right, in hand-painted watercolor and gouache with clean expressive ink linework. Each frame shows the same small hanging iron lantern on a short chain from the top centre of the frame, in Aged Bronze with Candle gold glass and a soft Ember flame. The lantern is identical in size, shape, colour and position in every frame. Only the flame, the soft glow radius and a few tiny floating embers change, in a smooth flicker cycle that loops from frame 8 back to frame 1. Glow fades softly to transparent at the frame edge. Transparent background, flat even frame spacing, 256 pixel frames. Palette: Candle gold, Ember orange, Aged Bronze, Ink Night outline. Original design. --ar 8:1 --no text, letters, words, logo, watermark, signature, figures, people, faces, scene, landscape, dragon scales, photorealistic, 3d render, lens flare
+```
+
+**Fallback (no new art):** if the generator cannot hold identical frames, discard the sheet. The app animates the existing lantern art from the registry in code: a glow pulse, a slight sway and a few drifting embers drawn as small shapes. This needs no extra art. Respect reduced motion: show the static lantern when the device asks for it.
+
+### UI-010: Splash backdrop, night meadow portrait
+
+- **Purpose:** Full-screen splash background. The lantern animation (UI-009) and the app name (rendered as text) sit on the calm centre.
+- **Output:** One portrait painting, 1080x2400, opaque. Staging name example: `UI-010_splash-backdrop_v1.png`. Same style as SKIN-001 (night background).
+- **Post-processing:** Resize to 1080x2400 exactly. Check the centre luminance is low and even so the overlay contrast holds; check the crop at 16:9 and 21:9.
+- **Acceptance (item):** Hawthorn only in the top corners. Centre dark, calm and even. No figures. Detail survives 16:9 to 21:9 crops. Overlay text and the lantern both read against the centre.
+- **Tool terms:** UNVERIFIED (see Tool terms below). Each output needs a provenance entry before merge.
+- **Prompt:**
+
+```text
+#UI-010 splash backdrop, night meadow portrait
+Full-bleed portrait night meadow painting, 9 by 20, hand-painted pastoral anime-fantasy in watercolor and gouache with expressive ink linework and soft colour fills. Warm lantern light from the upper left. Wind-swept grass and a dirt footpath fill the lower third, distant hills under a deep starry sky. Hawthorn branches with sparse small red berries reach in from the top left and top right corners only. The centre, from the middle third upward, is a large, calm, dark slate wash with minimal detail, reserved for an app overlay. Palette: Ink Night, Slate Ledger, Dusk Teal, Leaf green, berry red, Candle gold glints on distant lanterns only. Survives 16:9 to 21:9 crops. Original design. --ar 9:20 --no text, letters, words, logo, watermark, signature, figures, people, faces, frames, borders, ui buttons, photorealistic, 3d render, lens flare, recognizable character, existing game character
+```
+
 ## Post-processing (all items)
 
 Firefly connector capabilities are limited: it can crop, resize, remove a background, adjust and expand existing images. It cannot generate images from text. Generation must be done by the owner in an external tool (the Firefly web app, another tool with an API, or a human illustrator). Before any connector call, run `adobe_mandatory_init` as the connector instructions require.
@@ -137,3 +209,7 @@ Terms, output ownership and commercial use depend on the generator. For Adobe Fi
 - owner approval, with date.
 
 An output with no completed entry must not be merged. This brief does not claim that any output is cleared, compliant or approved.
+
+## Name pending
+
+The title banner (UI-007) carries no text, so it works for any app name. The final app name is under review in [docs/NAMING-REVIEW-forever-companion.md](../docs/NAMING-REVIEW-forever-companion.md). Until that review is recorded, do not put a name into any prompt, file name or art. The UI-007 variants are the same banner in two centre colours, and the app draws the name on top.

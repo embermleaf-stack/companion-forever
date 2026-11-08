@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <title>toggle-box-off-light</title>
+  <!-- Original hand-authored artwork, GPL-3.0-only. -->
+  <defs><linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF4DF"/><stop offset="1" stop-color="#EADFC0"/></linearGradient></defs>
+  <rect x="1" y="1" width="30" height="30" rx="7" fill="#7A5A28"/>
+  <rect x="2.5" y="2.5" width="27" height="27" rx="5.5" fill="url(#f)"/>
+  <rect x="4" y="4" width="24" height="24" rx="4" fill="none" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="0.8"/>
+</svg>

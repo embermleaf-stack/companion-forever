@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { useState } from "react";
 import { ScrollView, Text, View, useWindowDimensions } from "react-native";
-import { colors } from "./theme";
+import { useTheme } from "./ThemeContext";
 import { Button } from "./ui";
 import { ArtImage } from "./ArtImage";
 import type { ArtKey } from "./art";
@@ -14,13 +14,14 @@ export const ONBOARDING_PANELS: { art: ArtKey; title: string; body: string }[] =
 ];
 
 export function Onboarding({ onDone }: { onDone: () => void }) {
+  const { mode, colors } = useTheme();
   const [i, setI] = useState(0);
   const { width } = useWindowDimensions();
   const p = ONBOARDING_PANELS[i]!;
   const last = i === ONBOARDING_PANELS.length - 1;
   const imgW = Math.min(width - 32, 400);
   // Over the painted background the text block gets a backing (alpha from the contrast table in provenance.md).
-  const painted = getScreenSkin("onboarding") !== null;
+  const painted = getScreenSkin("onboarding", mode) !== null;
   return (
     <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 16, alignItems: "center" }}>
       <ArtImage art={p.art} width={imgW} style={{ borderRadius: 8 }} />
@@ -31,7 +32,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
           marginTop: 12,
           padding: 12,
           borderRadius: 8,
-          backgroundColor: painted ? "rgba(31,36,48,0.8)" : "transparent",
+          backgroundColor: painted ? colors.chip : "transparent",
         }}
       >
       <Text

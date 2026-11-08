@@ -4,10 +4,11 @@ import { Alert, Text, View } from "react-native";
 import { addActivity, removeActivity, type AppState, type Cadence, type Scope } from "@companion/core";
 import type { Run } from "../App";
 import { Button, Card, Choice, Field, H2 } from "../ui";
-import { colors } from "../theme";
+import { useTheme } from "../ThemeContext";
 import { EmptyState } from "../ArtImage";
 
 export function ActivitiesScreen({ state, run }: { state: AppState; run: Run }) {
+  const { colors } = useTheme();
   const [title, setTitle] = useState("");
   const [cadence, setCadence] = useState<Cadence>("daily");
   const [scope, setScope] = useState<Scope>("character");

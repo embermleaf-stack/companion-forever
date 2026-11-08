@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { Image, Text, View, type ImageStyle, type StyleProp } from "react-native";
-import { colors } from "./theme";
+import { useTheme } from "./ThemeContext";
 import { Panel } from "./ui";
 import { getArt, type ArtKey } from "./art";
 
@@ -32,6 +32,7 @@ export function ArtImage(props: {
 
 /** Illustrated empty state; shows text only when the art is disabled. */
 export function EmptyState(props: { art: ArtKey; title: string; body: string; children?: React.ReactNode }) {
+  const { colors } = useTheme();
   return (
     <Panel padding={16} style={{ alignItems: "center", marginTop: 12 }}>
       <ArtImage art={props.art} width={240} style={{ marginBottom: 8 }} />

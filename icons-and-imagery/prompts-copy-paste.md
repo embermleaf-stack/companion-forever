@@ -348,6 +348,72 @@ Seamless tile of a dark parchment and slate background in watercolor and gouache
 
 chars: 541
 
+## UI-007: Title banner (blank)
+
+Target: 1600x400 `ui-title-banner.png`, transparent outside the banner, `--ar 4:1`; 9-slice end caps 200 px left and right, 40 px top and bottom
+
+```text
+#UI-007 title banner, blank ornate nameplate
+Blank ornate horizontal nameplate banner in hand-painted watercolor and gouache: a wide ribbon with rolled scroll ends, clean expressive ink linework, Aged Bronze trim with a thin double-line edge. The centre is a flat, evenly lit, unmarked aged parchment panel in a mid warm tone, very low contrast, reserved for an overlay. Thin sparse hawthorn sprigs with a few small round red berries at the two outer ends only. Straight-on flat view, symmetric left to right, the centre band repeats cleanly along its length. Warm lantern light from the upper left, soft wash fills, Candle gold highlight on the trim only. Palette: Old Vellum, Aged Bronze, Leaf green, berry red. Transparent outside the banner. Original design. --ar 4:1 --no text, letters, words, logo, watermark, signature, figures, people, faces, flame, dragon scales, glow, gloss, shadows, photorealistic, 3d render, lens flare
+```
+
+chars: 887
+
+## UI-007a: Title banner, dark slate centre
+
+Target: 1600x400 `ui-title-banner.png`, transparent outside the banner, `--ar 4:1`; 9-slice end caps 200 px left and right, 40 px top and bottom
+
+```text
+#UI-007a title banner, dark slate centre
+Blank ornate horizontal nameplate banner in hand-painted watercolor and gouache: a wide ribbon with rolled scroll ends, clean expressive ink linework, Aged Bronze trim with a thin double-line edge. The centre is a flat, evenly lit deep Slate Ledger panel with a faint Old Vellum inner edge, very low contrast, reserved for an overlay. Thin sparse hawthorn sprigs with a few small round red berries at the two outer ends only. Straight-on flat view, symmetric left to right, the centre band repeats cleanly along its length. Warm lantern light from the upper left, soft wash fills, Candle gold highlight on the trim only. Palette: Old Vellum, Aged Bronze, Leaf green, berry red. Transparent outside the banner. Original design. --ar 4:1 --no text, letters, words, logo, watermark, signature, figures, people, faces, flame, dragon scales, glow, gloss, shadows, photorealistic, 3d render, lens flare
+```
+
+chars: 896
+
+## UI-007b: Title banner, light parchment centre
+
+Target: 1600x400 `ui-title-banner.png`, transparent outside the banner, `--ar 4:1`; 9-slice end caps 200 px left and right, 40 px top and bottom
+
+```text
+#UI-007b title banner, light parchment centre
+Blank ornate horizontal nameplate banner in hand-painted watercolor and gouache: a wide ribbon with rolled scroll ends, clean expressive ink linework, Aged Bronze trim with a thin double-line edge. The centre is a flat, evenly lit pale Old Vellum parchment panel with faint paper grain, very low contrast, reserved for an overlay. Thin sparse hawthorn sprigs with a few small round red berries at the two outer ends only. Straight-on flat view, symmetric left to right, the centre band repeats cleanly along its length. Warm lantern light from the upper left, soft wash fills, Candle gold highlight on the trim only. Palette: Old Vellum, Aged Bronze, Leaf green, berry red. Transparent outside the banner. Original design. --ar 4:1 --no text, letters, words, logo, watermark, signature, figures, people, faces, flame, dragon scales, glow, gloss, shadows, photorealistic, 3d render, lens flare
+```
+
+chars: 892
+
+## UI-008: Wide blank buttons, 3 styles by 3 states
+
+Target: 1440x480 `ui-wide-button-sheet.png`, transparent, `--ar 3:1`; 3x3 grid of 480x160 cells, each button 480x120 centred; 9-slice caps 40 px left and right, 30 px top and bottom
+
+```text
+#UI-008 wide blank buttons, 3 styles by 3 states
+Hand-painted pastoral fantasy set of wide blank buttons in watercolor and gouache on a fixed 3 by 3 grid: each row holds three wide rounded-rectangle buttons with clean expressive ink outlines, soft wash fills and a thin Aged Bronze bevel edge. Columns left to right: primary in Ember orange, secondary in Aged Bronze wash with slate, danger in muted Rust. Rows top to bottom: normal, pressed (slightly darker, inset bevel), disabled (desaturated, flat, pale vellum). Each button has a flat, even, empty centre, with tiny hawthorn berry studs at the four corners only. Even spacing, symmetric, transparent background around each button. Original design. --ar 3:1 --no text, letters, words, logo, watermark, signature, figures, people, faces, flame, dragon scales, glow, gloss, shadows, photorealistic, 3d render, lens flare
+```
+
+chars: 823
+
+## UI-009: Splash lantern, 8-frame flicker sheet
+
+Target: 2048x256 `ui-splash-lantern-sheet.png`, transparent, `--ar 8:1`; eight 256x256 frames, left to right; loops frame 8 to frame 1
+
+```text
+#UI-009 splash lantern, 8-frame flicker sheet
+Sprite sheet of eight frames in one row, left to right, in hand-painted watercolor and gouache with clean expressive ink linework. Each frame shows the same small hanging iron lantern on a short chain from the top centre of the frame, in Aged Bronze with Candle gold glass and a soft Ember flame. The lantern is identical in size, shape, colour and position in every frame. Only the flame, the soft glow radius and a few tiny floating embers change, in a smooth flicker cycle that loops from frame 8 back to frame 1. Glow fades softly to transparent at the frame edge. Transparent background, flat even frame spacing, 256 pixel frames. Palette: Candle gold, Ember orange, Aged Bronze, Ink Night outline. Original design. --ar 8:1 --no text, letters, words, logo, watermark, signature, figures, people, faces, scene, landscape, dragon scales, photorealistic, 3d render, lens flare
+```
+
+chars: 879
+
+## UI-010: Splash backdrop, night meadow portrait
+
+Target: 1080x2400 `splash-backdrop.png`, opaque, `--ar 9:20` portrait; calm dark centre, hawthorn at the top corners only
+
+```text
+#UI-010 splash backdrop, night meadow portrait
+Full-bleed portrait night meadow painting, 9 by 20, hand-painted pastoral anime-fantasy in watercolor and gouache with expressive ink linework and soft colour fills. Warm lantern light from the upper left. Wind-swept grass and a dirt footpath fill the lower third, distant hills under a deep starry sky. Hawthorn branches with sparse small red berries reach in from the top left and top right corners only. The centre, from the middle third upward, is a large, calm, dark slate wash with minimal detail, reserved for an app overlay. Palette: Ink Night, Slate Ledger, Dusk Teal, Leaf green, berry red, Candle gold glints on distant lanterns only. Survives 16:9 to 21:9 crops. Original design. --ar 9:20 --no text, letters, words, logo, watermark, signature, figures, people, faces, frames, borders, ui buttons, photorealistic, 3d render, lens flare, recognizable character, existing game character
+```
+
+chars: 896
+
 ## Screen skins (SKIN-001 to SKIN-008)
 
 Source: [SCREEN-SKIN-BRIEF.md](SCREEN-SKIN-BRIEF.md). Technical specs: [SCREEN-SKIN-SPEC.md](SCREEN-SKIN-SPEC.md). Midjourney: nothing to paste, the `--no` list is on each SKIN prompt. For other tools with a negative field, paste the list below there.

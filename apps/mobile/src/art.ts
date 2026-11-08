@@ -282,6 +282,105 @@ const ART_ENTRIES = [
     provisional: true,
     enabled: true,
   },
+  {
+    key: "btnPrimaryLight",
+    job: "UI-BTN-LIGHT",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; LIGHT-theme parchment variant; original SVG in icons-and-imagery/final/btn-primary-light.svg
+    source: require("../assets/art/ui/btn-primary-light.png"),
+    alt: "Button frame (light theme)",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "btnPrimaryPressedLight",
+    job: "UI-BTN-LIGHT",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; LIGHT-theme parchment variant; original SVG in icons-and-imagery/final/btn-primary-pressed-light.svg
+    source: require("../assets/art/ui/btn-primary-pressed-light.png"),
+    alt: "Button frame (light theme)",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "btnSecondaryLight",
+    job: "UI-BTN-LIGHT",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; LIGHT-theme parchment variant; original SVG in icons-and-imagery/final/btn-secondary-light.svg
+    source: require("../assets/art/ui/btn-secondary-light.png"),
+    alt: "Button frame (light theme)",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "btnSecondaryPressedLight",
+    job: "UI-BTN-LIGHT",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; LIGHT-theme parchment variant; original SVG in icons-and-imagery/final/btn-secondary-pressed-light.svg
+    source: require("../assets/art/ui/btn-secondary-pressed-light.png"),
+    alt: "Button frame (light theme)",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "btnDangerLight",
+    job: "UI-BTN-LIGHT",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; LIGHT-theme parchment variant; original SVG in icons-and-imagery/final/btn-danger-light.svg
+    source: require("../assets/art/ui/btn-danger-light.png"),
+    alt: "Button frame (light theme)",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "btnDangerPressedLight",
+    job: "UI-BTN-LIGHT",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; LIGHT-theme parchment variant; original SVG in icons-and-imagery/final/btn-danger-pressed-light.svg
+    source: require("../assets/art/ui/btn-danger-pressed-light.png"),
+    alt: "Button frame (light theme)",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "btnDisabledLight",
+    job: "UI-BTN-LIGHT",
+    // 48x48 9-slice (14px caps) with @2x/@3x siblings; LIGHT-theme parchment variant; original SVG in icons-and-imagery/final/btn-disabled-light.svg
+    source: require("../assets/art/ui/btn-disabled-light.png"),
+    alt: "Button frame (light theme)",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "toggleBoxOffLight",
+    job: "UI-TOGGLE-LIGHT",
+    // 32x32 with @2x/@3x siblings; LIGHT-theme parchment variant; original SVG in icons-and-imagery/final/toggle-box-off-light.svg
+    source: require("../assets/art/ui/toggle-box-off-light.png"),
+    alt: "Toggle graphic (light theme)",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "toggleBoxOnLight",
+    job: "UI-TOGGLE-LIGHT",
+    // 32x32 with @2x/@3x siblings; LIGHT-theme parchment variant; original SVG in icons-and-imagery/final/toggle-box-on-light.svg
+    source: require("../assets/art/ui/toggle-box-on-light.png"),
+    alt: "Toggle graphic (light theme)",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "toggleSwitchOffLight",
+    job: "UI-TOGGLE-LIGHT",
+    // 56x32 with @2x/@3x siblings; LIGHT-theme parchment variant; original SVG in icons-and-imagery/final/toggle-switch-off-light.svg
+    source: require("../assets/art/ui/toggle-switch-off-light.png"),
+    alt: "Toggle graphic (light theme)",
+    provisional: true,
+    enabled: true,
+  },
+  {
+    key: "toggleSwitchOnLight",
+    job: "UI-TOGGLE-LIGHT",
+    // 56x32 with @2x/@3x siblings; LIGHT-theme parchment variant; original SVG in icons-and-imagery/final/toggle-switch-on-light.svg
+    source: require("../assets/art/ui/toggle-switch-on-light.png"),
+    alt: "Toggle graphic (light theme)",
+    provisional: true,
+    enabled: true,
+  },
 ] as const satisfies readonly ArtEntry[];
 
 export type ArtKey = (typeof ART_ENTRIES)[number]["key"];

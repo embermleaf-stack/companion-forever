@@ -56,6 +56,14 @@ if (-not (Test-Path $android)) {
   Push-Location $app; npx expo prebuild --platform android; if ($LASTEXITCODE) { throw "expo prebuild failed" }; Pop-Location
 }
 
+# app.json userInterfaceStyle is "automatic" (follow the system light/dark setting); keep an already-prebuilt android/ in sync.
+$uiStr = Join-Path $android "app\src\main\res\values\strings.xml"
+if (Test-Path $uiStr) {
+  $t = Get-Content -Raw $uiStr
+  $n = $t -replace '(name="expo_system_ui_user_interface_style"[^>]*>)[^<]*', '${1}automatic'
+  if ($n -ne $t) { Set-Content -NoNewline -Encoding UTF8 $uiStr $n }
+}
+
 $gradle = Join-Path $android "app\build.gradle"
 $text = Get-Content -Raw $gradle
 if ($text -notmatch "buildStagingDirectory") {

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Persistence for the mobile app. Mirrors apps/web/src/storage.ts but takes an
 // injectable async key-value store so it can be unit-tested without React Native.
+import { DEFAULT_THEME_PREF, parseThemePref, type ThemePref } from "./theme";
 import { emptyState, exportState, parseState, type AppState } from "@companion/core";
 
 /** Minimal subset of AsyncStorage that we depend on. */
@@ -21,9 +22,11 @@ export interface Prefs {
   remindersEnabled: boolean;
   /** Minutes before a reset at which the reminder fires. */
   reminderLeadMinutes: number;
+  /** Appearance: "auto" follows the phone's system light/dark setting. */
+  theme: ThemePref;
 }
 
-export const DEFAULT_PREFS: Prefs = { remindersEnabled: false, reminderLeadMinutes: 30 };
+export const DEFAULT_PREFS: Prefs = { remindersEnabled: false, reminderLeadMinutes: 30, theme: DEFAULT_THEME_PREF };
 
 export const MIN_LEAD_MINUTES = 5;
 export const MAX_LEAD_MINUTES = 240;
@@ -38,6 +41,7 @@ export function parsePrefs(input: unknown): Prefs {
       typeof lead === "number" && Number.isInteger(lead) && lead >= MIN_LEAD_MINUTES && lead <= MAX_LEAD_MINUTES
         ? lead
         : DEFAULT_PREFS.reminderLeadMinutes,
+    theme: parseThemePref(o.theme),
   };
 }
 

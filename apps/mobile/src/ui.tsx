@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { useState } from "react";
 import { Image, Pressable, Text, TextInput, View, type AccessibilityRole, type StyleProp, type TextInputProps, type ViewStyle } from "react-native";
-import { TOUCH, colors } from "./theme";
-import { TEXTURE_DARK_OPACITY, getArt, type ArtKey } from "./art";
+import { TOUCH, type ThemeMode } from "./theme";
+import { useTheme } from "./ThemeContext";
+import { getArt, type ArtKey } from "./art";
 import { getPanelSkin, getScreenSkin, type NineSliceSkin, type ScreenId } from "./skin";
 import { computeContentRect, computeCoverRect, computeNineSlice } from "./skinLayout";
 
@@ -43,13 +44,21 @@ function NineSlice(props: { art?: ArtKey; skin?: NineSliceSkin }) {
   );
 }
 
-type SpriteSet = { normal: ArtKey; pressed: ArtKey; fg: string };
-const SPRITES: Record<"primary" | "secondary" | "danger", SpriteSet> = {
-  primary: { normal: "btnPrimary", pressed: "btnPrimaryPressed", fg: colors.onAccent }, // ink on ember >= 5:1
-  secondary: { normal: "btnSecondary", pressed: "btnSecondaryPressed", fg: colors.text },
-  danger: { normal: "btnDanger", pressed: "btnDangerPressed", fg: colors.text },
+type Look = "primary" | "secondary" | "danger";
+type SpriteSet = { normal: ArtKey; pressed: ArtKey; disabled: ArtKey };
+/** Sprite keys per theme (dark set and the light parchment set; label colours come from the palette). */
+const SPRITES: Record<ThemeMode, Record<Look, SpriteSet>> = {
+  dark: {
+    primary: { normal: "btnPrimary", pressed: "btnPrimaryPressed", disabled: "btnDisabled" },
+    secondary: { normal: "btnSecondary", pressed: "btnSecondaryPressed", disabled: "btnDisabled" },
+    danger: { normal: "btnDanger", pressed: "btnDangerPressed", disabled: "btnDisabled" },
+  },
+  light: {
+    primary: { normal: "btnPrimaryLight", pressed: "btnPrimaryPressedLight", disabled: "btnDisabledLight" },
+    secondary: { normal: "btnSecondaryLight", pressed: "btnSecondaryPressedLight", disabled: "btnDisabledLight" },
+    danger: { normal: "btnDangerLight", pressed: "btnDangerPressedLight", disabled: "btnDisabledLight" },
+  },
 };
-const DISABLED_FG = "#B3AA92"; // on #2B303B >= 6:1
 
 /** Sprite-framed button: normal / pressed / disabled states, 48dp target, a11y role/label/state preserved. */
 export function GameButton(props: {
@@ -69,7 +78,10 @@ export function GameButton(props: {
   tab?: boolean;
   style?: StyleProp<ViewStyle>;
 }) {
-  const set = SPRITES[props.look ?? "primary"];
+  const { mode, colors } = useTheme();
+  const look = props.look ?? "primary";
+  const set = SPRITES[mode][look];
+  const fg = look === "primary" ? colors.btnPrimaryFg : look === "danger" ? colors.btnDangerFg : colors.btnSecondaryFg;
   const state: { selected?: boolean; checked?: boolean; disabled?: boolean } = {};
   if (props.selected !== undefined) state.selected = props.selected;
   if (props.checked !== undefined) state.checked = props.checked;
@@ -91,14 +103,14 @@ export function GameButton(props: {
     >
       {({ pressed }) => (
         <>
-          <NineSlice art={props.disabled ? "btnDisabled" : pressed ? set.pressed : set.normal} />
+          <NineSlice art={props.disabled ? set.disabled : pressed ? set.pressed : set.normal} />
           <View style={{ flex: 1, minHeight: TOUCH, justifyContent: "center", alignItems: "center", paddingHorizontal: props.tab ? 2 : props.compact ? 10 : 16 }}>
             <Text
               numberOfLines={1}
               adjustsFontSizeToFit={props.tab}
               minimumFontScale={0.7}
               style={{
-                color: props.disabled ? DISABLED_FG : set.fg,
+                color: props.disabled ? colors.btnDisabledFg : fg,
                 fontWeight: props.selected || props.checked ? "800" : "600",
                 fontSize: props.tab ? 12 : props.compact ? 14 : 15,
               }}
@@ -145,7 +157,9 @@ export function Button(props: {
 
 /** Sprite checkbox graphic (32dp). Decorative: the enclosing Pressable carries role, label and checked state. */
 export function ToggleBoxGraphic({ checked }: { checked: boolean }) {
-  const entry = getArt(checked ? "toggleBoxOn" : "toggleBoxOff");
+  const { mode, colors } = useTheme();
+  const L = mode === "light";
+  const entry = getArt(checked ? (L ? "toggleBoxOnLight" : "toggleBoxOn") : L ? "toggleBoxOffLight" : "toggleBoxOff");
   if (!entry) {
     return (
       <Text style={{ color: checked ? colors.ok : colors.text, fontSize: 24, width: 32, textAlign: "center" }}>{checked ? "✔" : "○"}</Text>
@@ -156,7 +170,9 @@ export function ToggleBoxGraphic({ checked }: { checked: boolean }) {
 
 /** Sprite switch (56x32 graphic, 48dp-high target). Same a11y contract as RN Switch: role switch, checked state, label. */
 export function ToggleSwitch(props: { value: boolean; onValueChange: (v: boolean) => void; label: string; hint?: string }) {
-  const entry = getArt(props.value ? "toggleSwitchOn" : "toggleSwitchOff");
+  const { mode, colors } = useTheme();
+  const L = mode === "light";
+  const entry = getArt(props.value ? (L ? "toggleSwitchOnLight" : "toggleSwitchOn") : L ? "toggleSwitchOffLight" : "toggleSwitchOff");
   return (
     <Pressable
       accessibilityRole="switch"
@@ -179,31 +195,37 @@ export function ToggleSwitch(props: { value: boolean; onValueChange: (v: boolean
  * Backing chip for text that sits directly on the painted background (alpha from the contrast table in
  * provenance.md). Empty on the drawn Background, where the base colour already gives enough contrast.
  */
-export function textBacking(): ViewStyle {
-  if (!getScreenSkin("checklist")) return {};
-  return { backgroundColor: "rgba(31,36,48,0.8)", alignSelf: "flex-start", paddingHorizontal: 6, paddingVertical: 1, borderRadius: 6, overflow: "hidden" };
+export function useBacking(): ViewStyle {
+  const { mode, colors } = useTheme();
+  if (!getScreenSkin("checklist", mode)) return {};
+  return { backgroundColor: colors.chip, alignSelf: "flex-start", paddingHorizontal: 6, paddingVertical: 1, borderRadius: 6, overflow: "hidden" };
 }
 
 export function H2({ children }: { children: string }) {
+  const { colors } = useTheme();
+  const backing = useBacking();
   return (
-    <Text accessibilityRole="header" style={[{ color: colors.highlight, fontSize: 20, fontWeight: "700", marginTop: 12, marginBottom: 8 }, textBacking()]}>
+    <Text accessibilityRole="header" style={[{ color: colors.highlight, fontSize: 20, fontWeight: "700", marginTop: 12, marginBottom: 8 }, backing]}>
       {children}
     </Text>
   );
 }
 
 export function P({ children, dim }: { children: React.ReactNode; dim?: boolean }) {
-  return <Text style={[{ color: dim ? "rgba(232,220,192,0.8)" : colors.text, marginBottom: 8, fontSize: 15 }, textBacking()]}>{children}</Text>;
+  const { colors } = useTheme();
+  const backing = useBacking();
+  return <Text style={[{ color: dim ? colors.textDim : colors.text, marginBottom: 8, fontSize: 15 }, backing]}>{children}</Text>;
 }
 
 /** Screen background: ink base with a faint ember glow at the top and a darker vignette at the bottom. */
 export function Background({ children }: { children: React.ReactNode }) {
+  const { colors } = useTheme();
   const deco = { position: "absolute", left: 0, right: 0 } as const;
   // Stepped gradient (many thin low-alpha strips) so there are no visible hard band edges.
   const N = 24;
-  const top = Array.from({ length: N }, (_, i) => ({ i, a: (0.06 * (N - i)) / N }));
-  const bot = Array.from({ length: 12 }, (_, i) => ({ i, a: (0.2 * (12 - i)) / 12 }));
-  const tex = getArt("textureDark");
+  const top = Array.from({ length: N }, (_, i) => ({ i, a: (colors.glowAlpha * (N - i)) / N }));
+  const bot = Array.from({ length: 12 }, (_, i) => ({ i, a: (colors.vignetteAlpha * (12 - i)) / 12 }));
+  const tex = colors.textureOpacity > 0 ? getArt("textureDark") : null;
   return (
     <View style={{ flex: 1, backgroundColor: colors.bg }}>
       {tex ? (
@@ -212,14 +234,14 @@ export function Background({ children }: { children: React.ReactNode }) {
           resizeMode="repeat"
           accessible={false}
           importantForAccessibility="no"
-          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, opacity: TEXTURE_DARK_OPACITY }}
+          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, opacity: colors.textureOpacity }}
         />
       ) : null}
       {top.map((t) => (
-        <View key={`t${t.i}`} pointerEvents="none" importantForAccessibility="no-hide-descendants" style={[deco, { top: t.i * 12, height: 12, backgroundColor: `rgba(224,112,43,${t.a.toFixed(4)})` }]} />
+        <View key={`t${t.i}`} pointerEvents="none" importantForAccessibility="no-hide-descendants" style={[deco, { top: t.i * 12, height: 12, backgroundColor: `rgba(${colors.glowRgb},${t.a.toFixed(4)})` }]} />
       ))}
       {bot.map((t) => (
-        <View key={`b${t.i}`} pointerEvents="none" importantForAccessibility="no-hide-descendants" style={[deco, { bottom: t.i * 12, height: 12, backgroundColor: `rgba(0,0,0,${t.a.toFixed(4)})` }]} />
+        <View key={`b${t.i}`} pointerEvents="none" importantForAccessibility="no-hide-descendants" style={[deco, { bottom: t.i * 12, height: 12, backgroundColor: `rgba(${colors.vignetteRgb},${t.a.toFixed(4)})` }]} />
       ))}
       {children}
     </View>
@@ -231,7 +253,8 @@ export function Background({ children }: { children: React.ReactNode }) {
  * The image is cover-fitted (any aspect ratio) and anchored; it sits under everything and is hidden from a11y.
  */
 export function ScreenBackground({ screen, children }: { screen: ScreenId; children: React.ReactNode }) {
-  const skin = getScreenSkin(screen);
+  const { mode, colors } = useTheme();
+  const skin = getScreenSkin(screen, mode);
   const [box, setBox] = useState({ w: 0, h: 0 });
   if (!skin) return <Background>{children}</Background>;
   const r = computeCoverRect(skin.background.width, skin.background.height, box.w, box.h, skin.background.anchor);
@@ -259,7 +282,8 @@ export function ScreenBackground({ screen, children }: { screen: ScreenId; child
  * (a ScrollView) are laid out inside it, clear of the border. With no skin it is a plain flex:1 View.
  */
 export function ScreenFrame({ screen, children }: { screen: ScreenId; children: React.ReactNode }) {
-  const skin = getScreenSkin(screen);
+  const { mode } = useTheme();
+  const skin = getScreenSkin(screen, mode);
   const [box, setBox] = useState({ w: 0, h: 0 });
   if (!skin) return <View style={{ flex: 1 }}>{children}</View>;
   const r = computeContentRect(box.w, box.h, skin.contentInsets);
@@ -280,6 +304,7 @@ export function ScreenFrame({ screen, children }: { screen: ScreenId; children: 
 
 const CORNER = 8;
 function Corner({ pos }: { pos: "tl" | "tr" | "bl" | "br" }) {
+  const { colors } = useTheme();
   const top = pos[0] === "t";
   const left = pos[1] === "l";
   return (
@@ -291,7 +316,7 @@ function Corner({ pos }: { pos: "tl" | "tr" | "bl" | "br" }) {
         [left ? "left" : "right"]: 3,
         width: CORNER,
         height: CORNER,
-        borderColor: colors.highlight,
+        borderColor: colors.ornament,
         opacity: 0.55,
         borderTopWidth: top ? 1 : 0,
         borderBottomWidth: top ? 0 : 1,
@@ -315,6 +340,7 @@ export function Panel(props: {
   borderWidth?: number;
   style?: StyleProp<ViewStyle>;
 }) {
+  const { colors } = useTheme();
   const skin = getPanelSkin();
   if (skin) {
     // Sprite panel: the painted 9-slice replaces fill, border and corner ornaments. A caller that manages its own
@@ -342,7 +368,7 @@ export function Panel(props: {
         props.style,
       ]}
     >
-      <View pointerEvents="none" style={{ position: "absolute", top: 0, left: 8, right: 8, height: 1, backgroundColor: "rgba(246,217,138,0.18)" }} />
+      <View pointerEvents="none" style={{ position: "absolute", top: 0, left: 8, right: 8, height: 1, backgroundColor: colors.panelSheen }} />
       <Corner pos="tl" />
       <Corner pos="tr" />
       <Corner pos="bl" />
@@ -358,13 +384,15 @@ export function Card({ children }: { children: React.ReactNode }) {
 
 export function Field(props: { label: string } & Pick<TextInputProps, "value" | "onChangeText" | "keyboardType" | "maxLength">) {
   const { label, ...rest } = props;
+  const { colors } = useTheme();
+  const backing = useBacking();
   return (
     <View style={{ marginBottom: 8 }}>
-      <Text style={[{ color: colors.text, marginBottom: 4 }, textBacking()]}>{label}</Text>
+      <Text style={[{ color: colors.text, marginBottom: 4 }, backing]}>{label}</Text>
       <TextInput
         {...rest}
         accessibilityLabel={label}
-        placeholderTextColor={colors.border}
+        placeholderTextColor={colors.placeholder}
         style={{
           minHeight: TOUCH,
           color: colors.text,
@@ -386,9 +414,11 @@ export function Choice<T extends string | number>(props: {
   value: T;
   onChange: (v: T) => void;
 }) {
+  const { colors } = useTheme();
+  const backing = useBacking();
   return (
     <View style={{ marginBottom: 8 }}>
-      <Text style={[{ color: colors.text, marginBottom: 4 }, textBacking()]}>{props.label}</Text>
+      <Text style={[{ color: colors.text, marginBottom: 4 }, backing]}>{props.label}</Text>
       <View accessibilityRole="radiogroup" accessibilityLabel={props.label} style={{ flexDirection: "row", flexWrap: "wrap" }}>
         {props.options.map((o) => {
           const sel = o.value === props.value;
@@ -412,11 +442,13 @@ export function Choice<T extends string | number>(props: {
 
 /** - / + stepper for bounded integers. */
 export function Stepper(props: { label: string; value: number; min: number; max: number; step?: number; onChange: (v: number) => void }) {
+  const { colors } = useTheme();
+  const backing = useBacking();
   const step = props.step ?? 1;
   const set = (v: number) => props.onChange(Math.min(props.max, Math.max(props.min, v)));
   return (
     <View style={{ marginBottom: 8 }}>
-      <Text style={[{ color: colors.text, marginBottom: 4 }, textBacking()]}>{props.label}</Text>
+      <Text style={[{ color: colors.text, marginBottom: 4 }, backing]}>{props.label}</Text>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Button glyph="-" label={`Decrease ${props.label}`} onPress={() => set(props.value - step)} variant="plain" />
         <Text accessibilityLabel={`${props.label}: ${props.value}`} style={{ color: colors.text, minWidth: 48, textAlign: "center", fontSize: 18, fontWeight: "700" }}>

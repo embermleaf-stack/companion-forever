@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { Pressable, Text, View } from "react-native";
 import type { buildChecklist } from "@companion/core";
-import { TOUCH, colors } from "../theme";
+import { TOUCH } from "../theme";
+import { useTheme } from "../ThemeContext";
 import { H2, P, Panel, ToggleBoxGraphic } from "../ui";
 import { formatRemaining } from "../format";
 import { ArtImage, EmptyState } from "../ArtImage";
@@ -15,6 +16,7 @@ export function ChecklistScreen(props: {
   now: Date;
   onToggle: (activityId: string, subjectId: string) => void;
 }) {
+  const { colors } = useTheme();
   const { rows, done, total, now } = props;
   if (rows.length === 0) {
     return (

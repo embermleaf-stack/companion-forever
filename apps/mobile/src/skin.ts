@@ -7,6 +7,7 @@
 // EXPO_PUBLIC_SKIN_DEMO=1 (build time) swaps in the generated placeholder skins (`placeholder: true`), for screenshots only.
 import type { ImageSourcePropType } from "react-native";
 import type { Insets } from "./skinLayout";
+import type { ThemeMode } from "./theme";
 
 declare const process: { env: Record<string, string | undefined> };
 
@@ -98,6 +99,26 @@ function charactersScreen(): ScreenSkinDef {
   };
 }
 
+/**
+ * Shared DAY background (THEME-D-BG, provisional, license UNVERIFIED), used by every screen in light mode.
+ * INTERIM: an upscaled copy of a 736x1632 painting; the owner will replace the file at this same path with a
+ * properly upscaled 1080x2400 version (keep the path and size stable).
+ */
+const DAY_BG: SkinImage = { source: require("../assets/art/skin/bg-day.jpg"), width: 1080, height: 2400 };
+
+function dayScreen(): ScreenSkinDef {
+  return {
+    job: "THEME-D-BG",
+    alt: "A stone watchtower on a grassy hill under a towering sunlit cloud, a distant castle on the horizon",
+    provisional: true,
+    placeholder: false,
+    enabled: true,
+    background: { ...DAY_BG, anchor: { x: 0.5, y: 0.5 } },
+    contentInsets: { top: 0, right: 0, bottom: 0, left: 0 },
+    note: "INTERIM upscaled copy; owner will replace the file. Midjourney, output license UNVERIFIED, approval provisional. Text sits on parchment backings (see provenance.md contrast table).",
+  };
+}
+
 function nightScreen(): ScreenSkinDef {
   return {
     job: "SKIN-001",
@@ -114,7 +135,10 @@ function nightScreen(): ScreenSkinDef {
 const SCREEN_IDS: ScreenId[] = ["checklist", "characters", "activities", "settings", "about", "onboarding"];
 const build = (f: (id: ScreenId) => ScreenSkinDef) => Object.fromEntries(SCREEN_IDS.map((id) => [id, f(id)])) as Record<ScreenId, ScreenSkinDef>;
 
+/** Night (dark) skins. Characters keeps its own painting; every other screen shares the night background. */
 export const SCREEN_SKINS: Record<ScreenId, ScreenSkinDef> = build((id) => (id === "characters" ? charactersScreen() : nightScreen()));
+/** Day (light) skins: ONE shared painting for every screen, Characters included. */
+export const DAY_SCREEN_SKINS: Record<ScreenId, ScreenSkinDef> = build(() => dayScreen());
 export const PLACEHOLDER_SCREEN_SKINS: Record<ScreenId, ScreenSkinDef> = build(placeholderScreen);
 
 export const PANEL_SKIN: PanelSkinDef = {
@@ -140,9 +164,9 @@ export const DIVIDER_SKIN: DividerSkinDef = {
 const on = (s: SkinBase) => s.enabled || (DEMO && s.placeholder);
 
 /** Skin for a screen, or null when disabled (caller renders the drawn UI). */
-export function getScreenSkin(id: ScreenId): ScreenSkinDef | null {
+export function getScreenSkin(id: ScreenId, mode: ThemeMode = "dark"): ScreenSkinDef | null {
   if (DEMO) return PLACEHOLDER_SCREEN_SKINS[id];
-  const s = SCREEN_SKINS[id];
+  const s = (mode === "light" ? DAY_SCREEN_SKINS : SCREEN_SKINS)[id];
   return s.enabled ? s : null;
 }
 

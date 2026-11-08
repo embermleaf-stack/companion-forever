@@ -18,7 +18,7 @@ import {
 } from "@companion/core";
 import { createPersistence, DEFAULT_PREFS, type Prefs } from "./persistence";
 import { cancelReminders, rescheduleReminders } from "./reminderScheduler";
-import { colors } from "./theme";
+import { ThemeContext, useResolvedTheme } from "./ThemeContext";
 import { Button, ScreenBackground, ScreenFrame } from "./ui";
 import { ArtImage } from "./ArtImage";
 import { getScreenSkin, type ScreenId } from "./skin";
@@ -47,15 +47,7 @@ function useNow(intervalMs = 30_000): [Date, (d: Date) => void] {
 }
 
 export default function App() {
-  useEffect(() => {
-    // Fill the window behind system bars (incl. the Android nav bar area) with the app background.
-    SystemUI.setBackgroundColorAsync(colors.bg).catch(() => undefined);
-  }, []);
-  return (
-    <SafeAreaProvider style={{ backgroundColor: colors.bg }}>
-      <AppContent />
-    </SafeAreaProvider>
-  );
+  return <AppContent />;
 }
 
 function AppContent() {
@@ -72,6 +64,13 @@ function AppContent() {
   // True only for errors thrown by a state change (run); shows the error illustration beside the message.
   const [errorArt, setErrorArt] = useState(false);
   const [now, setNow] = useNow();
+  const theme = useResolvedTheme(prefs.theme);
+  const { mode, colors } = theme;
+
+  useEffect(() => {
+    // Fill the window behind system bars (incl. the Android nav bar area) with the theme background.
+    SystemUI.setBackgroundColorAsync(colors.bg).catch(() => undefined);
+  }, [colors.bg]);
 
   useEffect(() => {
     let alive = true;
@@ -154,14 +153,16 @@ function AppContent() {
 
   // Text that sits directly on the painting gets a backing (alphas from the contrast table in provenance.md);
   // the drawn Background keeps the original lighter 0.6 tint.
-  const painted = getScreenSkin(screenId) !== null;
-  const barBg = painted ? "rgba(31,36,48,0.75)" : "rgba(31,36,48,0.6)";
-  const footBg = painted ? "rgba(31,36,48,0.8)" : "transparent";
+  const painted = getScreenSkin(screenId, mode) !== null;
+  const barBg = painted ? colors.barPainted : colors.barPlain;
+  const footBg = painted ? colors.footPainted : "transparent";
 
   return (
+    <SafeAreaProvider style={{ backgroundColor: colors.bg }}>
+    <ThemeContext.Provider value={theme}>
     <ScreenBackground screen={screenId}>
     <SafeAreaView edges={["top", "bottom", "left", "right"]} style={{ flex: 1 }}>
-      <StatusBar style="light" />
+      <StatusBar style={colors.statusBar} />
       <View style={{ padding: 16, paddingBottom: 12, borderBottomWidth: 1, borderBottomColor: colors.border, backgroundColor: barBg }}>
         <Text accessibilityRole="header" style={{ color: colors.highlight, fontSize: 24, fontWeight: "700" }}>
           Companion Forever
@@ -235,10 +236,12 @@ function AppContent() {
       </>
       )}
 
-      <Text style={{ color: "rgba(232,220,192,0.85)", fontSize: 12, padding: 12, textAlign: "center", backgroundColor: footBg }}>
+      <Text style={{ color: colors.footText, fontSize: 12, padding: 12, textAlign: "center", backgroundColor: footBg }}>
         {DISCLAIMER}
       </Text>
     </SafeAreaView>
     </ScreenBackground>
+    </ThemeContext.Provider>
+    </SafeAreaProvider>
   );
 }

@@ -322,3 +322,20 @@ Disabled, no pixels shipped in `apps/`: ART-005 (legible "Error" text), ART-006 
 
   Measured by script (Pillow, WCAG relative luminance, Lanczos downscale); regions are approximate dp bands, the chip row is the worst pixel of the whole image. All values are at or above 4.5:1.
 - **Reviewed by / approved by owner (date):** PENDING
+
+## THEME-D-BG day background and light (day) theme (2026-11-08)
+
+- **Tool:** Midjourney (owner-confirmed). **Output license: UNVERIFIED.** **Approval: provisional.** Job THEME-D-BG. Similarity check: visual inspection only, no known work resembled.
+- **File:** `apps/mobile/assets/art/skin/bg-day.jpg` (1080x2400). **INTERIM:** an upscaled copy of a 736x1632 painting; the owner will replace the file at the same path with a properly upscaled version (path and size stay stable). Used for every screen in light mode (`DAY_SCREEN_SKINS` in `apps/mobile/src/skin.ts`). Alt text: "A stone watchtower on a grassy hill under a towering sunlit cloud, a distant castle on the horizon" (decorative).
+- **Light sprites (UI-BTN-LIGHT, UI-TOGGLE-LIGHT):** original hand-authored SVG, rasterized with resvg (build-time only) by `icons-and-imagery/final/build-light-sprites.mjs` to `apps/mobile/assets/art/ui/*-light[@2x|@3x].png`: btn-primary, btn-primary-pressed, btn-secondary, btn-secondary-pressed, btn-danger, btn-danger-pressed, btn-disabled, toggle-box-on/off, toggle-switch-on/off (11 sprites, registry keys `btn*Light`, `toggle*Light` in `art.ts`). No third-party source; GPL-3.0-only. The light Panel is drawn from tokens (no panel sprite).
+- **Palette contrast (WCAG, asserted by `apps/mobile/test/theme.test.ts`):** light: text on surface #1E1D26/#F6EDD3 12.0+, dim text 8.28, heading #7A3510 7.67, text on bg 12.56, placeholder 6.07, footer text 14.14, primary label ink on ember #E7873F 6.77 (pressed end #D2631F 4.73), UI: border 4.47 (>=3), ok 4.43 (>=3), accent 4.19 (>=3). Dark (unchanged values): text on bg 13.16, dim 7.79, heading 11.24, border 4.95, ok 4.81, accent 4.82, footer 8.89.
+- **Day background text contrast (Pillow, worst single pixel, cover-fit; ink #1E1D26 / dim #46434D / heading #7A3510 on a parchment #F6EDD3 backing; script in session scratchpad `theme/day_contrast.py`):**
+
+| Region | Bare ink (worst of sizes) | Backing alpha 0.90 (ink / dim / heading, worst of 360x800, 411x891, 1080x2400) |
+|---|---|---|
+| Header + tab bar, top 140 dp | 2.41 | 12.41 / 7.20 / 6.67 |
+| Footer disclaimer, bottom 90 dp | 1.00 | 11.42 / 6.63 / 6.14 |
+| Headings, paragraphs, field labels (chip, whole image) | 1.00 | 11.42 / 6.62 / 6.13 |
+
+  Bare dark text fails on this painting (the lower hill is near black), so every text region has a 0.90 parchment backing (`barPainted`, `footPainted`, `chip` in `theme.ts`); alpha 0.75 also passes (heading min 4.22 fails, hence 0.90). Reset strip stays a darkened photo with vellum text in both themes (6.51 worst case over white).
+- **Reviewed by / approved by owner (date):** PENDING

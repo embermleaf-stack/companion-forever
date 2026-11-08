@@ -9,9 +9,10 @@ import { userMessage } from "../battlenet/errors";
 import { getAuthConfig } from "../config";
 import { BLIZZARD_ATTRIBUTION } from "../format";
 import { Button, H2, P, Panel } from "../ui";
-import { colors } from "../theme";
+import { useTheme } from "../ThemeContext";
 
 export function BattleNetSection({ state, run, setMessage }: { state: AppState; run: Run; setMessage: (m: string) => void }) {
+  const { colors } = useTheme();
   const config = useMemo(() => getAuthConfig(), []);
   const svc = useMemo(() => createBattleNetServices(config), [config]);
   const [signedIn, setSignedIn] = useState(false);

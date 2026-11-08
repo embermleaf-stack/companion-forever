@@ -11,7 +11,8 @@ import { MAX_LEAD_MINUTES, MIN_LEAD_MINUTES, type Prefs } from "../persistence";
 import { ensurePermission } from "../reminderScheduler";
 import { Button, Choice, H2, P, Panel, Stepper, ToggleSwitch } from "../ui";
 import { DAYS } from "../format";
-import { TOUCH, colors } from "../theme";
+import { TOUCH, type ThemePref } from "../theme";
+import { useTheme } from "../ThemeContext";
 
 const MAX_IMPORT_BYTES = 1_000_000;
 
@@ -24,6 +25,7 @@ export function SettingsScreen(props: {
   setPrefs: (p: Prefs) => void;
   loadSample: () => Promise<void>;
 }) {
+  const { colors } = useTheme();
   const { state, run, setState, setMessage, prefs, setPrefs } = props;
   const r = state.resets;
 
@@ -81,6 +83,21 @@ export function SettingsScreen(props: {
 
   return (
     <View>
+      <Panel>
+      <H2>Appearance</H2>
+      <P dim>Auto follows your phone's light or dark setting.</P>
+      <Choice<ThemePref>
+        label="Theme"
+        value={prefs.theme}
+        onChange={(v) => setPrefs({ ...prefs, theme: v })}
+        options={[
+          { value: "auto", label: "Auto" },
+          { value: "light", label: "Light" },
+          { value: "dark", label: "Dark" },
+        ]}
+      />
+      </Panel>
+
       <Panel>
       <H2>Reset schedule</H2>
       <P dim>Set these to match your game. The defaults are placeholders, not official times. All times are UTC.</P>

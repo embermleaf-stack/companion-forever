@@ -46,10 +46,10 @@ describe("persistence", () => {
     expect(DEFAULT_PREFS.remindersEnabled).toBe(false);
     expect(parsePrefs(null)).toEqual(DEFAULT_PREFS);
     expect(parsePrefs({ remindersEnabled: "yes", reminderLeadMinutes: 1 })).toEqual(DEFAULT_PREFS);
-    expect(parsePrefs({ remindersEnabled: true, reminderLeadMinutes: 60 })).toEqual({ remindersEnabled: true, reminderLeadMinutes: 60 });
+    expect(parsePrefs({ remindersEnabled: true, reminderLeadMinutes: 60 })).toEqual({ remindersEnabled: true, reminderLeadMinutes: 60, theme: "auto" });
     const p = createPersistence(memStorage());
-    await p.savePrefs({ remindersEnabled: true, reminderLeadMinutes: 15 });
-    expect(await p.loadPrefs()).toEqual({ remindersEnabled: true, reminderLeadMinutes: 15 });
+    await p.savePrefs({ remindersEnabled: true, reminderLeadMinutes: 15, theme: "auto" });
+    expect(await p.loadPrefs()).toEqual({ remindersEnabled: true, reminderLeadMinutes: 15, theme: "auto" });
   });
 
   it("clearAll removes state and prefs", async () => {
@@ -82,5 +82,26 @@ describe("persistence", () => {
     };
     expect(await createPersistence(bad).loadOnboardingDone()).toBe(false);
     expect(await createPersistence(bad).saveOnboardingDone(true)).toBe(false);
+  });
+});
+
+describe("theme preference persistence", () => {
+  it("defaults to auto", () => {
+    expect(DEFAULT_PREFS.theme).toBe("auto");
+    expect(parsePrefs({}).theme).toBe("auto");
+  });
+  it("maps unknown values to auto and keeps valid ones", () => {
+    expect(parsePrefs({ theme: "sepia" }).theme).toBe("auto");
+    expect(parsePrefs({ theme: 3 }).theme).toBe("auto");
+    expect(parsePrefs({ theme: "light" }).theme).toBe("light");
+    expect(parsePrefs({ theme: "dark" }).theme).toBe("dark");
+  });
+  it("round-trips through storage and validates on load", async () => {
+    const st = memStorage();
+    const p = createPersistence(st);
+    await p.savePrefs({ ...DEFAULT_PREFS, theme: "light" });
+    expect((await p.loadPrefs()).theme).toBe("light");
+    st.data[PREFS_KEY] = JSON.stringify({ remindersEnabled: false, reminderLeadMinutes: 30, theme: "bogus" });
+    expect((await p.loadPrefs()).theme).toBe("auto");
   });
 });

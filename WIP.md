@@ -116,3 +116,24 @@ Product-form correction (ADR-0005, Proposed; owner decision pending):
 - SKIN-003 (activities) candidate: richer forest-at-night painting with one signpost per side (approved by owner pending upscale; not yet wired). SKIN-004 old-prompt candidate (workshop shelves) reviewed; new richer prompts for SKIN-004/005 given to owner.
 - Observed: character avatars show as cream squares on the dark UI; consider circular/transparent avatars.
 - Note for owner: Midjourney filenames contain the account name; it is stripped from all committed files.
+
+## Naming review: Forever Companion, Preliminary (2026-11-08)
+
+- New `docs/NAMING-REVIEW-forever-companion.md` (Status: Preliminary; not legal advice; docs only, not committed; no Accepted decision changed; package id unchanged).
+- Agent risk rating: HIGH for "Forever Companion", MEDIUM-HIGH for "Companion Forever" as a public name. Reasons: Blizzard sells "World of Warcraft®: Forever" ("WoW: Forever", launched 2026-11-04, Blizzard News primary source), which settles the HANDOFF "Forever" edition question as a name (API coverage still UNVERIFIED); "Companion" echoes Blizzard's retired "WoW Companion App"; a CurseForge WoW addon named "Forever Companion" plus about six GitHub WoW: Forever tools (one named "Companion-Forever") already exist; "Forever Companion" was also an adult AI-chatbot brand.
+- Trademark registries (USPTO, EUIPO, TMview, WIPO, UK IPO) not searched (JavaScript-only); owner must search by hand. Recommendation: choose a distinctive public name without "Forever"/"Companion" (shortlist in the doc), then a professional clearance search, then an ADR (Protected area).
+- Next: owner picks candidates and runs registry/store/domain searches; decision recorded as an ADR.
+
+## Naming review: Hawthorn Journal, Preliminary (2026-11-08)
+
+- Owner chose public name "Hawthorn Journal" (codename and package id unchanged). New `docs/NAMING-REVIEW-hawthorn-journal.md` (Preliminary, not legal advice), linked from the Forever Companion review; new `docs/adr/0007-public-app-name.md` (**Proposed**, Protected). Docs only, not committed; no app code or display strings changed.
+- Agent rating: MEDIUM overall. Low for Blizzard marks/§2(m) (no listed mark; avoid "Encounter Journal"/"Adventure Guide" in copy), exact-name conflicts, store fit, domains (exact .com/.app/.dev no DNS; GitHub `hawthornjournal` free). Main risk: international registration HAWTHORN WO0000001879894 by Near Studios Inc., Class 9 game software incl. mobile (seen via UK IPO journal search text; page 403, UNVERIFIED), for their cozy RPG *Hawthorn* (Steam, TBA). `hawthorn.app` taken by a hiking app.
+- Owner-only: WIPO IR 1879894, USPTO/EUIPO/TMview/UK IPO searches (steps in the review §4 and ADR-0007 checklist), store/domain/handle checks, professional knock-out. If HAWTHORN is live for Class 9 mobile games in launch markets, use a fallback (Thornbook, Waymark Journal, Hedgerow Journal).
+- Next: owner runs the checks and accepts or rejects ADR-0007; only then rename display strings (file list in the ADR).
+
+## Light (day) theme (2026-11-08, uncommitted)
+
+- Added Auto/Light/Dark theme: `src/theme.ts` (tokens, `resolveTheme`, `parseThemePref`), `src/ThemeContext.tsx`, pref persisted as `Prefs.theme` (unknown -> auto), Settings "Appearance" section, tokens applied in ui/App/screens/Onboarding/ResetStrip (no colour literals outside theme.ts), status bar follows theme, `app.json` userInterfaceStyle "automatic" (build script syncs an existing android/ strings.xml).
+- Day art: interim `bg-day.jpg` for all screens in light mode; 11 original light sprites (`build-light-sprites.mjs`). Contrast tables in `icons-and-imagery/provenance.md`.
+- Tests run: `npm run typecheck` clean; `npx vitest run` 181 passed (10 files); `npx expo export --platform android` OK; x86_64 build installed on emulator and checked in light, dark, Auto-follows-system, forced Light/Dark; arm64-v8a installed on the owner's phone (not launched).
+- Open: owner to replace bg-day.jpg with a properly upscaled file; splash screen is still dark in light mode; day Characters shares the day painting.

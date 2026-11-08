@@ -28,3 +28,16 @@ Entries are appended below this line.
 - **Observed deviations from brief:** hanger is a bronze curl, not a green vine; flame is not strictly leaf-shaped; dark vignette rather than flat navy; no green in the palette; lantern is tall and fills about 94% of the cropped height.
 - **Alt text:** A bronze lantern with a curling hanger glows with an orange flame against a dark background.
 - **Reviewed by / approved by owner (date):** PENDING
+
+## Safe-zone expansion of staging/icon-1024.png -> expand-1600.png, adaptive-foreground-1024.png, icon-1024/512/192-safe.png, icon-safe-mask-preview.png (candidate; staging only)
+
+- **Date generated:** 2026-11-07
+- **Created by:** Adobe Firefly connector (MCP), tool `image_generative_expand`, run by an AI agent; plus local System.Drawing bicubic resize. Method: CONNECTOR (no local fallback needed).
+- **Prompt (verbatim) / brief used:** The tool has no prompt parameter. Only expandPixels left/right/top/bottom 288 each (1024 -> 1600, seed 120464, requestId 9959c8f8-59dd-4f54-87fd-c8702c0763f4). Intent: continue the dark navy/charcoal vignette (about #161C22) so the lantern fills about 62-64% of the frame.
+- **Reference images used:** the owner-supplied staging/icon-1024.png (itself derived from ART-001, see entry above), uploaded to Adobe Creative Cloud storage as cf-icon-1024.png.
+- **Tool/output license terms:** UNVERIFIED (no URL/clause checked yet)
+- **Human edits:** expand-1600.png downscaled locally to 1024/512/192 (no other change). adaptive-foreground-1024.png and icon-1024-safe.png are the same image (opaque dark background, no transparency).
+- **Visual check (agent, not a legal review):** expanded border looks seamless: no seams, no hallucinated objects, tone matches. Lantern hardware spans about y 320-1310 of 1600 (about 62% of height); glow-inclusive bbox by threshold is about 68% (554x700 px at 1024). Hardware sits inside the 66% safe circle in the mask preview; faint outer glow slightly exceeds it, which is harmless.
+- **Limits:** the tool offers no prompt; seed-dependent; output is RGB without alpha.
+- **Alt text:** A bronze lantern with an orange flame glows against a dark navy background, centered with generous margin.
+- **Reviewed by / approved by owner (date):** PENDING

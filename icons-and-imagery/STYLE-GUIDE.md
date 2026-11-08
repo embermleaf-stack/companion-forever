@@ -25,7 +25,7 @@ Avoid making the dominant color a saturated royal/cyan blue paired with gold; th
 ## Shapes and construction
 
 - **Icon frames:** rounded squares with a thin double-line border in Aged Bronze and a soft inner shadow. Do **not** use flame-wreathed or ornate dragon-scale borders.
-- **Corners and flourishes:** simple leaf-and-vine corner motifs, rivets, and stitched edges.
+- **Corners and flourishes:** simple hawthorn-sprig corner motifs with small red berries, rivets, and stitched edges.
 - **Silhouette first:** every icon must read as a one-color silhouette at 24 px.
 - **Line weight:** consistent 2 px at 64 px canvas; slightly uneven, hand-inked feel allowed.
 - **Perspective:** flat or gentle 3/4 view; no photorealism.
@@ -40,7 +40,7 @@ Avoid lettering in art where possible. If needed: a humanist serif with calligra
 
 ## Motifs to prefer (original)
 
-Lantern, quill and ledger, compass rose, sprouting acorn, ember-lit hearth, signpost, rune-less abstract sigils, hourglass, lockbox, satchel, clover, trail map, bridge, standing stone circle (generic), moth, fox, heron, oak leaf.
+Lantern, quill and ledger, compass rose, sprouting acorn, ember-lit hearth, signpost, rune-less abstract sigils, hourglass, lockbox, satchel, clover, trail map, bridge, standing stone circle (generic), moth, fox, heron, oak leaf. **Signature plant motif: hawthorn sprig with small round red berries** (thin, sparse, 3 to 5 berries per sprig).
 
 ## Pastoral hand-painted direction (owner request, 2026-11-07)
 

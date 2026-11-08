@@ -56,10 +56,11 @@ Measure the centre rectangle of the finished 1080 x 2400 image: x 120 to 960, y 
 - **Purpose:** the light-mode background behind every screen. Ink text sits on the pale centre.
 - **Output:** `bg-day.png`, 1080 x 2400 px, opaque (alpha 255 everywhere), 9:20 portrait.
 - **Prompt:** copy the `THEME-D-BG` block from [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first).
-- **Scene:** pastoral hand-painted anime-fantasy meadow. Hills and soft clouds in the top band, wildflower meadow and a path in the bottom band. Large calm pale centre. Detail only at the edges and corners.
+- **Scene:** pastoral hand-painted anime-fantasy meadow. Hills and soft clouds in the top band, wildflower meadow and a path in the bottom band. A small cottage on a hillside at the lower right edge, beside the path, with dark windows and a thin chimney smoke curl. Large calm pale centre. Detail only at the edges and corners.
 - **Acceptance:**
   - [ ] Centre mean luminance at least 0.45; darkest centre pixel at least 0.214 (ink text at 4.5:1 or better), measured per the Contrast check
   - [ ] Painted detail only in the edges, corners and top and bottom bands; no figures, no text, no logo in the centre
+  - [ ] Cottage small, at the lower right edge (not the centre), windows dark, thin smoke curl visible; same cottage position in both (checked against THEME-N-BG)
   - [ ] Crops hold up: the 1080 x 1920 16:9 crop at top, centre and bottom anchors, and a 60 px side trim (the spec's 9:21 allowance), all still read as the same scene
   - [ ] Opaque; sRGB; under about 400 KB (quantise if larger)
 - **Post-processing:** crop or resize to 1080 x 2400 (Lanczos or bicubic); flatten to opaque; run the Contrast check; run the crop checks; export PNG to `icons-and-imagery/staging/`.
@@ -70,11 +71,12 @@ Measure the centre rectangle of the finished 1080 x 2400 image: x 120 to 960, y 
 - **Purpose:** the dark-mode background. It must match THEME-D-BG so the app looks like one scene in two lights.
 - **Output:** `bg-night.png`, 1080 x 2400 px, opaque, 9:20 portrait.
 - **Prompt:** copy the `THEME-N-BG` block from [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first).
-- **Scene:** the same layout as the day image: hills and clouds in the top band, meadow and footpath in the bottom band. At night: starry sky, lantern glow along the path, a warm cottage window glowing at one edge.
+- **Scene:** the same layout as the day image: hills and clouds in the top band, meadow and footpath in the bottom band. At night: starry sky; the same cottage in the same place at the lower right edge, with warm glowing windows; small lanterns on posts light the footpath so the lamps are visible.
 - **Matching tip (UNVERIFIED, tool behaviour not tested):** generate THEME-D-BG first, then use that image as an image reference with "same composition at night" (or this prompt) so the two match. The reference feature's name and weighting vary by tool and version; check them before relying on this. The owner may use other tools.
 - **Acceptance:**
   - [ ] Centre mean luminance at most 0.12; brightest centre pixel at most 0.121 (vellum text at 4.5:1 or better), measured per the Contrast check
   - [ ] Same layout as THEME-D-BG: when the two are overlaid at 50% opacity, hills, path and clouds line up
+  - [ ] Same cottage position in both; warm windows and lantern posts visible along the footpath
   - [ ] Glow stays at the edges and corners; the centre has no glow
   - [ ] Crop checks and file checks as THEME-D-BG
 - **Post-processing:** as THEME-D-BG, plus the overlay test against the approved day image.
@@ -83,7 +85,7 @@ Measure the centre rectangle of the finished 1080 x 2400 image: x 120 to 960, y 
 ### THEME-D-FRAME: Day frame, 9-slice
 
 - **Purpose:** frame for hero cards and screen headers in light mode.
-- **Output:** `frame-day.png`, 512 x 512 px, RGBA. Pale carved wood and brass with leaf vines in the corners. Slice at 96 px on every side. The 320 x 320 centre is fully transparent.
+- **Output:** `frame-day.png`, 512 x 512 px, RGBA. Pale carved wood and brass with thin sparse hawthorn sprigs with red berries in the corners. Slice at 96 px on every side. The 320 x 320 centre is fully transparent.
 - **Prompt:** copy the `THEME-D-FRAME` block from [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first).
 - **Acceptance:** all SKIN-006 checks in this brief, with the pale-wood and brass look in place of bronze.
 - **Post-processing:** generate on a plain background if the tool does not give alpha; remove it with the connector's background removal or by hand, then check for halo fringing; clear the 320 x 320 centre to alpha 0; run the mirror test (flip horizontally and vertically and compare) and the seam test (offset by half the width and height).
@@ -92,7 +94,7 @@ Measure the centre rectangle of the finished 1080 x 2400 image: x 120 to 960, y 
 ### THEME-N-FRAME: Night frame, 9-slice
 
 - **Purpose:** frame for hero cards and screen headers in dark mode.
-- **Output:** `frame-night.png`, 512 x 512 px, RGBA. Aged bronze and dark vine ornaments with small lantern studs. Slice at 96 px. Transparent centre.
+- **Output:** `frame-night.png`, 512 x 512 px, RGBA. Aged bronze and dark hawthorn sprig ornaments with red berries, with small lantern studs. Slice at 96 px. Transparent centre.
 - **Prompt:** copy the `THEME-N-FRAME` block from [prompts-copy-paste.md](prompts-copy-paste.md#daynight-theme-set-recommended-first).
 - **Acceptance:** all SKIN-006 checks in this brief. Studs are small and sit in the corners or on the mid-edges, not across the content window.
 - **Post-processing:** as THEME-D-FRAME.
@@ -232,7 +234,7 @@ All sizes are the exact export sizes. "9-slice" means the image is split into ni
 ### SKIN-006: Ornate frame, 9-slice
 
 - **Purpose:** frame for hero cards and screen headers. The centre is transparent so content sits inside.
-- **Output:** `skin-frame-9slice.png` (suggested name), 512 x 512 px, transparent. Bronze, vine and leaf ornaments in the four corners. Slice with 96 px on every side (the spec states the exact insets). The straight edges repeat or stretch.
+- **Output:** `skin-frame-9slice.png` (suggested name), 512 x 512 px, transparent. Bronze and hawthorn sprig ornaments with red berries in the four corners. Slice with 96 px on every side (the spec states the exact insets). The straight edges repeat or stretch.
 - **Prompt:** copy the `SKIN-006` block from [prompts-copy-paste.md](prompts-copy-paste.md#screen-skins-skin-001-to-skin-008).
 - **Acceptance:**
   - [ ] Centre (the region left after the 96 px slices) is fully transparent and empty
@@ -251,7 +253,8 @@ All sizes are the exact export sizes. "9-slice" means the image is split into ni
 ### SKIN-008: Divider rule
 
 - **Purpose:** section separator in lists and on About.
-- **Output:** `skin-divider.png` (suggested name), 1024 x 48 px, transparent. Horizontal stretch: end caps fixed, the centre column repeats across the width. The leaf sprig sits at the exact centre. End-cap width is set in the spec.
+- **Output:** `skin-divider.png` (suggested name), 1024 x 48 px, transparent. Horizontal stretch: end caps fixed, the centre column repeats across the width. The hawthorn sprig with berries sits at the exact centre. End-cap width is set in the spec.
+- **Post-processing:** output will be about 5:1; Claude crops, removes background and slices it into a 3-part divider (left cap, tiling line, centre ornament, right cap).
 - **Prompt:** copy the `SKIN-008` block from [prompts-copy-paste.md](prompts-copy-paste.md#screen-skins-skin-001-to-skin-008).
 - **Acceptance:** perfectly symmetric left to right; one row only; the centre column repeats with no seam; nothing else on the canvas.
 

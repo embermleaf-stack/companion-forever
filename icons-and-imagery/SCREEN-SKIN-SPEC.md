@@ -41,7 +41,7 @@ Safe-zone diagram (described in text, 1080 wide x 2400 tall, origin top-left):
 ```
 
 - Cropping: on 16:9 the top and bottom lose up to about 160 px each (visible area is 1080 x 1920 of the 2400); on 9:21 the sides lose up to about 40 px each. Treat the outer **160 px top/bottom and 60 px left/right** as "may be cropped": nothing essential (a character's face, a key prop) there.
-- Decorative detail (vines, brackets, lantern glow, torches) only in the **corners (about 300 x 300 px)** and the thin **edge bands**. The centre zone is flat or a very soft vertical gradient so any aspect ratio crops cleanly and text stays readable.
+- Decorative detail (hawthorn sprigs with berries, brackets, lantern glow, torches) only in the **corners (about 300 x 300 px)** and the thin **edge bands**. The centre zone is flat or a very soft vertical gradient so any aspect ratio crops cleanly and text stays readable.
 - Contrast: body text is `#EFE6D2`-ish on the background; any pixel under text must keep at least **4.5:1** contrast with it (so keep the centre zone dark, luminance below about 12%). No busy texture, no high-contrast shapes behind the list area.
 - Status bar (top ~72 px) and gesture bar (bottom ~72 px) overlay the art; do not put important detail there.
 - The header and tab bar are drawn by the app over the top ~220 px; the disclaimer line over the bottom ~100 px. Plan for a quiet band there.

@@ -91,3 +91,10 @@ Product-form correction (ADR-0005, Proposed; owner decision pending):
 - Verified: typecheck clean, vitest 167/167, expo export and web build OK, emulator screenshots (checklist, characters, about, error). arm64 build (built after the last source change) installed on the phone, never launched.
 - Added day/night theme set to SCREEN-SKIN-BRIEF.md (THEME-D/N BG, FRAME, PANEL). Theme system (light palette, parchment buttons, system-follow + override) not started.
 - Next: theme system; owner generates six day/night images; then register skins; wire Settings "Delete all data" to clear the Battle.net token; owner registers Blizzard client.
+
+## Update: art prompts and divider (2026-11-08)
+
+- All 36 paste-ready prompts (ART, THEME, UI, SKIN) now start with job id + title and end with `--ar N:N` (Midjourney ignores ratios written in words; earlier outputs came back square for that reason). Plant ornaments are now hawthorn sprigs with small, sparse red berries (signature motif, STYLE-GUIDE.md). THEME day/night backgrounds include a small cottage in the same place (lit windows and lantern posts at night) and a hawthorn bush.
+- SKIN-008 divider (Midjourney, hawthorn sprig) processed with Adobe background removal and sliced into left/centre/right caps plus a tiling line in staging/regen (git-ignored). Not wired into the app yet.
+- THEME-D-BG first attempt arrived square (1024x1024) and without the cottage; owner is regenerating with --ar 9:20.
+- UI-005 stays 1:1 (2x2 grid), though the brief's sheet size says 512x256; fix the size text if the layout changes.

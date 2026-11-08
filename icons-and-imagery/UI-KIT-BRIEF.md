@@ -39,7 +39,7 @@ Sizes are exact export sizes. "9-slice" means the image is split into 9 regions,
 - **Prompt:**
 
 ```text
-Hand-painted pastoral fantasy UI button set in watercolor and gouache: three rounded-rectangle buttons side by side with soft wash fills and clean expressive ink outlines, thin Aged Bronze double-line edge, soft inner shadow. Left to right: primary button in Ember orange, secondary button in Aged Bronze with slate, danger button in muted Rust. Top row normal, middle row pressed (slightly darker, inset shadow), bottom row disabled (desaturated, flat, pale vellum). Fixed 3 by 3 grid, even spacing, transparent background. Each button is symmetric with a flat empty centre and nothing inside it. Original design, no text, no letters, no figures.
+UI-001 button sprites: Hand-painted pastoral fantasy UI button set in watercolor and gouache: three rounded-rectangle buttons side by side with soft wash fills and clean expressive ink outlines, thin Aged Bronze double-line edge, soft inner shadow. Left to right: primary button in Ember orange, secondary button in Aged Bronze with slate, danger button in muted Rust. Top row normal, middle row pressed (slightly darker, inset shadow), bottom row disabled (desaturated, flat, pale vellum). Fixed 3 by 3 grid, even spacing, transparent background. Each button is symmetric with a flat empty centre and nothing inside it. Original design, no text, no letters, no figures. --ar 2:1
 ```
 
 ### UI-002: Panel and card border with corner ornaments (9-slice)
@@ -49,17 +49,18 @@ Hand-painted pastoral fantasy UI button set in watercolor and gouache: three rou
 - **Prompt:**
 
 ```text
-Hand-painted pastoral fantasy panel frame in gouache and watercolor: a rounded card border with clean expressive ink linework and a soft Aged Bronze fill, Old Vellum inner edge, small leaf-and-vine ornaments in the four corners, simple rivets along the straight edges. Flat, straight-on view, symmetric on all four sides, straight edges that repeat cleanly along each side. Transparent empty centre, flat, nothing inside the frame. Palette: Slate Ledger, Aged Bronze, Leaf green accents, Candle highlight only in the corner ornaments. Original design, no text, no letters, no figures.
+UI-002 panel border: Hand-painted pastoral fantasy panel frame in gouache and watercolor: a rounded card border with clean expressive ink linework and a soft Aged Bronze fill, Old Vellum inner edge, small thin sparse hawthorn sprigs (3 to 5 small round red berries each, no clusters) ornaments in the four corners, simple rivets along the straight edges. Flat, straight-on view, symmetric on all four sides, straight edges that repeat cleanly along each side. Transparent empty centre, flat, nothing inside the frame. Palette: Slate Ledger, Aged Bronze, Leaf green hawthorn leaves, berry red accents, Candle highlight only in the corner ornaments. Original design, no text, no letters, no figures. --ar 1:1
 ```
 
 ### UI-003: Ornamental divider rule
 
 - **Purpose:** section separator in lists and About.
-- **Output:** `ui-divider.png`, 512 x 32 px, transparent background. Horizontal stretch: 64 px caps at each end, the centre is a 1 px column that repeats across the width. The leaf sprig sits at the centre.
+- **Output:** `ui-divider.png`, 512 x 32 px, transparent background. Horizontal stretch: 64 px caps at each end, the centre is a 1 px column that repeats across the width. The hawthorn sprig with berries sits at the centre.
+- **Post-processing:** output will be about 5:1; Claude crops, removes background and slices it into a 3-part divider (left cap, tiling line, centre ornament, right cap).
 - **Prompt:**
 
 ```text
-Hand-painted pastoral fantasy ornamental divider rule in watercolor and gouache: a thin horizontal line of Aged Bronze with a small leaf sprig at the centre and a tiny Ember dot, tapering to fine ends, clean expressive ink linework, soft wash fill. Straight, horizontal, perfectly symmetric left to right, centred on a transparent background. One row only, nothing else on the canvas. Palette: Aged Bronze, Leaf green, Ember dot. Original design, no text, no letters, no figures.
+UI-003 divider rule: Hand-painted pastoral fantasy ornamental divider rule in watercolor and gouache: a thin horizontal line of Aged Bronze with a small thin sparse hawthorn sprig at the centre (3 to 5 small round red berries, no clusters) and a tiny Ember dot, tapering to fine ends, clean expressive ink linework, soft wash fill. Straight, horizontal, perfectly symmetric left to right, centred on a transparent background. One row only, nothing else on the canvas. Palette: Aged Bronze, Leaf green, berry red, Ember dot. Original design, no text, no letters, no figures. --ar 5:1
 ```
 
 ### UI-004: Tab-bar item frames (active, inactive)
@@ -69,7 +70,7 @@ Hand-painted pastoral fantasy ornamental divider rule in watercolor and gouache:
 - **Prompt:**
 
 ```text
-Hand-painted pastoral fantasy tab-bar item frames in gouache and watercolor: two rounded tab shapes side by side on a fixed grid. Left tab is active: taller, with a rounded top, filled with Old Vellum parchment, a warm Candle gold glow along the top edge and a soft Ember underline. Right tab is inactive: slightly shorter, flat Slate Ledger with a thin Aged Bronze outline and no glow. Clean expressive ink linework, soft wash fills, flat empty centres for icons, symmetric shapes, transparent background. Original design, no text, no letters, no figures.
+UI-004 tab frames: Hand-painted pastoral fantasy tab-bar item frames in gouache and watercolor: two rounded tab shapes side by side on a fixed grid. Left tab is active: taller, with a rounded top, filled with Old Vellum parchment, a warm Candle gold glow along the top edge and a soft Ember underline. Right tab is inactive: slightly shorter, flat Slate Ledger with a thin Aged Bronze outline and no glow. Clean expressive ink linework, soft wash fills, flat empty centres for icons, symmetric shapes, transparent background. Original design, no text, no letters, no figures. --ar 16:5
 ```
 
 ### UI-005: Checkbox and toggle sprites (on and off)
@@ -79,7 +80,7 @@ Hand-painted pastoral fantasy tab-bar item frames in gouache and watercolor: two
 - **Prompt:**
 
 ```text
-Hand-painted pastoral fantasy checkbox and toggle set in gouache and watercolor on a fixed 2 by 2 grid. Top left: an empty square checkbox with an Aged Bronze outline. Top right: the same box filled Leaf green with a clean ink check mark. Bottom left: a pill toggle in the off state, Slate track, small bronze knob on the left. Bottom right: the on state, Ember track, Candle gold knob on the right. Clean expressive ink linework, soft wash fills, flat, symmetric, transparent background, each item centred in its cell. The check mark and knob position show the state by shape. Original design, no text, no letters, no figures.
+UI-005 checkbox toggles: Hand-painted pastoral fantasy checkbox and toggle set in gouache and watercolor on a fixed 2 by 2 grid. Top left: an empty square checkbox with an Aged Bronze outline. Top right: the same box filled Leaf green with a clean ink check mark. Bottom left: a pill toggle in the off state, Slate track, small bronze knob on the left. Bottom right: the on state, Ember track, Candle gold knob on the right. Clean expressive ink linework, soft wash fills, flat, symmetric, transparent background, each item centred in its cell. The check mark and knob position show the state by shape. Original design, no text, no letters, no figures. --ar 1:1
 ```
 
 ### UI-006: Seamless dark parchment and slate background tile
@@ -89,7 +90,7 @@ Hand-painted pastoral fantasy checkbox and toggle set in gouache and watercolor 
 - **Prompt:**
 
 ```text
-Seamless tile of a dark parchment and slate background in watercolor and gouache: subtle Slate Ledger paper grain with faint wash mottling and barely visible hand-drawn compass lines, very low contrast, deep blue-grey with a faint warm vellum tint. Edges match exactly on all four sides so the tile repeats without seams. Uniform value, no vignette, no focal object, no bright spots, watercolor paper texture only. Original design, no text, no letters, no figures, no logo.
+UI-006 slate tile: Seamless tile of a dark parchment and slate background in watercolor and gouache: subtle Slate Ledger paper grain with faint wash mottling and barely visible hand-drawn compass lines, very low contrast, deep blue-grey with a faint warm vellum tint. Edges match exactly on all four sides so the tile repeats without seams. Uniform value, no vignette, no focal object, no bright spots, watercolor paper texture only. Original design, no text, no letters, no figures, no logo. --ar 1:1 --tile
 ```
 
 ## Post-processing (all items)
